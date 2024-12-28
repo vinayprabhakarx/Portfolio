@@ -12,6 +12,26 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Middleware for validation
+const validateEmailData = (req, res, next) => {
+  // Get data from either query params or request body
+  const data = req.query.userName ? req.query : req.body;
+  const { userName, email, subject, message } = data;
+
+  if (!userName || !email || !subject || !message) {
+    return res.status(400).json({ message: "All fields are required." });
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ message: "Invalid email format." });
+  }
+
+  req.emailData = data; // Attach validated data to the request object
+  next(); // Proceed to the next middleware or route handler
+};
+
+
 // Initialize Mailgun
 const mailgun = new Mailgun(formData);
 const mg = mailgun.client({

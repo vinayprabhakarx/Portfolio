@@ -38,24 +38,15 @@ const Contact = () => {
       message: "",
     });
 
+    // API Call
     try {
-      // Convert form data to query parameters
-      const queryParams = new URLSearchParams({
-        userName: formData.userName,
-        email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-      }).toString();
-
-      const response = await fetch(
-        `http://localhost:3001/api/send-email?${queryParams}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const data = await response.json();
 
@@ -88,7 +79,6 @@ const Contact = () => {
     }
   };
 
-  // Rest of your component remains exactly the same...
   return (
     <ContactContainer>
       <Header>
