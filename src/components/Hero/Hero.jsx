@@ -26,7 +26,9 @@ const Hero = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <WelcomeText>Hi There! 👋🏻 I'm</WelcomeText>
+          <WelcomeText>
+            Hi There! <Wave>👋</Wave> I'm
+          </WelcomeText>
           <GradientName>Vinay Prabhakar</GradientName>
           <TypewriterContainer>
             <Typewriter
@@ -44,8 +46,9 @@ const Hero = () => {
             />
           </TypewriterContainer>
           <Description>
-            Passionate about transforming complex data into meaningful insights
-            and building intelligent systems that make a difference.
+            Welcome to my portfolio. Here, You can explore my projects, learn
+            more about my work, and read my blog to gain insights into my
+            approach and expertise.
           </Description>
           <SocialLinks>
             <SocialIcon
@@ -171,6 +174,7 @@ const WelcomeText = styled.h2`
   font-size: 1.8rem;
   color: ${({ theme }) => theme.colors.text};
   margin-bottom: 1rem;
+  user-select: none;
 `;
 
 const GradientName = styled.h1`
@@ -182,6 +186,7 @@ const GradientName = styled.h1`
   background-size: 200% 200%;
   animation: ${gradientAnimation} 4s ease infinite;
   margin-bottom: 1rem;
+  user-select: none;
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -192,6 +197,7 @@ const TypewriterContainer = styled.div`
   font-size: 1.8rem;
   color: ${({ theme }) => theme.colors.text};
   margin-bottom: 1rem;
+  user-select: none;
 
   .Typewriter__wrapper {
     color: ${({ theme }) => theme.colors.text};
@@ -212,6 +218,7 @@ const Description = styled.p`
   margin-bottom: 2rem;
   line-height: 1.6;
   max-width: 600px;
+  user-select: none;
 
   @media (max-width: 968px) {
     margin: 0 auto 2rem;
@@ -250,6 +257,7 @@ const CTAButton = styled(motion.button)`
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-block;
+  user-select: none;
 
   &:hover {
     background: ${({ theme }) => theme.gradients.primaryHover};
@@ -274,23 +282,25 @@ const SkillsCloud = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  cursor: pointer;
-  padding: 0.8rem 2rem;
+  cursor: grab;
 `;
 
 const SkillBadge = styled.span`
-  padding: 0.8rem 2.5rem;
-  background: ${({ theme }) => theme.gradients.primaryTransparent};
-  color: ${({ theme }) => theme.colors.primary};
+  padding: 0.6rem 2.5rem;
+  background: ${({ active, theme }) =>
+    active ? theme.gradients.primary : theme.gradients.primaryTransparent};
+  color: ${({ active, theme }) => (active ? "white" : theme.colors.primary)};
   border: 1px solid ${({ theme }) => `${theme.colors.primary}30`};
   border-radius: 35px;
   font-size: 1rem;
   white-space: nowrap;
+  border: none;
   position: relative;
   animation: ${floatAnimation} 3s ease-in-out infinite;
   animation-delay: var(--delay);
   transform-origin: center;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  user-select: none;
 
   &:hover {
     background: ${({ theme }) => theme.gradients.primary};
@@ -298,6 +308,23 @@ const SkillBadge = styled.span`
     border-color: transparent;
     box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
   }
+`;
+
+const waveAnimation = keyframes`
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(24deg); }
+  20% { transform: rotate(-18deg); }
+  30% { transform: rotate(24deg); }
+  40% { transform: rotate(-14deg); }
+  50% { transform: rotate(20deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+`;
+
+const Wave = styled.span`
+  display: inline-block;
+  animation: ${waveAnimation} 2.5s infinite;
+  transform-origin: 70% 70%;
 `;
 
 export default Hero;

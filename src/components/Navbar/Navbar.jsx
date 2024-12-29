@@ -6,6 +6,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { useTheme } from "../../contexts/ThemeContext";
 import logo from "../../assets/logo.svg";
 
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -42,8 +43,7 @@ const Navbar = () => {
             <LogoContainer>
               <StyledLogo src={logo} alt="Logo" $isDark={isDarkMode} />
               <Logo>
-                <LogoName style={{ marginRight: "0.5rem" }}>Vinay</LogoName>
-                <LogoSurname>Prabhakar</LogoSurname>
+                <LogoName style={{ marginRight: "0.5rem" }}>Vinay Prabhakar</LogoName>
               </Logo>
             </LogoContainer>
           </LogoLink>
@@ -158,14 +158,13 @@ const Logo = styled.span`
 `;
 
 const LogoName = styled.span`
-  font-size: 1.2rem;
-  font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 700; 
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase; 
+  display:flex;
 `;
 
-const LogoSurname = styled.span`
-  font-size: 1.2rem;
-  font-weight: 400;
-`;
 
 const DesktopNav = styled.div`
   display: none;

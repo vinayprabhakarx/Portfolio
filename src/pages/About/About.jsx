@@ -9,11 +9,11 @@ const About = () => {
 
   const experience = [
     {
-      title: "Fresher",
+      title: "Aspiring Machine Learning and Web Development Professional",
       company: "Open for Opportunities",
       period: "Present",
       description:
-        "Currently seeking opportunities to apply my skills in Machine Learning, Web Development, and Programming. Passionate about building innovative solutions and eager to contribute to meaningful projects.",
+        "Actively seeking opportunities to apply my expertise in Machine Learning, Web Development, and Programming. I am passionate about developing innovative solutions and eager to contribute to impactful projects that drive growth and success.",
       skills: ["Machine Learning", "Web Development", "DSA"],
     },
   ];
@@ -47,46 +47,73 @@ const About = () => {
 
   const skills = {
     "Programming Languages": [
-      { name: "Python", details: "Primary language" },
-      { name: "C/C++", details: "Basics" },
-      { name: "JavaScript", details: "Web development" },
+      { name: "Python", details: "Primary language for various applications" },
+      {
+        name: "C/C++",
+        details: "Fundamental knowledge for systems programming",
+      },
+      { name: "JavaScript", details: "Used for interactive web development" },
     ],
 
     "Machine Learning": [
+      { name: "Python", details: "Core language for machine learning tasks" },
       {
-        name: "Python",
-        level: 85,
-        details: "Programming language for ML",
+        name: "NumPy",
+        details: "Essential for data manipulation and computation",
       },
-      { name: "NumPy", level: 42, details: "Data handling" },
       {
         name: "Scikit-learn",
-        level: 30,
-        details: "ML models, preprocessing",
+        details: "Tools for building ML models and preprocessing",
       },
       {
         name: "Matplotlib",
-        level: 10,
-        details: "Data visualization",
+        details: "Used for visualizing data and model results",
       },
-      { name: "TensorFlow", level: 10, details: "Model building and training" },
+      {
+        name: "TensorFlow",
+        details: "Framework for building deep learning models",
+      },
     ],
+
     "Web Development": [
-      { name: "React.js" },
-      { name: "HTML/CSS" },
-      { name: "Node.js" },
+      {
+        name: "React.js",
+        details: "Library for building dynamic user interfaces",
+      },
+      {
+        name: "HTML/CSS",
+        details: "Foundation for web page structure and design",
+      },
+      {
+        name: "Node.js",
+        details: "Backend framework for server-side development",
+      },
     ],
-    Database: [
-      { name: "SQL", details: "MySQL, SQLite" },
-      { name: "MongoDB", details: "NoSQL database" },
+
+    Databases: [
+      {
+        name: "SQL",
+        details: "Experience with MySQL, SQLite for relational databases",
+      },
+      { name: "MongoDB", details: "Familiar with NoSQL database management" },
     ],
-    "Tools I use ": [
-      { name: "Linux", details: "Pop-OS as my daily driver" },
-      { name: "Git", details: "Version control" },
-      { name: "GitHub", details: "Remote Repos" },
-      { name: "VS Code", details: "Code editor" },
-      { name: "Postman", details: "API testing" },
-      { name: "Jupyter Notebook", details: "Machine Learning extension" },
+
+    "Tools & Technologies": [
+      { name: "Linux", details: "Using Pop!_OS as my daily operating system" },
+      { name: "Git", details: "Version control for collaborative projects" },
+      {
+        name: "GitHub",
+        details: "Repository management and project collaboration",
+      },
+      {
+        name: "VS Code",
+        details: "Code editor for writing and debugging code",
+      },
+      { name: "Postman", details: "API testing and interaction" },
+      {
+        name: "Jupyter Notebook",
+        details: "Used for creating and sharing ML experiments",
+      },
     ],
   };
 
@@ -116,11 +143,11 @@ const About = () => {
             transition={{ duration: 0.6 }}
           >
             <BioText>
-              I'm a passionate Machine Learning Engineer and Data Scientist with
-              a strong foundation in computer science and a deep interest in
-              artificial intelligence. My journey in tech has been driven by the
-              desire to create intelligent systems that solve real-world
-              problems.
+              I’m really passionate about Machine Learning and Web Development.
+              I enjoy creating solutions that solve real-world problems, and I
+              like building websites and apps that are user-friendly. I’m always
+              looking for ways to improve and apply what I learn in practical,
+              meaningful ways.
             </BioText>
           </motion.div>
         </BioSection>
@@ -301,6 +328,7 @@ const GradientTitle = styled.h2`
   background: linear-gradient(120deg, #6a11cb 0%, #2575fc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  user-select: none;
 `;
 
 const BioSection = styled.div`
@@ -314,6 +342,7 @@ const BioText = styled.p`
   color: ${({ theme }) => theme.colors.text};
   max-width: 800px;
   margin: 0 auto;
+  user-select: none;
 `;
 
 const TabContainer = styled.div`
@@ -328,27 +357,23 @@ const TabButton = styled.button`
   padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 25px;
-  background: ${(props) =>
-    props.active
-      ? "linear-gradient(120deg, #6a11cb 0%, #2575fc 100%)"
-      : "transparent"};
-  color: ${(props) =>
-    props.active ? "white" : ({ theme }) => theme.colors.text};
-  cursor: pointer;
+  background: ${({ active, theme }) =>
+    active ? theme.gradients.primary : theme.gradients.primaryTransparent};
+  color: ${({ active, theme }) => (active ? "white" : theme.colors.primary)};
   transition: all 0.3s ease;
   font-size: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border: 2px solid ${(props) => (props.active ? "transparent" : "#6a11cb")};
+  cursor: grab;
+  user-select: none;
+  border: 2px solid
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(106, 17, 203, 0.2);
-  }
-
-  svg {
-    font-size: 1.2rem;
+    background: ${({ theme }) => theme.gradients.primary};
+    color: white;
+    border-color: transparent;
+    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
   }
 `;
 
@@ -410,6 +435,9 @@ const TimelineItem = styled(motion.div)`
       width: 30px;
     }
   }
+    &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
 
   &::after {
     content: "";
@@ -518,7 +546,7 @@ const SkillCategoryHeader = styled.div`
 `;
 
 const CategoryTitle = styled.h3`
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.text};
   font-size: 1.2rem;
   margin: 0;
   display: flex;

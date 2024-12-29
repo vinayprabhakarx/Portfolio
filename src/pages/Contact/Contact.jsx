@@ -83,10 +83,6 @@ const Contact = () => {
     <ContactContainer>
       <Header>
         <GradientTitle>Get In Touch</GradientTitle>
-        <Subtitle>
-          Let's collaborate on exciting Machine Learning and Data Science
-          projects
-        </Subtitle>
       </Header>
 
       <ContentWrapper>
@@ -100,7 +96,7 @@ const Contact = () => {
             <InfoTitle>Contact Information</InfoTitle>
             <InfoText>
               Feel free to reach out for collaborations, questions, or just to
-              say hello!
+              say hello! I'll try my best to get back to you!
             </InfoText>
 
             <ContactMethods>
@@ -274,13 +270,7 @@ const GradientTitle = styled.h2`
   background-size: 200% 200%;
   animation: ${gradientAnimation} 4s ease infinite;
   margin-bottom: 1rem;
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.2rem;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  max-width: 600px;
-  margin: 0 auto;
+  user-select: none;
 `;
 
 const ContentWrapper = styled.div`
@@ -307,6 +297,15 @@ const InfoCard = styled.div`
   overflow: hidden;
   z-index: 1;
   border: 1px solid ${({ theme }) => theme.colors.border};
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+
+    &::before {
+      opacity: 1;
+    }
+  }
 `;
 
 const GradientBackground = styled.div`
@@ -375,6 +374,13 @@ const FormSection = styled.div`
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.border};
+
+  &:hover {
+    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+  }
+  &::before {
+    opacity: 1;
+  }
 `;
 
 const ContactForm = styled.form`

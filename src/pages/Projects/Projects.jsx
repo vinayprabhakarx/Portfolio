@@ -39,7 +39,7 @@ const Projects = () => {
     },
   ];
 
-  const categories = ["all", "machine-learning", "web",];
+  const categories = ["all", "machine-learning", "web"];
 
   const filteredProjects = projects.filter((project) =>
     selectedCategory === "all" ? true : project.category === selectedCategory
@@ -166,20 +166,28 @@ const CategoryContainer = styled.div`
 `;
 
 const FilterButton = styled.button`
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 25px;
   background: ${({ active, theme }) =>
     active ? theme.gradients.primary : theme.gradients.primaryTransparent};
   color: ${({ active, theme }) => (active ? "white" : theme.colors.primary)};
-  border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 15px;
-  cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: grab;
+  user-select: none;
+  border: 2px solid
 
   &:hover {
-    background: ${({ theme }) => theme.gradients.primary};
-    color: white;
-    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(106, 17, 203, 0.2);
+  }
+
+  svg {
+    font-size: 1.2rem;
   }
 `;
 
@@ -198,18 +206,6 @@ const ProjectCard = styled(motion.div)`
   overflow: hidden;
   transition: all 0.3s ease;
   border: 1px solid ${({ theme }) => theme.colors.border};
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: ${({ theme }) => theme.gradients.primary};
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
 
   &:hover {
     transform: translateY(-5px);
