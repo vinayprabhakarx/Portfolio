@@ -6,16 +6,15 @@ import { Link } from "react-router-dom";
 
 const Blog = () => {
   const [selectedTag, setSelectedTag] = useState("all");
-  const [blogPosts, setBlogPosts] = useState([]);
-  const [tags, setTags] = useState(["all"]);
+  const [blogPosts] = useState([]);
+  const [tags] = useState(["all"]);
 
   return (
     <BlogContainer>
       <Header>
-        <GradientTitle>Latest Blog Posts</GradientTitle>
+        <GradientTitle>Blog Posts</GradientTitle>
         <Subtitle>
-          Sharing insights and experiences in Machine Learning, Data Science,
-          and AI
+          Sharing insights and experiences
         </Subtitle>
       </Header>
 

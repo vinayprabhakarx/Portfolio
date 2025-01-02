@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaPaperPlane } from "react-icons/fa";
 
@@ -40,7 +40,7 @@ const Contact = () => {
 
     // API Call
     try {
-      const response = await fetch("http://localhost:5000/api/send-email", {
+      const response = await fetch("http://localhost:5000/api/email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,13 +98,6 @@ const Contact = () => {
               Feel free to reach out for collaborations, questions, or just to
               say hello! I'll try my best to get back to you!
             </InfoText>
-
-            <ContactMethods>
-              <ContactMethod>
-                <FaEnvelope />
-                <span>work.vinayprabhakar@gmail.com</span>
-              </ContactMethod>
-            </ContactMethods>
 
             <SocialLinks>
               <SocialLink
@@ -332,23 +325,6 @@ const InfoText = styled.p`
   color: ${({ theme }) => theme.colors.textSecondary};
   line-height: 1.6;
   margin-bottom: 2rem;
-`;
-
-const ContactMethods = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const ContactMethod = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  color: ${({ theme }) => theme.colors.text};
-
-  svg {
-    color: #60a5fa;
-    font-size: 1.2rem;
-  }
 `;
 
 const SocialLinks = styled.div`

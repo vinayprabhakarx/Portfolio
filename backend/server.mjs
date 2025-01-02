@@ -14,7 +14,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Middleware for validation
 const validateEmailData = (req, res, next) => {
-  // Get data from either query params or request body
   const data = req.query.userName ? req.query : req.body;
   const { userName, email, subject, message } = data;
 
@@ -28,9 +27,8 @@ const validateEmailData = (req, res, next) => {
   }
 
   req.emailData = data; // Attach validated data to the request object
-  next(); // Proceed to the next middleware or route handler
+  next();
 };
-
 
 // Initialize Mailgun
 const mailgun = new Mailgun(formData);
@@ -39,18 +37,23 @@ const mg = mailgun.client({
   key: process.env.MAILGUN_API_KEY,
 });
 
-app.post("/api/send-email", async (req, res) => {
+// Route to handle sending emails
+app.post("/api/email", validateEmailData, async (req, res) => {
   try {
-    // Get data from either query params or request body
-    const data = req.query.userName ? req.query : req.body;
-    const { userName, email, subject, message } = data;
+    const { userName, email, subject, message } = req.emailData;
+
+    // Convert message text into HTML paragraphs
+    const htmlMessage = message
+      .split("\n")
+      .map((line) => `<p>${line.trim()}</p>`)
+      .join("");
 
     const response = await mg.messages.create(process.env.MAILGUN_DOMAIN, {
       from: `${userName} <${email}>`,
       to: process.env.RECIPIENT_EMAIL,
-      subject: subject,
+      subject,
       text: message,
-      html: `<p>${message}</p>`,
+      html: htmlMessage,
     });
 
     console.log("Email response:", response);
