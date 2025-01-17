@@ -40,7 +40,7 @@ const Contact = () => {
 
     // API Call
     try {
-      const response = await fetch("http://localhost:5000/api/email", {
+      const response = await fetch("https://vinayprabhakar.tech/api/email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

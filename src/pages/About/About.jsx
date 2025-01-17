@@ -365,14 +365,13 @@ const TabButton = styled.button`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  cursor: grab;
   user-select: none;
-  border: 2px solid
-
+  
   &:hover {
     background: ${({ theme }) => theme.gradients.primary};
     color: white;
     border-color: transparent;
+    cursor: pointer;
     box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
   }
 `;

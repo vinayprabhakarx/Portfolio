@@ -100,7 +100,7 @@ const Hero = () => {
 const floatAnimation = keyframes`
   0% { 
     transform: translateY(0px) rotate(0deg);
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
   50% { 
     transform: translateY(-20px) rotate(5deg);
@@ -108,14 +108,14 @@ const floatAnimation = keyframes`
   }
   100% { 
     transform: translateY(0px) rotate(0deg);
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
 `;
 
 const gradientAnimation = keyframes`
-  0% { background-position: 0% 50%; }
+  0% { background-position: 0 50%; }
   50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  100% { background-position: 0 50%; }
 `;
 
 const BackgroundAnimation = styled.div`
@@ -198,15 +198,7 @@ const TypewriterContainer = styled.div`
   color: ${({ theme }) => theme.colors.text};
   margin-bottom: 1rem;
   user-select: none;
-
-  .Typewriter__wrapper {
-    color: ${({ theme }) => theme.colors.text};
-  }
-
-  .Typewriter__cursor {
-    color: ${({ theme }) => theme.colors.primary};
-  }
-
+  
   @media (max-width: 768px) {
     font-size: 1.2rem;
   }
@@ -282,7 +274,6 @@ const SkillsCloud = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  cursor: grab;
 `;
 
 const SkillBadge = styled.span`
@@ -297,7 +288,6 @@ const SkillBadge = styled.span`
   border: none;
   position: relative;
   animation: ${floatAnimation} 3s ease-in-out infinite;
-  animation-delay: var(--delay);
   transform-origin: center;
   transition: all 0.2s ease;
   user-select: none;
@@ -307,6 +297,7 @@ const SkillBadge = styled.span`
     color: white;
     border-color: transparent;
     box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+    cursor: pointer;
   }
 `;
 
