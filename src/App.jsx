@@ -66,7 +66,12 @@ function App() {
         draggable
         pauseOnHover
       />
-      <Router>
+      <Router
+        future={{
+          v7_startTransition: true, // Enable startTransition early
+          v7_relativeSplatPath: true, // Enable relative splat path resolution
+        }}
+      >
         <AppLayout>
           <Routes>
             {/* Public Routes */}
