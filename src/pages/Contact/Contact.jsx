@@ -136,50 +136,58 @@ const Contact = () => {
             transition={{ duration: 0.5 }}
           >
             <FormGroup>
-              <FormLabel>Name</FormLabel>
+              <FormLabel htmlFor="userName">Name</FormLabel>
               <FormInput
                 type="text"
+                id="userName"
                 name="userName"
                 value={formData.userName}
                 onChange={handleChange}
                 required
                 disabled={status.submitting}
+                autoComplete="name"
               />
             </FormGroup>
 
             <FormGroup>
-              <FormLabel>Email</FormLabel>
+              <FormLabel htmlFor="email">Email</FormLabel>
               <FormInput
                 type="email"
+                id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
                 disabled={status.submitting}
+                autoComplete="email"
               />
             </FormGroup>
 
             <FormGroup>
-              <FormLabel>Subject</FormLabel>
+              <FormLabel htmlFor="subject">Subject</FormLabel>
               <FormInput
                 type="text"
+                id="subject"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
                 required
                 disabled={status.submitting}
+                autoComplete="off"
               />
             </FormGroup>
 
             <FormGroup>
-              <FormLabel>Message</FormLabel>
+              <FormLabel htmlFor="message">Message</FormLabel>
               <FormTextarea
+                id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 required
                 rows="5"
                 disabled={status.submitting}
+                autoComplete="off"
               />
             </FormGroup>
 

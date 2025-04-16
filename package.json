@@ -1,9 +1,11 @@
 {
-    "name": "Portfolio",
-    "version": "1.0.0",
+    "name": "portfolio-app",
+    "version": "1.0.1",
     "private": true,
+    "author": "Vinay Prabhakar",
+    "license": "MIT",
+    "description": "A personal portfolio website showcasing skills, projects, and more.",
     "dependencies": {
-        "firebase": "^9.0.0",
         "framer-motion": "^4.1.0",
         "react": "^18.0.0",
         "react-dom": "^18.0.0",
@@ -41,7 +43,6 @@
         ]
     },
     "devDependencies": {
-        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
         "concurrently": "^8.2.2"
     },
     "proxy": "http://localhost:4000"
