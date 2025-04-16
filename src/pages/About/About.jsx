@@ -61,6 +61,7 @@ const About = () => {
         name: "NumPy",
         details: "Essential for data manipulation and computation",
       },
+      { name: "Pandas", details: "For data analysis and preprocessing tasks" },
       {
         name: "Scikit-learn",
         details: "Tools for building ML models and preprocessing",
@@ -77,29 +78,59 @@ const About = () => {
 
     "Web Development": [
       {
-        name: "React.js",
-        details: "Library for building dynamic user interfaces",
+        name: "HTML/CSS",
+        details:
+          "Standard markup and styling languages for structuring and presenting web content.",
       },
       {
-        name: "HTML/CSS",
-        details: "Foundation for web page structure and design",
+        name: "React.js",
+        details:
+          "A declarative and component-based JavaScript library for building interactive UIs efficiently.",
       },
       {
         name: "Node.js",
-        details: "Backend framework for server-side development",
+        details:
+          "A JavaScript runtime environment enabling server-side development and scalable network applications.",
+      },
+      {
+        name: "Express.js",
+        details:
+          "A minimalist and flexible Node.js web application framework for building robust APIs and web applications.",
       },
     ],
 
     Databases: [
       {
         name: "SQL",
-        details: "Experience with MySQL, SQLite for relational databases",
+        details:
+          "Experience with MySQL, SQLite, and PostgreSQL for relational databases",
       },
       { name: "MongoDB", details: "Familiar with NoSQL database management" },
     ],
 
+    "Cloud & DevOps": [
+      {
+        name: "AWS",
+        details:
+          "Basic experience with cloud computing services and deployments",
+      },
+      {
+        name: "DigitalOcean",
+        details: "Used for hosting full-stack applications",
+      },
+      {
+        name: "Nginx",
+        details: "Web server and reverse proxy setup for production apps",
+      },
+      {
+        name: "Docker",
+        details: "Containerization for development and deployment",
+      },
+      { name: "Cloudflare", details: "Used for DNS, CDN, and site security" },
+    ],
+
     "Tools & Technologies": [
-      { name: "Linux", details: "Using Pop!_OS as my daily operating system" },
+      { name: "Linux", details: "Using Pop!_OS as my daily driver" },
       { name: "Git", details: "Version control for collaborative projects" },
       {
         name: "GitHub",
@@ -113,6 +144,11 @@ const About = () => {
       {
         name: "Jupyter Notebook",
         details: "Used for creating and sharing ML experiments",
+      },
+      { name: "Excel", details: "For data handling and basic analytics" },
+      {
+        name: "Firebase",
+        details: "Used for hosting, authentication, and real-time databases",
       },
     ],
   };
@@ -143,11 +179,23 @@ const About = () => {
             transition={{ duration: 0.6 }}
           >
             <BioText>
-              I’m really passionate about Machine Learning and Web Development.
-              I enjoy creating solutions that solve real-world problems, and I
-              like building websites and apps that are user-friendly. I’m always
-              looking for ways to improve and apply what I learn in practical,
-              meaningful ways.
+              I’m not someone who started coding at 10 or built an app that
+              changed the world — not yet. I come from a village, without a
+              tech background, and like many, I’ve faced the reality of limited
+              resources and exposure. But I’ve never let that stop me. I
+              discovered coding during my graduation and realized this isn’t
+              just about building apps — it’s about building opportunities,
+              solving real problems, and changing lives, including my own. I’m
+              drawn to Machine Learning because I believe it can be used to
+              create actual impact — not just fancy models, but systems that
+              help people. At the same time, I work in Web Development to become
+              job-ready, support my family, and grow step by step in the real
+              world. I won’t pretend I know everything. I’m still learning —
+              every single day. I struggle with doubts, feel behind sometimes,
+              and battle that pressure to "be perfect." But I show up, I put in
+              the work, I break things, I fix them, and I learn. This is my
+              journey — not polished, not perfect, but real. And I’m here for
+              the long haul.
             </BioText>
           </motion.div>
         </BioSection>
@@ -366,7 +414,9 @@ const TabButton = styled.button`
   align-items: center;
   gap: 0.5rem;
   user-select: none;
-  
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+
   &:hover {
     background: ${({ theme }) => theme.gradients.primary};
     color: white;
@@ -414,31 +464,15 @@ const TimelineItem = styled(motion.div)`
   margin-bottom: 2rem;
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 
   @media (max-width: 768px) {
     margin-left: 45px;
     backdrop-filter: none;
   }
 
+  /* Dot */
   &::before {
-    content: "";
-    position: absolute;
-    left: -30px;
-    top: 50%;
-    width: 30px;
-    height: 2px;
-    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-
-    @media (max-width: 768px) {
-      left: -30px;
-      width: 30px;
-    }
-  }
-    &:hover {
-    transform: translateY(-5px);
-    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
-
-  &::after {
     content: "";
     position: absolute;
     left: -36px;
@@ -447,10 +481,38 @@ const TimelineItem = styled(motion.div)`
     height: 12px;
     border-radius: 50%;
     background: linear-gradient(120deg, #6a11cb 0%, #2575fc 100%);
-    box-shadow: 0 0 0 4px rgba(106, 17, 203, 0.2);
+    box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.2);
+    transition: all 0.3s ease;
 
     @media (max-width: 768px) {
       left: -36px;
+    }
+  }
+
+  /* Connector line */
+  &::after {
+    content: "";
+    position: absolute;
+    left: -24px; /* between dot (-36px) and box (0px) */
+    top: 50%;
+    width: 24px;
+    height: 2px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    transform: translateY(-50%);
+    z-index: 0;
+
+    @media (max-width: 768px) {
+      left: -24px;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+
+    &::before {
+      box-shadow: 0 0 0 4px rgba(106, 17, 203, 0.4);
+      transform: scale(1.1);
     }
   }
 `;

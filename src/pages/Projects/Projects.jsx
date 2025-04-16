@@ -19,7 +19,7 @@ const Projects = () => {
     //     "Flask",
     //   ],
     //   github: "https://github.com/VinayPrabhakarX/disease-detection",
-    //   demo: "https://disease-detection-demo.com",
+    //   demo: "#",
     //   category: "machine-learning",
     //   highlights: [
     //     "Accurate disease prediction based on symptom patterns",
@@ -29,17 +29,36 @@ const Projects = () => {
     //   ],
     // },
     {
+      title: "Course Selling App",
+      description:
+        "Scalable Node.js backend with MongoDB for an online course platform featuring JWT authentication, course management and secure payment tracking.",
+      tags: ["Node.js", "Express.js", "MongoDB", "JWT"],
+      github: "https://github.com/VinayPrabhakarX/course-selling-app",
+      demo: "https://github.com/VinayPrabhakarX/course-selling-app?tab=readme-ov-file#-installation",
+      category: "backend",
+      highlights: [
+        "JWT authentication for admins and users",
+        "Course management with Cloudinary image uploads",
+        "Secure course purchase system",
+      ],
+    },
+    {
       title: "Portfolio Website",
       description:
         "Modern portfolio website built with React and styled-components featuring interactive animations.",
-      tags: ["React", "Styled Components", "JavaScript"],
+      tags: ["React.js", "Express.js", "Node.js", "Cloudflare"],
       github: "https://github.com/VinayPrabhakarX/Portfolio",
       demo: "https://vinayprabhakar.tech",
       category: "web",
+      highlights: [
+        "Showcases my work, skills, and background.",
+        "Includes a contact form so visitors can easily get in touch with me.",
+        "Works smoothly on mobile, tablet, and desktop devices.",
+      ],
     },
   ];
 
-  const categories = ["all", "machine-learning", "web"];
+  const categories = ["all", "web", "backend", "machine-learning"];
 
   const filteredProjects = projects.filter((project) =>
     selectedCategory === "all" ? true : project.category === selectedCategory
@@ -177,9 +196,11 @@ const FilterButton = styled.button`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  cursor: grab;
+  cursor: pointer;
   user-select: none;
   border: 2px solid
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
     transform: translateY(-2px);

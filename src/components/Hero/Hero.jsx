@@ -198,7 +198,7 @@ const TypewriterContainer = styled.div`
   color: ${({ theme }) => theme.colors.text};
   margin-bottom: 1rem;
   user-select: none;
-  
+
   @media (max-width: 768px) {
     font-size: 1.2rem;
   }
@@ -250,6 +250,8 @@ const CTAButton = styled(motion.button)`
   text-decoration: none;
   display: inline-block;
   user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
     background: ${({ theme }) => theme.gradients.primaryHover};
@@ -291,6 +293,8 @@ const SkillBadge = styled.span`
   transform-origin: center;
   transition: all 0.2s ease;
   user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
     background: ${({ theme }) => theme.gradients.primary};

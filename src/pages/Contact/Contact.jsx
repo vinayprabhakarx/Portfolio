@@ -452,6 +452,8 @@ const SubmitButton = styled(motion.button)`
   width: 100%;
   justify-content: center;
   transition: all 0.3s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 
   &:disabled {
     opacity: 0.7;

@@ -13,9 +13,7 @@ const Blog = () => {
     <BlogContainer>
       <Header>
         <GradientTitle>Blog Posts</GradientTitle>
-        <Subtitle>
-          Sharing insights and experiences
-        </Subtitle>
+        <Subtitle>Sharing insights and experiences</Subtitle>
       </Header>
 
       <TagsContainer>
@@ -84,27 +82,6 @@ const Blog = () => {
   );
 };
 
-// Styled components
-// const LoadingContainer = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   min-height: 400px;
-// `;
-
-// const ErrorContainer = styled.div`
-//   text-align: center;
-//   padding: 2rem;
-//   color: ${({ theme }) => theme.colors.error};
-// `;
-
-const NoPosts = styled.div`
-  text-align: center;
-  padding: 2rem;
-  grid-column: 1 / -1;
-  color: ${({ theme }) => theme.colors.textSecondary};
-`;
-
 const BlogContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
@@ -113,6 +90,13 @@ const BlogContainer = styled.div`
   @media (max-width: 768px) {
     padding: 1rem;
   }
+`;
+
+const NoPosts = styled.div`
+  text-align: center;
+  padding: 2rem;
+  grid-column: 1 / -1;
+  color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const Header = styled.header`
