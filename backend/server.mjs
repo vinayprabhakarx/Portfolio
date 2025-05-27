@@ -53,7 +53,7 @@ app.post("/api/email", validateEmailData, async (req, res) => {
       {
         from: `Vinay Prabhakar <no-reply@${process.env.MAILGUN_DOMAIN}>`,
         to: process.env.RECIPIENT_EMAIL,
-        subject: `New Contact Form Submission: ${subject}`,
+        subject: `Contact Form Submission: ${subject}`,
         text: message,
         html: htmlMessage,
       }
@@ -63,30 +63,79 @@ app.post("/api/email", validateEmailData, async (req, res) => {
 
     // Prepare confirmation email for user
     const confirmationText = `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px; background-color: #f9f9f9;">
-      <h3 style="color: #f9f9f9;">Hello ${userName},</h3>
+    <div style="font-family: Georgia, 'Times New Roman', serif; max-width: 580px; margin: 0 auto; background-color: #fdfdfd; border: 1px solid #d4d4d8; border-radius: 2px;">
+      
+      <!-- Header -->
+    <div style="background-color: #18181b; padding: 16px 32px; border-bottom: 2px solid #3f3f46;">
+      <h1 style="color: #fafafa; margin: 0; font-size: 18px; font-weight: 400; letter-spacing: 0.3px;">
+        Message Confirmation
+      </h1>
+    </div>
   
-      <p style="font-size: 16px; color: #333;">
-        Thank you for reaching out to me! 🙌<br/>
-        I've received your message and will get back to you as soon as possible.
-      </p>
+      <!-- Content -->
+      <div style="padding: 32px;">
+        
+        <div style="margin-bottom: 28px;">
+          <p style="font-size: 16px; color: #27272a; margin: 0; line-height: 1.5;">
+            Dear ${userName},
+          </p>
+        </div>
   
-      <h3 style="color: #f9f9f9;">Your Message:</h3>
-      <div style="background-color: #ffffff; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
-        ${htmlMessage}
+        <div style="margin-bottom: 28px;">
+          <p style="font-size: 15px; color: #3f3f46; line-height: 1.6; margin: 0;">
+            I have received your message sent through my website contact form. Thank you for reaching out!
+          </p>
+        </div>
+  
+        <!-- Message Content -->
+        <div style="margin-bottom: 32px;">
+          <h3 style="color: #18181b; font-size: 16px; font-weight: 500; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 1px; font-family: Arial, sans-serif;">
+            Message Details
+          </h3>
+          <div style="background-color: #f4f4f5; padding: 20px; border: 1px solid #e4e4e7; margin-top: 8px;">
+            <div style="font-size: 14px; color: #52525b; line-height: 1.5;">
+              ${htmlMessage}
+            </div>
+          </div>
+        </div>
+  
+        <!-- Response Information -->
+        <div style="background-color: #f9fafb; border: 1px solid #e5e7eb; padding: 24px; margin-bottom: 28px;">
+          <h4 style="color: #374151; font-size: 15px; font-weight: 500; margin: 0 0 12px 0; font-family: Arial, sans-serif;">
+            Response Timeline
+          </h4>
+          <p style="font-size: 14px; color: #4b5563; line-height: 1.6; margin: 0;">
+            You can expect a personal response from me within 2-3 business days. I appreciate your patience as I work through my messages.
+          </p>
+        </div>
+  
+        <!-- Contact Information -->
+        <div style="margin-bottom: 32px;">
+          <p style="font-size: 15px; color: #3f3f46; line-height: 1.6; margin: 0;">
+            If you have any urgent questions or need immediate assistance, please feel free to reach out to me directly at <a href="mailto:${process.env.RECIPIENT_EMAIL}" style="color: #2563eb; text-decoration: none;">${process.env.RECIPIENT_EMAIL}</a>.
+          </p>
+        </div>
+  
+        <!-- Signature -->
+        <div style="border-top: 1px solid #e4e4e7; padding-top: 24px;">
+          <p style="font-size: 15px; color: #3f3f46; margin: 0 0 8px 0;">
+            Regards,
+          </p>
+          <p style="font-size: 16px; color: #18181b; font-weight: 500; margin: 0;">
+            Vinay Prabhakar
+          </p>
+        </div>
+  
       </div>
   
-      <p style="font-size: 16px; color: #333;">
-        If you need to contact me again, feel free to reply through the contact form on my website.
-      </p>
+      <!-- Footer -->
+      <div style="background-color: #f4f4f5; padding: 20px 32px; border-top: 1px solid #e4e4e7;">
+        <p style="font-size: 12px; color: #71717a; margin: 0; line-height: 1.4;">
+          This message was automatically generated in response to your contact form submission. 
+          Please do not reply to this email address as it is not monitored for responses.
+        </p>
+      </div>
   
-      <p style="font-size: 16px; color: #333;">Kind regards,</p>
-      <p style="font-weight: bold; font-size: 16px; color: #f9f9f9;">Vinay Prabhakar</p>
-  
-      <hr style="margin-top: 30px; border: none; border-top: 1px solid #ddd;" />
-      <p style="font-size: 12px; color: #777;">
-        This is an automated message. Please do not reply directly to this email.
-      </p>
     </div>
   `;
 
