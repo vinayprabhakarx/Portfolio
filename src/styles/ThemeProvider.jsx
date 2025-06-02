@@ -4,11 +4,11 @@ import {
   useTheme, // Hook to consume theme state
 } from "../contexts/ThemeContext.jsx";
 import GlobalStyle from "./GlobalStyles.jsx"; // Injects global styles
-import getTheme from "./theme.jsx"; // Returns theme object based on mode
+import Theme from "./Theme.jsx"; // Returns theme object based on mode
 
 const ThemeProviderWrapper = ({ children }) => {
   const { isDarkMode } = useTheme(); // Access current theme mode from context
-  const themeObject = getTheme(isDarkMode); // Resolve theme object (light or dark)
+  const themeObject = Theme(isDarkMode); // Resolve theme object (light or dark)
 
   return (
     <StyledThemeProvider theme={themeObject}>
