@@ -51,7 +51,7 @@ app.post("/api/email", validateEmailData, async (req, res) => {
     const responseToRecipient = await mg.messages.create(
       process.env.MAILGUN_DOMAIN,
       {
-        from: `Vinay Prabhakar <no-reply@${process.env.MAILGUN_DOMAIN}>`,
+        from: email,
         to: process.env.RECIPIENT_EMAIL,
         subject: `Contact Form Submission: ${subject}`,
         text: message,
