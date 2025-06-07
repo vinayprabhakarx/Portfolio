@@ -146,7 +146,7 @@ const Navbar = () => {
                 <ToggleTrack $dark={isDarkMode}>
                   <ToggleKnob
                     layout
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 20 }}
                   >
                     {isDarkMode ? "🌙" : "☀️"}
                   </ToggleKnob>
@@ -229,7 +229,7 @@ const DesktopNav = styled.div`
   gap: 2rem;
   align-items: center;
 
-  @media (min-width: 768px) {
+  @media (min-width: 775px) {
     display: flex;
   }
 `;
@@ -282,7 +282,7 @@ const MobileMenuButton = styled.button`
   cursor: pointer;
   padding: 0.4rem;
 
-  @media (min-width: 768px) {
+  @media (min-width: 775px) {
     display: none;
   }
 `;
