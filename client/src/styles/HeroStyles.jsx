@@ -168,50 +168,13 @@ export const CTAButton = styled(motion.button)`
   }
 `;
 
-// Right section of the Hero content, for skill cloud
-export const RightSection = styled.div`
+// Right section of the Hero content, animated with Framer Motion
+export const RightSection = styled(motion.div)`
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-`;
-
-// Container for the floating skill badges
-export const SkillsCloud = styled.div`
-  position: relative;
-  width: 100%;
-  height: 400px;
-  display: flex;
-  flex-wrap: wrap; /* Allows badges to wrap */
-  justify-content: center;
-  align-items: center;
-  gap: 1rem; /* Spacing between badges */
-`;
-
-// Individual skill badge styling, with float animation
-export const SkillBadge = styled.span`
-  padding: 0.6rem 2.5rem;
-  background: ${({ theme }) =>
-    theme.gradients.primaryTransparent}; /* Transparent gradient background */
-  color: ${({ theme }) => theme.colors.text};
-  border-radius: 35px; /* Pill shape */
-  font-size: 1rem;
-  white-space: nowrap; /* Prevents text from wrapping */
-  animation: ${floatAnimation} 3s ease-in-out infinite; /* Apply float animation */
-  transform-origin: center; /* Set transform origin for rotation */
-  transition: all 0.2s ease;
-  user-select: none;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-
-  &:hover {
-    background: ${({ theme }) =>
-      theme.gradients.primary}; /* Solid gradient on hover */
-    color: ${({ theme }) => theme.colors.secondary};
-    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
-    cursor: pointer;
-  }
 `;
 
 // Waving hand emoji styling
