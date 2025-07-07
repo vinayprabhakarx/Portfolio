@@ -1,169 +1,199 @@
+import {
+  FaPython,
+  FaJsSquare,
+  FaHtml5,
+  FaCss3Alt,
+  FaReact,
+  FaNodeJs,
+  FaGitAlt,
+  FaFedora,
+  FaGithub,
+  FaAws,
+  FaDocker,
+  FaDatabase,
+} from "react-icons/fa";
+import {
+  SiC,
+  SiMongodb,
+  SiMysql,
+  SiTensorflow,
+  SiScikitlearn,
+  SiPandas,
+  SiNumpy,
+  SiStreamlit,
+  SiExpress,
+  SiJupyter,
+  SiGooglecolab,
+  SiPostman,
+  SiCloudflare,
+  SiDigitalocean,
+  SiNginx,
+} from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
+
 export const experience = [
   {
-    title: "Aspiring Machine Learning and Web Development Professional",
+    title: "Web Developer & Aspiring Machine Learning Engineer",
     company: "Open for Opportunities",
     period: "Present",
     description:
-      "Actively seeking opportunities to apply my expertise in Machine Learning, Web Development, and Programming. I am passionate about developing innovative solutions and eager to contribute to impactful projects that drive growth and success.",
-    skills: ["Machine Learning", "Web Development", "DSA"],
+      "Looking for opportunities to apply my knowledge in Machine Learning, Web Development, and Data Structures & Algorithms. Focused on building practical solutions to real-world problems.",
   },
 ];
 
 export const education = [
   {
-    degree: "Bachelor of Computer Applications",
+    degree: "Bachelor of Computer Applications (BCA)",
     institution: "Indian Institute of Business Management, Patna",
-    period: "2022 - Current",
-    description: "Currently pursuing BCA under Aryabhatta Knowledge University",
-    courses: [],
+    period: "2022 – Present",
+    description: "Affiliated with Aryabhatta Knowledge University, Patna",
   },
   {
-    degree: "Intermediate (12th)",
+    degree: "Intermediate (Science)",
     institution: "S.K. College, Lohanda, Jamui",
-    period: "2018 - 2020",
-    description:
-      "Completed Intermediate education under Bihar School Examination Board",
-    courses: [],
+    period: "2018 – 2020",
+    description: "Affiliated with Bihar School Examination Board",
   },
   {
-    degree: "Matriculation (10th)",
+    degree: "Matriculation",
     institution: "Janta High School, Satyana, Jamui",
     period: "2018",
-    description: "Completed Matriculation under Bihar School Examination Board",
-    courses: [],
+    description: "Affiliated with Bihar School Examination Board",
   },
 ];
-
 export const skills = {
   "Programming Languages": [
     {
       name: "Python",
-      details: "Primary language for scripting and machine learning tasks",
-    },
-    {
-      name: "C/C++",
-      details: "Foundational knowledge for systems and algorithmic programming",
+      icon: FaPython,
     },
     {
       name: "JavaScript",
-      details: "Used for building interactive web applications",
+      icon: FaJsSquare,
+    },
+    {
+      name: "C",
+      icon: SiC,
     },
   ],
   "Machine Learning": [
     {
       name: "NumPy",
-      details: "Used for numerical computations and data manipulation",
+      icon: SiNumpy,
     },
     {
       name: "Pandas",
-      details: "For data analysis, preprocessing, and transformation",
+      icon: SiPandas,
     },
     {
       name: "Scikit-learn",
-      details: "Used for model building, evaluation, and preprocessing",
+      icon: SiScikitlearn,
     },
     {
       name: "Matplotlib",
-      details: "For data visualization and plotting model results",
+      icon: FaDatabase,
     },
     {
       name: "TensorFlow",
-      details: "Framework for building and training deep learning models",
+      icon: SiTensorflow,
     },
     {
       name: "Streamlit",
-      details:
-        "Used for building interactive frontends for machine learning applications",
+      icon: SiStreamlit,
     },
   ],
   "Web Development": [
     {
-      name: "HTML/CSS",
-      details: "Markup and styling for structuring and designing web content",
+      name: "HTML",
+      icon: FaHtml5,
+    },
+    {
+      name: "CSS",
+      icon: FaCss3Alt,
     },
     {
       name: "React.js",
-      details: "Component-based library for building dynamic user interfaces",
+      icon: FaReact,
     },
     {
       name: "Node.js",
-      details: "JavaScript runtime for server-side application development",
+      icon: FaNodeJs,
     },
     {
       name: "Express.js",
-      details: "Minimal Node.js framework for building APIs and web services",
+      icon: SiExpress,
     },
   ],
   Databases: [
     {
-      name: "SQL",
-      details:
-        "Experience with MySQL, SQLite, and PostgreSQL for relational databases",
+      name: "MySQL",
+      icon: SiMysql,
     },
     {
       name: "MongoDB",
-      details: "Used for managing NoSQL document-based databases",
+      icon: SiMongodb,
     },
   ],
   "Cloud & DevOps": [
     {
       name: "AWS",
-      details:
-        "Basic experience with EC2, S3, and deployment of applications on cloud infrastructure",
+      icon: FaAws,
     },
     {
       name: "DigitalOcean",
-      details: "Used for deploying and hosting full-stack applications",
+      icon: SiDigitalocean,
     },
     {
       name: "Nginx",
-      details:
-        "Configured as a web server and reverse proxy for production apps",
+      icon: SiNginx,
     },
     {
       name: "Docker",
-      details:
-        "Used for containerizing applications for development and deployment",
+      icon: FaDocker,
     },
     {
       name: "Cloudflare",
-      details: "Used for DNS management, CDN, and site security",
+      icon: SiCloudflare,
     },
   ],
   "Tools & Technologies": [
     {
-      name: "Pop-os(Linux)",
-      details:
-        "Daily driver OS; proficient with command-line and system operations",
+      name: "Fedora (Linux)",
+      icon: FaFedora,
     },
     {
       name: "Git",
-      details: "Version control system for source code management",
+      icon: FaGitAlt,
     },
     {
       name: "GitHub",
-      details: "For repository hosting and project collaboration",
+      icon: FaGithub,
     },
-    { name: "VS Code", details: "Primary IDE for development and debugging" },
-    { name: "Postman", details: "Used for API testing and integration" },
+    {
+      name: "VS Code",
+      icon: VscVscode,
+    },
+    {
+      name: "Postman",
+      icon: SiPostman,
+    },
     {
       name: "Jupyter Notebook",
-      details: "Interactive environment for ML experimentation",
+      icon: SiJupyter,
     },
     {
       name: "Google Colab",
-      details:
-        "Used for training machine learning models in a cloud environment",
+      icon: SiGooglecolab,
     },
   ],
 };
 
 export const bioText = `
-My name is Vinay Prabhakar, a Bachelor's student in Computer Applications with a strong focus on web development, machine learning, and DevOps. I specialize in building full-stack applications using React.js, Node.js, Express.js, and MongoDB.
+My name is Vinay Prabhakar, a Bachelor of Computer Applications student with a strong interest in web development and machine learning. I focus on building full-stack applications using the MERN stack.
 
-In the field of machine learning, I work with Python, scikit-learn, Pandas, and NumPy, and I have experience building classification models and applying basic computer vision techniques.
+In machine learning, I work primarily with Python, using libraries such as scikit-learn, Pandas, and NumPy. I have experience developing classification models and implementing basic computer vision techniques.
 
-Currently, I’m working on projects that leverage machine learning and computer vision to solve real-world challenges, including a disease prediction system and a cleanliness rating tool.
+Currently, I’m engaged in projects that apply machine learning to real-world problems, including a disease prediction system and a cleanliness rating tool.
 
-My goal is to begin my career in the IT industry and grow into a Machine Learning Engineer committed to developing intelligent, impactful solutions.
+My objective is to begin my career in the IT industry and advance as a Machine Learning Engineer, dedicated to building intelligent, practical solutions.
 `;

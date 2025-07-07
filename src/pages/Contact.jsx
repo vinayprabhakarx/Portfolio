@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"; // React hooks
-import { motion } from "framer-motion"; // Animation library
+import { motion, AnimatePresence } from "framer-motion"; // Animation library
 import { FaPaperPlane } from "react-icons/fa6"; // Icon for send button
 import SocialLinks from "../components/SocialLinks"; // Social media links component
 import Container from "../components/Container";
@@ -120,31 +120,36 @@ const Contact = () => {
       </Header>
 
       <ContentWrapper>
-        <ContactInfo>
-          <InfoCard
-            as={motion.div}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <InfoTitle>Contact Information</InfoTitle>
-            <InfoText>
-              Feel free to reach out for collaborations, questions, or just to
-              say hello! I'll try my best to get back to you!
-            </InfoText>
-            <SocialLinks />
-            <GradientBackground />
-          </InfoCard>
-        </ContactInfo>
+        <InfoCard
+          as={motion.div}
+          initial={{ y: 30 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          style={{
+            willChange: "transform",
+            isolation: "isolate",
+          }}
+        >
+          <InfoTitle>Contact Information</InfoTitle>
+          <InfoText>
+            Feel free to reach out for collaborations, questions, or just to say
+            hello! I'll try my best to get back to you!
+          </InfoText>
+          <SocialLinks />
+          <GradientBackground />
+        </InfoCard>
 
-        <FormSection>
-          <ContactForm
-            onSubmit={handleSubmit}
-            as={motion.form}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+        <FormSection
+          as={motion.div}
+          initial={{ y: 30 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          style={{
+            willChange: "transform",
+            isolation: "isolate",
+          }}
+        >
+          <ContactForm onSubmit={handleSubmit}>
             {formFields.map(({ name, type, label, autoComplete }) => (
               <FormGroup key={name}>
                 <FormLabel htmlFor={name}>{label}</FormLabel>
@@ -191,15 +196,17 @@ const Contact = () => {
             </SubmitButton>
 
             {/* Display success or error messages */}
-            {status.submitted && (
-              <SuccessMessage
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-              >
-                {status.message}
-              </SuccessMessage>
-            )}
+            <AnimatePresence>
+              {status.submitted && (
+                <SuccessMessage
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                >
+                  {status.message}
+                </SuccessMessage>
+              )}
+            </AnimatePresence>
 
             {status.error && (
               <ErrorMessage

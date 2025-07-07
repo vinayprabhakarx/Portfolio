@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
  */
 const CardContainer = styled(motion.div)`
   background: ${({ theme }) => theme.colors.surface};
-  padding: ${({ theme }) => theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.xl};
   border-radius: 20px;
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: 0 4px 15px ${({ theme }) => theme.shadows.small};

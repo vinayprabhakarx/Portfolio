@@ -1,14 +1,15 @@
-import { useState } from "react"; // State management hook
-import { motion } from "framer-motion"; // Animation library
-import { FaGraduationCap, FaBriefcase, FaCode } from "react-icons/fa"; // Icons for tabs
-import profilePhoto from "../assets/photo.png"; // Profile image asset
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { FaGraduationCap, FaBriefcase, FaCode } from "react-icons/fa";
+import profilePhoto from "../assets/photo.png";
 import Container from "../components/Container";
-import Card from "../components/Card"; // Card component for styling
-import TabButton from "../components/TabButton"; // Tab button component
-import GradientTitle from "../components/GradientTitle"; // Gradient title component
-import Profile from "../components/Profile"; // Profile image component
-import TimelineComponent from "../components/TimelineComponent"; // Timeline component for experience/education
-import { experience, education, skills, bioText } from "../data/AboutData"; // Data for about sections
+import Card from "../components/Card";
+import TabButton from "../components/TabButton";
+import GradientTitle from "../components/GradientTitle";
+import Profile from "../components/Profile";
+import TimelineComponent from "../components/TimelineComponent";
+import { experience, education, skills, bioText } from "../data/AboutData";
+import { useTheme } from "styled-components";
 import {
   ProfileSection,
   BioSection,
@@ -18,34 +19,19 @@ import {
   CourseList,
   CourseItem,
   SkillsContainer,
-  SkillSection,
-  SkillCategoryHeader,
-  CategoryTitle,
-  ArrowIcon,
-  SkillList,
-  SkillItem,
-  SkillBullet,
-  SkillInfo,
   SkillName,
-} from "../styles/AboutStyles"; // Styled components for About page
+} from "../styles/AboutStyles"; // Styled components
 
 const About = () => {
-  const [activeTab, setActiveTab] = useState("experience"); // State for active tab
-  const [expandedSection, setExpandedSection] = useState(null); // State for expanded skill section
+  const theme = useTheme();
+  const [activeTab, setActiveTab] = useState("experience");
 
-  // Toggles the expansion of a skill section
-  const toggleSection = (section) => {
-    setExpandedSection(expandedSection === section ? null : section);
-  };
-
-  // Configuration for tabs
   const tabs = [
     { id: "experience", icon: FaBriefcase, label: "Experience" },
     { id: "education", icon: FaGraduationCap, label: "Education" },
     { id: "skills", icon: FaCode, label: "Skills" },
   ];
 
-  // Renders timeline items for experience or education
   const renderTimelineItems = (items, type) =>
     items.map((item) => ({
       title: type === "education" ? item.degree : item.title,
@@ -53,20 +39,13 @@ const About = () => {
       extra: (
         <>
           <Company>
-            {type === "education" ? item.institution : item.company}
+            {type === "experience" ? item.company : item.institution}
           </Company>
           <Card.HighlightItem>{item.description}</Card.HighlightItem>
-          {type === "experience" && (
-            <Card.TagContainer>
-              {item.skills.map((skill, i) => (
-                <Card.Tag key={i}>{skill}</Card.Tag>
-              ))}
-            </Card.TagContainer>
-          )}
-          {type === "education" && item.courses.length > 0 && (
+          {type === "education" && item.courses && item.courses.length > 0 && (
             <CourseList>
-              {item.courses.map((course, i) => (
-                <CourseItem key={i}>{course}</CourseItem>
+              {item.courses.map((course, idx) => (
+                <CourseItem key={idx}>{course}</CourseItem>
               ))}
             </CourseList>
           )}
@@ -74,7 +53,6 @@ const About = () => {
       ),
     }));
 
-  // Renders content based on the active tab
   const renderTabContent = () => {
     switch (activeTab) {
       case "experience":
@@ -91,38 +69,49 @@ const About = () => {
         );
       case "skills":
         return (
-          <SkillsContainer>
+          <SkillsContainer
+            style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
+          >
             {Object.entries(skills).map(([category, skillList]) => (
-              <SkillSection key={category}>
-                <SkillCategoryHeader onClick={() => toggleSection(category)}>
-                  <CategoryTitle>
-                    <ArrowIcon $isExpanded={expandedSection === category}>
-                      ▶
-                    </ArrowIcon>
-                    {category}
-                  </CategoryTitle>
-                </SkillCategoryHeader>
-                <SkillList $isExpanded={expandedSection === category}>
-                  {skillList.map((skill, index) => (
-                    <SkillItem
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                    >
-                      <SkillBullet>•</SkillBullet>
-                      <SkillInfo>
-                        <SkillName>{skill.name}</SkillName>
-                        {skill.details && (
-                          <Card.HighlightItem>
-                            {skill.details}
-                          </Card.HighlightItem>
+              <div key={category}>
+                <h3 style={{ marginBottom: "1rem" }}>{category}</h3>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                    gap: "1.5rem",
+                  }}
+                >
+                  {skillList.map((skill, index) => {
+                    const Icon = skill.icon;
+                    return (
+                      <Card
+                        key={index}
+                        as={motion.div}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        style={{
+                          padding: "0.75rem",
+                          display: "flex",
+                          gap: "0.75rem",
+                          alignItems: "flex-start",
+                        }}
+                      >
+                        {Icon && (
+                          <Icon size={28} color={theme.colors.primary} />
                         )}
-                      </SkillInfo>
-                    </SkillItem>
-                  ))}
-                </SkillList>
-              </SkillSection>
+                        <div>
+                          <SkillName style={{ fontWeight: 600 }}>
+                            {skill.name}
+                          </SkillName>
+                          {skill.details}
+                        </div>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </div>
             ))}
           </SkillsContainer>
         );
@@ -138,25 +127,26 @@ const About = () => {
       <ProfileSection>
         <Profile src={profilePhoto} alt="Vinay Prabhakar" />
         <BioSection>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <BioText>{bioText}</BioText>
-          </motion.div>
+          <BioText>{bioText}</BioText>
         </BioSection>
       </ProfileSection>
 
+      {/* Animate each tab button */}
       <TabButton.TabContainer>
-        {tabs.map(({ id, icon: Icon, label }) => (
-          <TabButton
+        {tabs.map(({ id, icon: Icon, label }, index) => (
+          <motion.div
             key={id}
-            $active={activeTab === id}
-            onClick={() => setActiveTab(id)}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 * index, duration: 0.4 }}
           >
-            <Icon /> {label}
-          </TabButton>
+            <TabButton
+              $active={activeTab === id}
+              onClick={() => setActiveTab(id)}
+            >
+              <Icon /> {label}
+            </TabButton>
+          </motion.div>
         ))}
       </TabButton.TabContainer>
 

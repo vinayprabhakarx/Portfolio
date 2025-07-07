@@ -33,9 +33,9 @@ const Hero = () => (
     <BackgroundAnimation /> {/* Background animation */}
     <ContentWrapper>
       <LeftSection
-        initial={{ opacity: 0, x: -50 }} // Animation start state
-        animate={{ opacity: 1, x: 0 }} // Animation end state
-        transition={{ duration: 0.8 }} // Animation duration
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
       >
         <WelcomeText>
           Hi There! <Wave>👋</Wave> I'm {/* Greeting with wave emoji */}
@@ -45,11 +45,7 @@ const Hero = () => (
         <TypewriterContainer>
           <Typewriter
             options={{
-              strings: [
-                "Machine Learning",
-                "Web Development",
-                "Problem Solving",
-              ],
+              strings: ["Web Developer", "Machine Learning Engineer"],
               autoStart: true,
               loop: true,
               deleteSpeed: 50,
@@ -58,8 +54,8 @@ const Hero = () => (
           />
         </TypewriterContainer>
         <Description>
-          Welcome to my portfolio! Explore my projects, learn more about my work
-          and background, and feel free to get in touch.
+          Welcome to my portfolio. Explore my work, discover my professional
+          background and projects, and feel free to reach out .
         </Description>
         <CTAButton
           as={Link} // React Router link styled as button

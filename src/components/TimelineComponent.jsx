@@ -7,21 +7,21 @@ const TimelineComponent = ({ items }) => (
     {items.map((item, index) => (
       <TimelineItem
         key={index}
-        initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: index * 0.1 }}
+        initial={{ y: 20 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
       >
         <TimelineHeader>
-          <h3>{item.title}</h3> {/* Item title (e.g., job title, degree) */}
-          <Duration>{item.duration}</Duration> {/* Duration of the item */}
+          <h3>{item.title}</h3>
+          <Duration>{item.duration}</Duration>
         </TimelineHeader>
-        {item.extra} {/* Additional content for the item */}
+        {item.extra}
       </TimelineItem>
     ))}
   </Timeline>
 );
 
-// Main container for the timeline, with a vertical line in the middle.
+// Timeline wrapper with vertical line
 const Timeline = styled.div`
   position: relative;
   max-width: 800px;
@@ -42,14 +42,7 @@ const Timeline = styled.div`
   }
 `;
 
-// Styling for the duration text within each timeline item.
-const Duration = styled.span`
-  color: ${({ theme }) => theme.colors.text};
-  font-style: italic;
-  font-size: 0.95rem;
-`;
-
-// Styling for an individual timeline item, animated with Framer Motion.
+// Styled individual timeline entry with animation
 const TimelineItem = styled(motion.div)`
   position: relative;
   margin-left: 30px;
@@ -61,6 +54,8 @@ const TimelineItem = styled(motion.div)`
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.light};
   transition: all 0.3s ease;
+  will-change: transform;
+  isolation: isolate;
 
   @media (max-width: 768px) {
     margin-left: 45px;
@@ -110,7 +105,7 @@ const TimelineItem = styled(motion.div)`
   }
 `;
 
-// Styling for the header part of each timeline item (title and duration).
+// Header for each timeline item
 const TimelineHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -123,6 +118,13 @@ const TimelineHeader = styled.div`
     font-weight: 600;
     margin: 0;
   }
+`;
+
+// Duration styling
+const Duration = styled.span`
+  color: ${({ theme }) => theme.colors.text};
+  font-style: italic;
+  font-size: 0.95rem;
 `;
 
 export default TimelineComponent;
