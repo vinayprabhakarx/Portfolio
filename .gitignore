@@ -75,6 +75,8 @@ jspm_packages/
 .chokidar-custom-files
 
 # Production build output
+/api/dist/
+/client/dist/
 /dist
 /build
 /out
