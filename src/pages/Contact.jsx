@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react"; // React hooks
-import { motion, AnimatePresence } from "framer-motion"; // Animation library
-import { FaPaperPlane } from "react-icons/fa6"; // Icon for send button
-import SocialLinks from "../components/SocialLinks"; // Social media links component
+import { motion, AnimatePresence } from "framer-motion";
+import { FaPaperPlane } from "react-icons/fa6";
+import SocialLinks from "../components/SocialLinks";
 import Container from "../components/Container";
 import GradientTitle from "../components/GradientTitle";
+import { useContactForm } from "../hooks/useContactForm";
 import {
   Header,
   ContentWrapper,
-  ContactInfo,
   InfoCard,
   InfoTitle,
   InfoText,
@@ -21,97 +20,17 @@ import {
   SubmitButton,
   SuccessMessage,
   ErrorMessage,
-} from "../styles/ContactStyles"; // Styled components
+} from "../styles/ContactStyles";
 
 const Contact = () => {
-  // Form input state
-  const [formData, setFormData] = useState({
-    userName: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-
-  // Submission status and feedback state
-  const [status, setStatus] = useState({
-    submitting: false,
-    submitted: false,
-    error: null,
-    message: "",
-  });
-
-  // Config for form fields (excluding message textarea)
-  const formFields = [
-    { name: "userName", type: "text", label: "Name", autoComplete: "name" },
-    { name: "email", type: "email", label: "Email", autoComplete: "email" },
-    { name: "subject", type: "text", label: "Subject", autoComplete: "off" },
-  ];
-
-  // Update form input on user change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // Reset form fields
-  const resetForm = () => {
-    setFormData({ userName: "", email: "", subject: "", message: "" });
-  };
-
-  // Update submission status state
-  const updateStatus = (updates) => {
-    setStatus((prev) => ({ ...prev, ...updates }));
-  };
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    updateStatus({
-      submitting: true,
-      submitted: false,
-      error: null,
-      message: "",
-    });
-
-    try {
-      const response = await fetch("/api/email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok)
-        throw new Error(data.message || "Failed to send message");
-
-      updateStatus({
-        submitting: false,
-        submitted: true,
-        error: null,
-        message: "Message sent successfully!",
-      });
-      setTimeout(resetForm, 3000);
-    } catch (error) {
-      console.error("Submission error:", error);
-      updateStatus({
-        submitting: false,
-        submitted: false,
-        error: true,
-        message: error.message || "Failed to send message",
-      });
-    }
-  };
-
-  // Auto-dismiss success or error messages after 3 seconds
-  useEffect(() => {
-    if (status.submitted || status.error) {
-      const timer = setTimeout(() => {
-        updateStatus({ submitted: false, error: null, message: "" });
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [status.submitted, status.error]);
+  const {
+    formData,
+    status,
+    validationErrors,
+    formFields,
+    handleChange,
+    handleSubmit,
+  } = useContactForm();
 
   return (
     <Container>
@@ -120,6 +39,7 @@ const Contact = () => {
       </Header>
 
       <ContentWrapper>
+        {/* Animate InfoCard like in Code 1 */}
         <InfoCard
           as={motion.div}
           initial={{ y: 30 }}
@@ -139,6 +59,7 @@ const Contact = () => {
           <GradientBackground />
         </InfoCard>
 
+        {/* Animate FormSection like in Code 1 */}
         <FormSection
           as={motion.div}
           initial={{ y: 30 }}
@@ -150,73 +71,142 @@ const Contact = () => {
           }}
         >
           <ContactForm onSubmit={handleSubmit}>
-            {formFields.map(({ name, type, label, autoComplete }) => (
-              <FormGroup key={name}>
-                <FormLabel htmlFor={name}>{label}</FormLabel>
-                <FormInput
-                  type={type}
-                  id={name}
-                  name={name}
-                  value={formData[name]}
-                  onChange={handleChange}
-                  required
-                  disabled={status.submitting}
-                  autoComplete={autoComplete}
-                />
-              </FormGroup>
-            ))}
+            {formFields.map(
+              ({ name, type, label, autoComplete, maxLength }) => (
+                <FormGroup key={name}>
+                  <FormLabel htmlFor={name}>
+                    {label} <span style={{ color: "#ef4444" }}>*</span>
+                  </FormLabel>
+                  <FormInput
+                    type={type}
+                    id={name}
+                    name={name}
+                    value={formData[name]}
+                    onChange={handleChange}
+                    required
+                    disabled={status.submitting}
+                    autoComplete={autoComplete}
+                    maxLength={maxLength}
+                    style={{
+                      borderColor: validationErrors[name]
+                        ? "#ef4444"
+                        : undefined,
+                    }}
+                    aria-invalid={!!validationErrors[name]}
+                    aria-describedby={
+                      validationErrors[name] ? `${name}-error` : undefined
+                    }
+                  />
+                  {validationErrors[name] && (
+                    <div
+                      id={`${name}-error`}
+                      style={{
+                        color: "#ef4444",
+                        fontSize: "0.875rem",
+                        marginTop: "0.25rem",
+                      }}
+                    >
+                      {validationErrors[name]}
+                    </div>
+                  )}
+                </FormGroup>
+              )
+            )}
 
             <FormGroup>
-              <FormLabel htmlFor="message">Message</FormLabel>
+              <FormLabel htmlFor="message">
+                Message <span style={{ color: "#ef4444" }}>*</span>
+              </FormLabel>
               <FormTextarea
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 required
-                rows="5"
+                rows="6"
                 disabled={status.submitting}
                 autoComplete="off"
+                maxLength={2000}
+                style={{
+                  borderColor: validationErrors.message ? "#ef4444" : undefined,
+                }}
+                aria-invalid={!!validationErrors.message}
+                aria-describedby={
+                  validationErrors.message ? "message-error" : undefined
+                }
               />
+              {validationErrors.message && (
+                <div
+                  id="message-error"
+                  style={{
+                    color: "#ef4444",
+                    fontSize: "0.875rem",
+                    marginTop: "0.25rem",
+                  }}
+                >
+                  {validationErrors.message}
+                </div>
+              )}
+              <div
+                style={{
+                  fontSize: "0.75rem",
+                  color: "#6b7280",
+                  marginTop: "0.25rem",
+                }}
+              >
+                {formData.message.length}/2000 characters
+              </div>
             </FormGroup>
 
             <SubmitButton
               type="submit"
               disabled={status.submitting}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={status.submitting ? {} : { scale: 1.02 }}
+              whileTap={status.submitting ? {} : { scale: 0.98 }}
+              style={{
+                opacity: status.submitting ? 0.7 : 1,
+                cursor: status.submitting ? "not-allowed" : "pointer",
+              }}
             >
               {status.submitting ? (
                 "Sending..."
               ) : (
                 <>
-                  Send Message <FaPaperPlane />
+                  Send Message <FaPaperPlane style={{ marginLeft: "8px" }} />
                 </>
               )}
             </SubmitButton>
 
-            {/* Display success or error messages */}
+            {/* Animated Feedback Messages */}
             <AnimatePresence>
               {status.submitted && (
                 <SuccessMessage
+                  as={motion.div}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
+                  role="alert"
+                  aria-live="polite"
                 >
-                  {status.message}
+                  ✅ {status.message}
                 </SuccessMessage>
               )}
             </AnimatePresence>
 
-            {status.error && (
-              <ErrorMessage
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-              >
-                {status.message}
-              </ErrorMessage>
-            )}
+            <AnimatePresence>
+              {status.error && (
+                <ErrorMessage
+                  as={motion.div}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  role="alert"
+                  aria-live="assertive"
+                >
+                  ❌ {status.message}
+                </ErrorMessage>
+              )}
+            </AnimatePresence>
           </ContactForm>
         </FormSection>
       </ContentWrapper>

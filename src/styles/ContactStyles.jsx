@@ -26,11 +26,6 @@ export const ContentWrapper = styled.div`
   }
 `;
 
-// Container for contact information card
-export const ContactInfo = styled.div`
-  position: relative;
-`;
-
 // Styling for the contact info card
 export const InfoCard = styled.div`
   background: ${({ theme }) => theme.colors.surface};

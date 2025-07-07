@@ -57,7 +57,7 @@ export const education = [
   {
     degree: "Matriculation",
     institution: "Janta High School, Satyana, Jamui",
-    period: "2018",
+    period: "2017 - 2018",
     description: "Affiliated with Bihar School Examination Board",
   },
 ];
