@@ -76,7 +76,7 @@ const handleValidationErrors = (req, res, next) => {
   next();
 };
 
-// --- Sanitization ---
+// --- Sanitization & Template Utilities ---
 const sanitizeForEmail = (text) =>
   text
     .replace(/</g, "&lt;")
@@ -85,7 +85,6 @@ const sanitizeForEmail = (text) =>
     .replace(/'/g, "&#x27;")
     .replace(/\//g, "&#x2F;");
 
-// --- HTML Message Builder ---
 const createHtmlMessage = (message) =>
   message
     .split("\n")
@@ -97,17 +96,21 @@ const createHtmlMessage = (message) =>
     )
     .join("");
 
-// --- Confirmation Email Template ---
+// --- Confirmation Template ---
 const createConfirmationEmail = (userName, originalMessage) => {
   const htmlMessage = createHtmlMessage(originalMessage);
   const recipientEmail = process.env.RECIPIENT_EMAIL;
-  const websiteUrl = process.env.SENDER_WEBSITE;
+  const websiteUrl =
+    process.env.SENDER_WEBSITE || "https://vinayprabhakar.tech";
+  const displayUrl = websiteUrl.replace(/^https?:\/\//, "");
 
   return `
-  <div style="font-family: Georgia, serif; max-width: 580px; margin: auto; background: #fdfdfd; border: 1px solid #d4d4d8; border-radius: 8px;">
-    <div style="background: #18181b; padding: 24px 32px; border-bottom: 2px solid #3f3f46;">
-      <h1 style="color: #fafafa; margin: 0;">Message Confirmation</h1>
-    </div>
+<div style="font-family: 'Segoe UI', Roboto, sans-serif; max-width: 580px; margin: auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 6px; overflow: hidden;">
+  <!-- Header -->
+  <div style="background-color: #111827; padding: 16px 24px; border-bottom: 1px solid #334155;">
+    <h3 style="color: #f9fafb; margin: 0; font-size: 20px; font-weight: 600;">📩 Message Confirmation</h3>
+  </div>
+  <!-- Body -->
     <div style="padding: 32px;">
       <p style="font-size: 16px; color: #27272a;">Dear ${sanitizeForEmail(
         userName
@@ -130,20 +133,63 @@ const createConfirmationEmail = (userName, originalMessage) => {
     </div>
    <div style="background: #f8f9fa; padding: 16px 32px; border-top: 1px solid #e4e4e7; text-align: center;">
       <p style="font-size: 12px; color: #6b7280;">
-        This is an automated message — please do not reply.<br>
-        Sent from <a href="${websiteUrl}" style="color: #2563eb;">${websiteUrl.replace(
-    /^https?:\/\//,
-    ""
-  )}</a> • ${new Date().toLocaleDateString()}
+        This is an automated message — please do not direct reply.<br>
+        Sent from <a href="${websiteUrl}" style="color: #2563eb;">${displayUrl}</a><br/>
+        ${new Date().toLocaleDateString()}
       </p>
     </div>
   </div>`;
 };
 
-// --- Retry Email Function ---
+// --- Submission Template (for site owner) ---
+const createSubmissionEmail = ({ userName, email, subject, message }) => {
+  const htmlMessage = createHtmlMessage(message);
+  const websiteUrl =
+    process.env.SENDER_WEBSITE || "https://vinayprabhakar.tech";
+  const displayUrl = websiteUrl.replace(/^https?:\/\//, "");
+
+  return `
+    <div style="font-family: 'Segoe UI', Roboto, sans-serif; max-width: 580px; margin: auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 6px; overflow: hidden;">
+    <!-- Header -->
+    <div style="background-color: #111827; padding: 16px 24px; border-bottom: 1px solid #334155;">
+       <h3 style="color: #f9fafb; margin: 0; font-size: 20px; font-weight: 600;">📩 Message Confirmation</h3>
+    </div>
+  <!-- Body -->
+    <div style="padding: 32px;">
+      <p style="font-size: 16px; color: #27272a;">
+        <strong>Name:</strong> ${sanitizeForEmail(userName)}<br/>
+        <strong>Email:</strong> <a href="mailto:${email}" style="color: #2563eb;">${email}</a><br/>
+        <strong>Subject:</strong> ${sanitizeForEmail(subject)}<br/>
+        <strong>Received:</strong> ${new Date().toLocaleString()}
+      </p>
+
+      <h3 style="margin-top: 30px; color: #18181b;">📨 Message</h3>
+      <div style="background: #f8f9fa; padding: 20px; border-left: 4px solid #6366f1;">
+        ${htmlMessage}
+      </div>
+
+      <div style="background: #f0f9ff; padding: 20px; margin-top: 24px;">
+        <h4 style="color: #0369a1;">🔍 Tip</h4>
+        <p style="color: #0c4a6e;">
+          This message was submitted via your website contact form. You can reply directly to this user by clicking their email.
+        </p>
+      </div>
+
+      <p style="margin-top: 24px;">Kind regards,<br><strong>Your Website Bot</strong></p>
+    </div>
+
+    <div style="background: #f8f9fa; padding: 16px 32px; border-top: 1px solid #e4e4e7; text-align: center;">
+      <p style="font-size: 12px; color: #6b7280;">
+        Submission from <a href="${websiteUrl}" style="color: #2563eb;">${displayUrl}</a><br/>
+        ${new Date().toLocaleDateString()}
+      </p>
+    </div>
+  </div>`;
+};
+
+// --- Retry Email ---
 const sendEmailWithRetry = async (emailData, maxRetries = 3) => {
   let error;
-
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       const result = await mg.messages.create(
@@ -162,11 +208,10 @@ const sendEmailWithRetry = async (emailData, maxRetries = 3) => {
       }
     }
   }
-
   throw error;
 };
 
-// --- Main Endpoint ---
+// --- Main API ---
 app.post(
   "/api/email",
   emailValidationRules,
@@ -178,26 +223,20 @@ app.post(
     console.log(`📩 Incoming message from ${email} - ${subject}`);
 
     try {
-      const htmlMessage = createHtmlMessage(message);
-      const firstName =
-        userName.trim().split(" ")[0].charAt(0).toUpperCase() +
-        userName.trim().split(" ")[0].slice(1).toLowerCase();
-      const confirmationHtml = createConfirmationEmail(firstName, message);
+      const confirmationHtml = createConfirmationEmail(userName, message);
+      const submissionHtml = createSubmissionEmail({
+        userName,
+        email,
+        subject,
+        message,
+      });
 
       const recipientEmailData = {
-        from: `${userName} <noreply@${process.env.MAILGUN_DOMAIN}>`,
+        from: `Website Bot <noreply@${process.env.MAILGUN_DOMAIN}>`,
         to: process.env.RECIPIENT_EMAIL,
-        subject: `💌 Contact Form: ${subject}`,
-        text: `New message from ${userName} (${email}):\n\n${message}`,
-        html: `
-          <div style="font-family: Arial, sans-serif; padding: 20px;">
-            <h2>New Contact Form Submission</h2>
-            <p><strong>From:</strong> ${sanitizeForEmail(userName)}</p>
-            <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-            <p><strong>Subject:</strong> ${sanitizeForEmail(subject)}</p>
-            <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
-            <div style="margin-top: 20px;">${htmlMessage}</div>
-          </div>`,
+        subject: `📬 New Contact Submission: ${subject}`,
+        text: `From: ${userName} <${email}>\nSubject: ${subject}\n\n${message}`,
+        html: submissionHtml,
         "h:Reply-To": email,
       };
 

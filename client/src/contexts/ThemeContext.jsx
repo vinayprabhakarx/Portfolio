@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-// Create the Theme Context
 const ThemeContext = createContext();
 
 // Custom hook to consume theme context
@@ -45,7 +44,7 @@ export const ThemeProvider = ({ children }) => {
 
     const handleChange = (e) => {
       const savedTheme = localStorage.getItem("theme");
-      // Only update if user hasn\u2019t manually selected a theme
+      // Only update if user hasn't manually selected a theme
       if (!savedTheme) {
         setIsDarkMode(e.matches);
       }
