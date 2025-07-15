@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 
-import AppLayout from "./AppLayout";
+import AppLayout from "./AppLayout.jsx";
 
 const Home = lazy(() => import("./pages/Hero.jsx"));
 const About = lazy(() => import("./pages/About.jsx"));

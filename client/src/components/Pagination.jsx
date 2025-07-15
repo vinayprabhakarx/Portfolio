@@ -1,63 +1,58 @@
-import { memo, useMemo, useCallback, useRef, useEffect } from "react"; // React hooks for optimization and side effects
-import styled from "styled-components"; // CSS-in-JS library for styling
+import { memo, useMemo, useCallback, useRef, useEffect } from "react";
+import styled from "styled-components";
 
-// Pagination component, memoized for performance optimization.
 const Pagination = memo(
   ({
-    data = [], // Array of items to paginate
-    itemsPerPage = 5, // Number of items to display per page
-    currentPage = 1, // The current active page number
-    onPageChange, // Callback function when the page changes
-    onDataChange, // Callback function to return paginated data
-    maxVisiblePages = 7, // Maximum number of pagination buttons to show
+    data = [],
+    itemsPerPage = 5,
+    currentPage = 1,
+    onPageChange,
+    onDataChange,
+    maxVisiblePages = 7,
   }) => {
-    const totalItems = data.length; // Total number of items
-    const totalPages = Math.ceil(totalItems / itemsPerPage) || 1; // Calculate total pages, ensure at least 1
+    // Input validation
+    const safeItemsPerPage = Math.max(1, itemsPerPage);
+    const safeMaxVisiblePages = Math.max(5, maxVisiblePages); // Minimum 5 for proper ellipsis
 
-    // useRef to track the last notified state to prevent unnecessary onDataChange calls.
+    const totalItems = data.length;
+    const totalPages = Math.ceil(totalItems / safeItemsPerPage) || 1;
     const lastNotifiedRef = useRef({ page: 0, totalItems: 0, itemsPerPage: 0 });
 
-    // Ensure currentPage is within valid bounds.
     const safeCurrentPage = useMemo(
       () => Math.min(Math.max(currentPage, 1), totalPages),
       [currentPage, totalPages]
     );
 
-    // Memoize the slice of data for the current page.
     const paginatedData = useMemo(() => {
-      const startIdx = (safeCurrentPage - 1) * itemsPerPage;
-      return data.slice(startIdx, startIdx + itemsPerPage);
-    }, [data, safeCurrentPage, itemsPerPage]);
+      const startIdx = (safeCurrentPage - 1) * safeItemsPerPage;
+      return data.slice(startIdx, startIdx + safeItemsPerPage);
+    }, [data, safeCurrentPage, safeItemsPerPage]);
 
-    // Memoize page information object.
     const pageInfo = useMemo(
       () => ({
         currentPage: safeCurrentPage,
         totalPages,
-        itemsPerPage,
+        itemsPerPage: safeItemsPerPage,
         totalItems,
       }),
-      [safeCurrentPage, totalPages, itemsPerPage, totalItems]
+      [safeCurrentPage, totalPages, safeItemsPerPage, totalItems]
     );
 
-    // Effect to notify the parent component with the current paginated data.
-    // This runs only when relevant pagination parameters or data actually change.
     useEffect(() => {
-      if (!onDataChange) return; // Exit if no callback is provided
-
+      if (!onDataChange) return;
       const last = lastNotifiedRef.current;
       const hasChanged =
         last.page !== safeCurrentPage ||
         last.totalItems !== totalItems ||
-        last.itemsPerPage !== itemsPerPage;
+        last.itemsPerPage !== safeItemsPerPage;
 
       if (hasChanged) {
-        onDataChange(paginatedData, pageInfo); // Call parent callback
+        onDataChange(paginatedData, pageInfo);
         lastNotifiedRef.current = {
           page: safeCurrentPage,
           totalItems,
-          itemsPerPage,
-        }; // Update last notified state
+          itemsPerPage: safeItemsPerPage,
+        };
       }
     }, [
       onDataChange,
@@ -65,232 +60,228 @@ const Pagination = memo(
       pageInfo,
       safeCurrentPage,
       totalItems,
-      itemsPerPage,
+      safeItemsPerPage,
     ]);
 
-    // Memoize the array of page numbers to display, including ellipsis logic.
+    // Always call onDataChange on mount to ensure initial data is provided
+    useEffect(() => {
+      if (onDataChange && lastNotifiedRef.current.page === 0) {
+        onDataChange(paginatedData, pageInfo);
+        lastNotifiedRef.current = {
+          page: safeCurrentPage,
+          totalItems,
+          itemsPerPage: safeItemsPerPage,
+        };
+      }
+    }, []);
+
+    const createEllipsis = (targetPage) => ({
+      type: "ellipsis",
+      targetPage: Math.min(Math.max(targetPage, 1), totalPages),
+    });
+
     const pageNumbers = useMemo(() => {
-      if (totalPages <= maxVisiblePages) {
-        // If total pages are less than or equal to max visible, show all.
+      if (totalPages <= safeMaxVisiblePages) {
         return Array.from({ length: totalPages }, (_, i) => i + 1);
       }
 
-      const half = Math.floor(maxVisiblePages / 2); // Half of visible pages for centering
       const pages = [];
-      // Helper for creating ellipsis objects
-      const ellipsis = (targetPage) => ({ type: "ellipsis", targetPage });
+      const sidePages = Math.floor((safeMaxVisiblePages - 3) / 2); // Reserve 3 for 1, ellipsis, totalPages
 
-      // Logic for displaying page numbers with ellipses
-      if (safeCurrentPage <= half + 1) {
-        // Current page is near the beginning
-        for (let i = 1; i <= maxVisiblePages - 2; i++) {
+      if (safeCurrentPage <= sidePages + 2) {
+        // Show: 1, 2, 3, 4, 5, ..., totalPages
+        for (let i = 1; i <= safeMaxVisiblePages - 2; i++) {
           pages.push(i);
         }
-        pages.push(ellipsis(Math.min(totalPages - 1, maxVisiblePages))); // First ellipsis
-        pages.push(totalPages); // Last page
-      } else if (safeCurrentPage >= totalPages - half) {
-        // Current page is near the end
-        pages.push(1); // First page
-        const startPage = totalPages - (maxVisiblePages - 3);
-        pages.push(ellipsis(Math.max(2, startPage - 1))); // Second ellipsis
+        pages.push(createEllipsis(safeMaxVisiblePages - 1));
+        pages.push(totalPages);
+      } else if (safeCurrentPage >= totalPages - sidePages - 1) {
+        // Show: 1, ..., n-4, n-3, n-2, n-1, n
+        pages.push(1);
+        const startPage = totalPages - (safeMaxVisiblePages - 3);
+        pages.push(createEllipsis(startPage - 1));
         for (let i = startPage; i <= totalPages; i++) {
           pages.push(i);
         }
       } else {
-        // Current page is in the middle
-        pages.push(1); // First page
-        pages.push(ellipsis(Math.max(2, safeCurrentPage - half))); // First ellipsis
+        // Show: 1, ..., current-1, current, current+1, ..., totalPages
+        pages.push(1);
+        pages.push(createEllipsis(safeCurrentPage - sidePages - 1));
 
-        const start = safeCurrentPage - (half - 1);
-        const end = safeCurrentPage + (half - 1);
+        const start = safeCurrentPage - sidePages;
+        const end = safeCurrentPage + sidePages;
         for (let i = start; i <= end; i++) {
-          pages.push(i); // Middle pages around current page
+          pages.push(i);
         }
 
-        pages.push(ellipsis(Math.min(totalPages - 1, safeCurrentPage + half))); // Second ellipsis
-        pages.push(totalPages); // Last page
+        pages.push(createEllipsis(safeCurrentPage + sidePages + 1));
+        pages.push(totalPages);
       }
 
       return pages;
-    }, [safeCurrentPage, totalPages, maxVisiblePages]);
+    }, [safeCurrentPage, totalPages, safeMaxVisiblePages]);
 
-    // Callback for handling page button clicks (including ellipsis).
     const handlePageClick = useCallback(
       (page) => {
         if (!onPageChange) return;
 
-        // Determine the actual target page number for ellipsis clicks
         const targetPage =
           typeof page === "object" && page.type === "ellipsis"
-            ? Math.min(Math.max(page.targetPage, 1), totalPages)
+            ? page.targetPage
             : page;
 
-        // Only call onPageChange if the target page is different and valid.
         if (typeof targetPage === "number" && targetPage !== safeCurrentPage) {
           onPageChange(targetPage);
         }
       },
-      [onPageChange, safeCurrentPage, totalPages]
+      [onPageChange, safeCurrentPage]
     );
 
-    // Callback for handling "Previous" button click.
     const handlePrevious = useCallback(() => {
       if (safeCurrentPage > 1 && onPageChange) {
         onPageChange(safeCurrentPage - 1);
       }
     }, [safeCurrentPage, onPageChange]);
 
-    // Callback for handling "Next" button click.
     const handleNext = useCallback(() => {
       if (safeCurrentPage < totalPages && onPageChange) {
         onPageChange(safeCurrentPage + 1);
       }
     }, [safeCurrentPage, totalPages, onPageChange]);
 
-    // Determine if "Previous" or "Next" buttons should be disabled.
     const isFirstPage = safeCurrentPage <= 1;
     const isLastPage = safeCurrentPage >= totalPages;
 
-    // Render nothing if there's only one page or no data.
-    if (totalPages <= 1) return <></>;
-
-    // Main render of the pagination component.
+    // Always return the component, but only show pagination controls when needed
     return (
-      <PaginationContainer>
-        <ArrowButton
-          onClick={handlePrevious}
-          disabled={isFirstPage}
-          aria-label="Previous Page"
-          type="button"
-        >
-          &#8592; {/* Left arrow character */}
-        </ArrowButton>
-
-        {pageNumbers.map((page, idx) => {
-          const isEllipsis = typeof page === "object"; // Check if it's an ellipsis object
-          const pageNumber = isEllipsis ? page.targetPage : page; // Get the actual page number
-          const isActive = !isEllipsis && page === safeCurrentPage; // Check if the button is active
-
-          return (
-            <PaginationButton
-              key={isEllipsis ? `ellipsis-${idx}` : page} // Unique key for rendering
-              $active={isActive} // Prop for styling active state
-              $isEllipsis={isEllipsis} // Prop for styling ellipsis
-              onClick={() => handlePageClick(page)} // Click handler
-              aria-label={
-                isEllipsis ? `Go to page ${pageNumber}` : `Page ${page}`
-              } // ARIA label for accessibility
-              aria-current={isActive ? "page" : undefined} // ARIA attribute for current page
-              type="button" // Specify button type
+      <>
+        {/* You can render your data here, or return it via onDataChange */}
+        {totalPages > 1 && (
+          <PaginationContainer>
+            <ArrowButton
+              onClick={handlePrevious}
+              disabled={isFirstPage}
+              aria-label="Previous Page"
+              type="button"
             >
-              {isEllipsis ? "..." : page} {/* Display "..." for ellipsis */}
-            </PaginationButton>
-          );
-        })}
+              &#8592;
+            </ArrowButton>
 
-        <ArrowButton
-          onClick={handleNext}
-          disabled={isLastPage}
-          aria-label="Next Page"
-          type="button"
-        >
-          &#8594; {/* Right arrow character */}
-        </ArrowButton>
-      </PaginationContainer>
+            {pageNumbers.map((page, idx) => {
+              const isEllipsis = typeof page === "object";
+              const pageNumber = isEllipsis ? page.targetPage : page;
+              const isActive = !isEllipsis && page === safeCurrentPage;
+
+              return (
+                <PaginationButton
+                  key={isEllipsis ? `ellipsis-${idx}` : page}
+                  $active={isActive}
+                  $isEllipsis={isEllipsis}
+                  onClick={() => handlePageClick(page)}
+                  aria-label={
+                    isEllipsis ? `Go to page ${pageNumber}` : `Page ${page}`
+                  }
+                  aria-current={isActive ? "page" : undefined}
+                  type="button"
+                >
+                  {isEllipsis ? "..." : page}
+                </PaginationButton>
+              );
+            })}
+
+            <ArrowButton
+              onClick={handleNext}
+              disabled={isLastPage}
+              aria-label="Next Page"
+              type="button"
+            >
+              &#8594;
+            </ArrowButton>
+          </PaginationContainer>
+        )}
+      </>
     );
   }
 );
 
-Pagination.displayName = "Pagination"; // Assign a display name for React DevTools
+Pagination.displayName = "Pagination";
 
-//  PaginationContainer
+// Styled components
 const PaginationContainer = styled.div`
-  display: flex; // Arranges items in a row
-  justify-content: center; // Centers items horizontally
-  gap: ${({ theme }) => theme.spacing.md}; // Spacing between buttons
-  margin-top: ${({ theme }) =>
-    theme.spacing["3xl"]}; // Top margin for spacing from content
-  flex-wrap: wrap; // Allows buttons to wrap to the next line on smaller screens
+  display: flex;
+  justify-content: center;
+  gap: ${({ theme }) => theme.spacing.md};
+  margin-top: ${({ theme }) => theme.spacing["3xl"]};
+  flex-wrap: wrap;
 `;
 
 const PaginationButton = styled.button`
-  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md}; // Padding for button size
-  border: none; // No border
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+  border: none;
   background: ${({ $active, theme }) =>
-    $active
-      ? theme.colors.primary
-      : "transparent"}; // Background changes based on active state
-  color: ${({ $active, theme }) =>
-    $active
-      ? "white"
-      : theme.colors.primary}; // Text color changes based on active state
-  border-radius: ${({ theme }) => theme.borderRadius.md}; // Rounded corners
-  cursor: pointer; // Pointer cursor on hover
-  font-size: 1rem; // Font size
-  font-weight: 900; // Bold font weight
-  transition: ${({ theme }) => theme.transitions.default}; // Smooth transitions
-  user-select: none; // Prevents text selection
-  outline: none; // Removes default outline
-  align-items: center; // Centers content vertically
-  justify-content: center; // Centers content horizontally
+    $active ? theme.gradients.primary : theme.gradients.primaryTransparent};
+  color: ${({ theme }) => theme.colors.text};
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 900;
+  transition: ${({ theme }) => theme.transitions.default};
+  user-select: none;
+  outline: none;
+  align-items: center;
+  justify-content: center;
 
   &:hover:not(:disabled) {
-    background: ${({ theme }) => theme.colors.primary}; // Hover background
+    background: ${({ theme }) => theme.colors.primary};
     color: ${({ $active, theme }) =>
-      $active ? "white" : theme.colors.secondary}; // Hover text color
-    transform: translateY(-2px); // Slight lift on hover
+      $active ? "white" : theme.colors.secondary};
   }
 
   &:active:not(:disabled) {
-    color: ${({ theme }) => theme.colors.secondary}; // Text color when active
-    transform: translateY(-2px); // Slight lift on active
+    color: ${({ theme }) => theme.colors.secondary};
   }
 
   &:disabled {
-    opacity: 0.5; // Reduced opacity when disabled
-    cursor: not-allowed; // Not-allowed cursor when disabled
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary}; // Outline for keyboard navigation
-    outline-offset: 2px; // Offset for the outline
+    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline-offset: 2px;
   }
 `;
 
 const ArrowButton = styled.button`
-  background: transparent; // Transparent background
-  border: none; // No border
+  background: transparent;
+  border: none;
   color: ${({ theme, disabled }) =>
-    disabled
-      ? theme.colors.disabled || "#ccc"
-      : theme.colors.primary}; // Color based on disabled state
-  cursor: ${({ disabled }) =>
-    disabled ? "not-allowed" : "pointer"}; // Cursor based on disabled state
-  font-size: 1.2rem; // Font size
-  font-weight: 600; // Font weight
-  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md}; // Padding
-  transition: all 0.3s ease; // Smooth transitions
-  opacity: ${({ disabled }) =>
-    disabled ? 0.5 : 1}; // Opacity based on disabled state
-  outline: none; // Removes default outline
+    disabled ? theme.colors.disabled || "#ccc" : theme.colors.primary};
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+  transition: all 0.3s ease;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  outline: none;
 
   &:hover:not(:disabled) {
-    color: ${({ $active, theme }) =>
-      $active ? "white" : theme.colors.secondary}; // Hover text color
-    transform: translateY(-2px); // Slight lift on hover
+    color: ${({ theme }) => theme.colors.secondary};
+    transform: translateY(-2px);
   }
 
   &:active:not(:disabled) {
-    transform: translateY(0); // Reset transform on active
+    transform: translateY(0);
   }
 
   &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary}; // Outline for keyboard navigation
-    outline-offset: 2px; // Offset for the outline
+    outline: 2px solid ${({ theme }) => theme.colors.primary};
+    outline-offset: 2px;
   }
 
   @media (max-width: ${({ theme }) => theme?.breakpoints?.sm || "640px"}) {
-    font-size: 1.25rem; // Adjust font size on small screens
+    font-size: 1.25rem;
   }
 `;
 

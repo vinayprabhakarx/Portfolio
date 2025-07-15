@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "framer-motion": "^12.16.0",
-    "lottie-react": "^2.4.1",
+    "lottie-web": "^5.13.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
@@ -38,6 +38,12 @@
     "globals": "^16.2.0",
     "serve": "^14.2.4",
     "vite": "^6.3.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "rollup": "4.43.0",
+      "vite": "6.3.5"
+    }
   },
   "eslintConfig": {
     "extends": [
