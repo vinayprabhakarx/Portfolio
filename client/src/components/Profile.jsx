@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-// Memoized component to prevent unnecessary re-renders.
-// It takes `src` for the image source and `alt` for the alt text.
+// Image component for profile photo.
 const Profile = ({ src, alt = "Profile Image" }) => (
   <ProfileSection>
     <PhotoContainer>
@@ -36,7 +35,6 @@ const PhotoContainer = styled.div`
   background: ${({ theme }) => theme.gradients.primary};
   padding: 4px;
 
-  /* Optimized pseudo-element for a mask effect with will-change for better compositing */
   &::before {
     content: "";
     position: absolute;

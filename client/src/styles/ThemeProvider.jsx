@@ -1,14 +1,14 @@
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import {
-  ThemeProvider as CustomThemeProvider, // Provides theme state via context (dark/light mode)
-  useTheme, // Hook to consume theme state
+  ThemeProvider as CustomThemeProvider,
+  useTheme,
 } from "../contexts/ThemeContext.jsx";
-import GlobalStyle from "./GlobalStyles.jsx"; // Injects global styles
-import Theme from "./Theme.jsx"; // Returns theme object based on mode
+import GlobalStyle from "./GlobalStyles.jsx";
+import Theme from "./Theme.jsx";
 
 const ThemeProviderWrapper = ({ children }) => {
-  const { isDarkMode } = useTheme(); // Access current theme mode from context
-  const themeObject = Theme(isDarkMode); // Resolve theme object (light or dark)
+  const { isDarkMode } = useTheme();
+  const themeObject = Theme(isDarkMode);
 
   return (
     <StyledThemeProvider theme={themeObject}>

@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, memo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import TabButton from "../components/TabButton";
+import Button from "../components/Button";
 import Card from "../components/Card";
 import GradientTitle from "../components/GradientTitle";
 import Pagination from "../components/Pagination";
@@ -77,14 +77,14 @@ const CategoryTab = memo(({ category, isActive, onClick, index }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
     >
-      <TabButton
+      <Button
         $active={isActive}
         onClick={onClick}
         aria-pressed={isActive}
         role="tab"
       >
         {formatted}
-      </TabButton>
+      </Button>
     </motion.div>
   );
 });
@@ -138,7 +138,7 @@ const Projects = memo(() => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <TabButton.TabContainer role="tablist" aria-label="Project categories">
+        <Button.TabContainer role="tablist" aria-label="Project categories">
           {categories.map((category, index) => (
             <CategoryTab
               key={category}
@@ -148,7 +148,7 @@ const Projects = memo(() => {
               index={index}
             />
           ))}
-        </TabButton.TabContainer>
+        </Button.TabContainer>
       </motion.div>
 
       {/* Project Cards */}

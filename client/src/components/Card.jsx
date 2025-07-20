@@ -2,12 +2,8 @@ import { memo, forwardRef } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-/* ─── Styled Components ─── */
+// ─── Styled Components ───
 
-/**
- * Animated card container leveraging framer-motion for smooth transitions and hover effects.
- * Uses theme values for consistent styling including background, border, shadows, and spacing.
- */
 const CardContainer = styled(motion.div)`
   background: ${({ theme }) => theme.colors.surface};
   padding: ${({ theme }) => theme.spacing.xl};
@@ -24,15 +20,11 @@ const CardContainer = styled(motion.div)`
     box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
 
     &::before {
-      opacity: 1; // Enable pseudo-element visibility on hover if used for effects
+      opacity: 1;
     }
   }
 `;
 
-/**
- * Responsive grid layout for multiple cards.
- * Automatically adjusts columns based on available width, with a minimum card width of 300px.
- */
 const CardGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -40,9 +32,6 @@ const CardGrid = styled.div`
   margin-top: 2rem;
 `;
 
-/**
- * Title styling for cards, using theme typography and color standards.
- */
 const CardTitle = styled.h3`
   color: ${({ theme }) => theme.colors.text};
   font-size: 1.5rem;
@@ -50,26 +39,16 @@ const CardTitle = styled.h3`
   font-weight: 600;
 `;
 
-/**
- * Description paragraph with comfortable spacing and line height for readability.
- */
 const CardDescription = styled.p`
   color: ${({ theme }) => theme.colors.text};
   margin: 1rem 0;
   line-height: 1.6;
 `;
 
-/**
- * Container for a list of highlights or bullet points.
- */
 const HighlightsList = styled.div`
   margin: 1rem 0;
 `;
 
-/**
- * Individual highlight item styled with secondary text color and italic font style.
- * Flex layout is used to accommodate optional icons alongside text.
- */
 const HighlightItem = styled.div`
   color: ${({ theme }) => theme.colors.textSecondary};
   font-style: italic;
@@ -81,9 +60,6 @@ const HighlightItem = styled.div`
   line-height: 1.4;
 `;
 
-/**
- * Container for tags, supporting wrapping and spacing between tags.
- */
 const TagContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -91,10 +67,6 @@ const TagContainer = styled.div`
   margin-top: 1rem;
 `;
 
-/**
- * Tag element styled with a transparent gradient background and primary color text.
- * Rounded pill shape for visual appeal and consistent sizing.
- */
 const Tag = styled.span`
   background: ${({ theme }) => theme.gradients.primaryTransparent};
   color: ${({ theme }) => theme.colors.primary};
@@ -104,31 +76,22 @@ const Tag = styled.span`
   font-weight: 500;
 `;
 
-/**
- * Text styling for work period or duration with secondary text color and medium font weight.
- */
 const WorkPeriod = styled.span`
   color: ${({ theme }) => theme.colors.textSecondary};
   font-size: 0.9rem;
   font-weight: 500;
 `;
 
-/**
- * Decorative background gradient positioned absolutely behind card content.
- */
 const GradientBackground = styled.div`
   position: absolute;
   inset: 0;
   background: ${({ theme }) => theme.gradients.primaryTransparent};
+  background-color: ${({ theme }) => theme.colors.surface};
   z-index: -1;
 `;
 
-/* ─── Main Card Component ─── */
+// ─── Main Card Component ───
 
-/**
- * Card component encapsulating the card container with animation support.
- * Memoized for rendering performance and supports forwarding refs to the root element.
- */
 const Card = memo(
   forwardRef(({ children, ...props }, ref) => (
     <CardContainer ref={ref} {...props}>
@@ -139,7 +102,7 @@ const Card = memo(
 
 Card.displayName = "Card";
 
-/* ─── Attaching Subcomponents for Modular API ─── */
+// ─── Subcomponents ───
 
 Card.Grid = memo(CardGrid);
 Card.Grid.displayName = "Card.Grid";

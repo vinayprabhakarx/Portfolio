@@ -10,31 +10,29 @@ export const TabContainer = styled.div`
 `;
 
 // Styled button component for tabs
-const TabButton = styled.button.withConfig({
-  shouldForwardProp: (prop) => prop !== "$active", // Prevents `$active` prop from being passed to the DOM
-})`
+const Button = styled.button`
   padding: 0.8rem 1.5rem;
-  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 0.1px solid ${({ theme }) => theme.colors.border};
   border-radius: 25px;
   background: ${({ $active, theme }) =>
     $active ? theme.gradients.primary : theme.gradients.primaryTransparent};
   color: ${({ theme }) => theme.colors.text};
   transition: all 0.3s ease;
-  font-size: 1rem;
   user-select: none;
   outline: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: ${({ $active, theme }) =>
-    $active ? theme.shadows.primaryGlow : "none"};
 
   &:hover {
-    background: ${({ theme }) => theme.gradients.primary};
+    background: ${({ theme }) => theme.gradients.primaryHover};
     color: ${({ theme }) => theme.colors.secondary};
-    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+    &::before {
+      opacity: 1;
+    }
   }
 `;
 
-// Attach TabContainer as a static property to TabButton for easy access
-TabButton.TabContainer = TabContainer;
-export default TabButton;
+Button.TabContainer = TabContainer;
+export default Button;

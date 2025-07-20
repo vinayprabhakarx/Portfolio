@@ -68,12 +68,12 @@ const DownloadBtn = styled(motion.a)`
   justify-content: center;
   gap: ${({ theme }) => theme.spacing.xs};
   padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: white;
   background: ${({ theme }) => theme.gradients.primary};
   border: none;
-  border-radius: 12px;
+  border-radius: 25px;
   text-decoration: none;
   cursor: pointer;
   align-self: center;
@@ -81,20 +81,17 @@ const DownloadBtn = styled(motion.a)`
   transition: all 0.3s ease;
   &:hover {
     background: ${({ theme }) => theme.gradients.primaryHover};
-    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
     transform: translateY(-1px);
   }
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 0.4rem 0.6rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 `;
 
 // --- Component ---
 const Resume = () => {
   const GOOGLE_DRIVE_RESUME_ID = "1lC3uGeCbvYE70zs9M9qsBmc-06wglHxP";
-
-  // Construct URLs clearly.
   const embedUrl = `https://drive.google.com/file/d/${GOOGLE_DRIVE_RESUME_ID}/preview`;
   const downloadUrl = `https://drive.google.com/uc?export=download&id=${GOOGLE_DRIVE_RESUME_ID}`;
 

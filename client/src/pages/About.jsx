@@ -4,7 +4,7 @@ import { FaGraduationCap, FaBriefcase, FaCode } from "react-icons/fa";
 import profilePhoto from "../assets/photo.png";
 import Container from "../components/Container";
 import Card from "../components/Card";
-import TabButton from "../components/TabButton";
+import Button from "../components/Button";
 import GradientTitle from "../components/GradientTitle";
 import Profile from "../components/Profile";
 import TimelineComponent from "../components/TimelineComponent";
@@ -132,7 +132,7 @@ const About = () => {
       </ProfileSection>
 
       {/* Animate each tab button */}
-      <TabButton.TabContainer>
+      <Button.TabContainer>
         {tabs.map(({ id, icon: Icon, label }, index) => (
           <motion.div
             key={id}
@@ -140,15 +140,12 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * index, duration: 0.4 }}
           >
-            <TabButton
-              $active={activeTab === id}
-              onClick={() => setActiveTab(id)}
-            >
+            <Button $active={activeTab === id} onClick={() => setActiveTab(id)}>
               <Icon /> {label}
-            </TabButton>
+            </Button>
           </motion.div>
         ))}
-      </TabButton.TabContainer>
+      </Button.TabContainer>
 
       <TabContent>{renderTabContent()}</TabContent>
     </Container>

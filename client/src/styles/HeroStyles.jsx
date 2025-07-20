@@ -65,15 +65,15 @@ export const BackgroundAnimation = styled.div`
     width: 100%;
     height: 100%;
     background: ${({ theme }) => theme.colors.background};
-    opacity: 0.1; /* Semi-transparent */
-    animation: ${gradientAnimation} 15s ease infinite; /* Apply gradient animation */
+    opacity: 0.1;
+    animation: ${gradientAnimation} 15s ease infinite;
   }
 `;
 
 // Left section of the Hero content, animated with Framer Motion
 export const LeftSection = styled(motion.div)`
-  flex: 1; /* Allows it to take up available space */
-  z-index: 1; /* Ensures it's above the background animation */
+  flex: 1;
+  z-index: 1;
 `;
 
 // "Welcome" text styling
@@ -81,24 +81,23 @@ export const WelcomeText = styled.h2`
   font-size: 1.8rem;
   color: ${({ theme }) => theme.colors.text};
   margin-bottom: 1rem;
-  user-select: none; /* Prevents text selection */
+  user-select: none;
 `;
 
 // Animated gradient name styling
 export const GradientName = styled.h1`
   font-size: 3.5rem;
   font-weight: 700;
-  background: ${({ theme }) =>
-    theme.gradients.primary}; /* Gradient background */
-  -webkit-background-clip: text; /* Clips background to text shape */
-  -webkit-text-fill-color: transparent; /* Makes text transparent to show background */
-  background-size: 200% 200%; /* Larger background for animation */
-  animation: ${gradientAnimation} 4s ease infinite; /* Apply gradient animation */
+  background: ${({ theme }) => theme.gradients.primary};
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: ${gradientAnimation} 4s ease infinite;
   margin-bottom: 1rem;
   user-select: none;
 
   @media (max-width: 768px) {
-    font-size: 2.5rem; /* Smaller font size on mobile */
+    font-size: 2.5rem;
   }
 `;
 
@@ -110,7 +109,7 @@ export const TypewriterContainer = styled.div`
   user-select: none;
 
   @media (max-width: 768px) {
-    font-size: 1.2rem; /* Smaller font size on mobile */
+    font-size: 1.2rem;
   }
 `;
 
@@ -119,12 +118,12 @@ export const Description = styled.p`
   font-size: 1.1rem;
   color: ${({ theme }) => theme.colors.textSecondary};
   margin-bottom: 2rem;
-  line-height: 1.6; /* Improves readability */
-  max-width: 600px; /* Limits width for readability */
+  line-height: 1.6;
+  max-width: 600px;
   user-select: none;
 
   @media (max-width: 968px) {
-    margin: 0 auto 2rem; /* Center text block on smaller screens */
+    margin: 0 auto 2rem;
   }
 `;
 
@@ -145,11 +144,8 @@ export const CTAButton = styled(motion.button)`
   -webkit-tap-highlight-color: transparent;
 
   &:hover {
-    background: ${({ theme }) =>
-      theme.gradients.primaryHover}; /* Hover gradient */
-    box-shadow: ${({ theme }) =>
-      theme.shadows.primaryGlow}; /* Glow effect on hover */
-    color: ${({ theme }) => theme.colors.secondary}; /* Text color on hover */
+    background: ${({ theme }) => theme.gradients.primaryHover};
+    color: ${({ theme }) => theme.colors.secondary};
   }
 
   svg {
@@ -174,6 +170,6 @@ export const RightSection = styled(motion.div)`
 // Waving hand emoji styling
 export const Wave = styled.span`
   display: inline-block;
-  animation: ${waveAnimation} 2.5s infinite; /* Apply wave animation */
-  transform-origin: 70% 70%; /* Set transform origin for wave effect */
+  animation: ${waveAnimation} 2.5s infinite;
+  transform-origin: 70% 70%;
 `;

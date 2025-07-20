@@ -2,7 +2,6 @@ import { createGlobalStyle } from "styled-components";
 import { typography } from "./Typography";
 
 const GlobalStyle = createGlobalStyle`
-  /* Universal box-sizing, remove default margin/padding, disable tap highlight */
   * {
     margin: 0;
     padding: 0;

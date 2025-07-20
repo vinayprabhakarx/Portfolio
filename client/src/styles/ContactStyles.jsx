@@ -192,7 +192,6 @@ export const SubmitButton = styled(motion.button)`
 
   &:hover:not(:disabled) {
     background: ${({ theme }) => theme.gradients.primaryHover};
-    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
     color: ${({ theme }) => theme.colors.secondary};
   }
 `;

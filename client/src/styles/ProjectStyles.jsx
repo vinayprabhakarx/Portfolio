@@ -17,8 +17,6 @@ export const ProjectsGrid = styled.div`
   margin-top: ${({ theme }) => theme.spacing["2xl"]};
 `;
 
-/* ─── Link Components ─────────────────────────────────── */
-
 // Container for project links (e.g., GitHub, live demo).
 export const ProjectLinks = styled.div`
   display: flex;
@@ -42,7 +40,6 @@ export const ProjectLink = styled.a`
   }
 `;
 
-/* ─── Performance Optimizations ─────────────────────── */
 
 // Memoized version of ProjectsGrid for performance.
 export const MemoizedProjectsGrid = styled(ProjectsGrid).withConfig({
@@ -69,8 +66,6 @@ export const MemoizedProjectLink = styled(ProjectLink).withConfig({
   `}
 `;
 
-/* ─── Utility Styled Components ─────────────────────── */
-
 // Section wrapper for projects, ensuring minimum height.
 export const ProjectsSection = styled.section`
   position: relative;
@@ -93,8 +88,6 @@ export const ProjectCard = styled.div`
   }
 `;
 
-/* ─── Responsive Grid Variants ──────────────────────── */
-
 // Responsive grid variant for projects.
 export const ResponsiveGrid = styled(ProjectsGrid)`
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
@@ -113,8 +106,6 @@ export const CompactGrid = styled(ProjectsGrid)`
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: ${({ theme }) => theme.spacing.lg};
 `;
-
-/* ─── Animation Variants ────────────────────────────── */
 
 // Animated project card with a fade-in-up effect.
 export const AnimatedProjectCard = styled(ProjectCard)`
@@ -138,7 +129,6 @@ export const AnimatedProjectCard = styled(ProjectCard)`
   }
 `;
 
-/* ─── Loading and Error States ──────────────────────── */
 
 // Loading card with a shimmer effect.
 export const LoadingCard = styled.div`

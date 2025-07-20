@@ -167,12 +167,11 @@ const NavContainer = styled.nav`
   right: 0;
   z-index: 1000;
   height: 64px;
-  background: ${({ theme, $scrolled }) =>
-    $scrolled ? theme.colors.navbar.scrolled : theme.colors.navbar.default};
+  background: ${({ theme }) => theme.colors.background};
   backdrop-filter: ${({ $scrolled }) =>
     $scrolled ? "blur(10px)" : "blur(4px)"};
   box-shadow: ${({ $scrolled }) =>
-    $scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none"};
+    $scrolled ? "0 2px 10px rgba(0, 0, 0, 0.7)" : "none"};
   transition: background 0.3s ease, box-shadow 0.3s ease,
     backdrop-filter 0.3s ease;
 `;
@@ -233,10 +232,11 @@ const DesktopNav = styled.div`
 `;
 
 const NavLink = styled(Link)`
+  font-size: 1rem;
+  font-weight: 600;
   text-decoration: none;
   color: ${({ theme, $isActive }) =>
     $isActive ? theme.colors.primary : theme.colors.text};
-  font-weight: ${({ $isActive }) => ($isActive ? "600" : "400")};
   position: relative;
   padding: 0.5rem 0;
 

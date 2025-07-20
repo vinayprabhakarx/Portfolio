@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom"; // Internal navigation link
-import styled from "styled-components"; // Styled-components for CSS-in-JS
-
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 // 404 NotFound page component
 const NotFound = () => {
   return (
@@ -13,7 +12,7 @@ const NotFound = () => {
           fontSize: "1.1rem",
           padding: "0.5rem 1rem",
         }}
-        to="/" // Navigate back to home page
+        to="/"
       >
         Go Back Home
       </Link>
