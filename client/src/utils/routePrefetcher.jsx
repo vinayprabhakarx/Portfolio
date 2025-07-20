@@ -17,9 +17,9 @@ export const useRoutePrefetch = () => {
     // Pre-fetch adjacent routes when current route changes
     const currentPath = location.pathname;
     const prefetchPaths = {
-      "/": ["/about", "/projects"],
+      "/": ["/about", "/contact"],
       "/about": ["/projects", "/contact"],
-      "/projects": ["/about", "/contact"],
+      "/projects": ["/about", "/resume"],
       "/contact": ["/about", "/projects"],
       "/blog": ["/about", "/projects"],
       "/resume": ["/about", "/projects"],
