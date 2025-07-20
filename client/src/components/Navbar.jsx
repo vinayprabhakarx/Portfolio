@@ -160,15 +160,13 @@ const Navbar = () => {
   );
 };
 
-// Styled Components definitions below (comments kept only for clarifying non-obvious logic)
-
 const NavContainer = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  height: 50px;
+  height: 64px;
   background: ${({ theme, $scrolled }) =>
     $scrolled ? theme.colors.navbar.scrolled : theme.colors.navbar.default};
   backdrop-filter: ${({ $scrolled }) =>
@@ -197,11 +195,11 @@ const LogoLink = styled(Link)`
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 `;
 
 const StyledLogo = styled.img`
-  height: 40px;
+  height: 35px;
   width: auto;
   transition: filter 0.1s ease;
   filter: ${({ $isDark }) => ($isDark ? "brightness(0) invert(1)" : "none")};
@@ -212,16 +210,16 @@ const StyledLogo = styled.img`
 `;
 
 const Logo = styled.span`
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
 `;
 
 const LogoName = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 `;
 
 const DesktopNav = styled.div`

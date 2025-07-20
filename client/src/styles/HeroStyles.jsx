@@ -1,12 +1,22 @@
 import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 
-// Reusable CSS for padding
-const sharedPadding = ({ theme }) => `
-  padding: ${theme.spacing["3xl"]} ${theme.spacing.lg};
+// Wrapper for the main content within Hero section
+export const ContentWrapper = styled.div`
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 0;
+  margin-top: 0;
 
-  @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.xl} ${theme.spacing.md};
+  @media (max-width: 968px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 `;
 
@@ -47,7 +57,7 @@ export const BackgroundAnimation = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: -1; /* Ensures it stays behind content */
+  z-index: -1;
 
   &::before {
     content: "";
@@ -57,22 +67,6 @@ export const BackgroundAnimation = styled.div`
     background: ${({ theme }) => theme.colors.background};
     opacity: 0.1; /* Semi-transparent */
     animation: ${gradientAnimation} 15s ease infinite; /* Apply gradient animation */
-  }
-`;
-
-// Wrapper for the main content within Hero section
-export const ContentWrapper = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex; /* Uses flexbox for layout */
-  align-items: center; /* Vertically centers items */
-  justify-content: space-between; /* Distributes space between items */
-  gap: 2rem; /* Spacing between flex items */
-
-  @media (max-width: 968px) {
-    flex-direction: column; /* Stack items vertically on smaller screens */
-    text-align: center; /* Center text when stacked */
   }
 `;
 
