@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { typography } from "./Typography";
 
 const GlobalStyle = createGlobalStyle`
   /* Universal box-sizing, remove default margin/padding, disable tap highlight */
@@ -15,12 +16,16 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: ${({ theme }) => theme.typography.fontFamily};
+    font-family: ${typography.fontFamily};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "liga" 0;
+    font-variation-settings: "wght" ${typography.fontWeights.regular};
     background: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
-    line-height: 1.5;
+    line-height: ${typography.lineHeights.base};
+    font-size: ${typography.fontSizes.base};
+    letter-spacing: -0.01em;
   }
 
   .app-container {

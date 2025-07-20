@@ -1,19 +1,22 @@
+import { typography } from "./Typography";
+
 // ---------- Light Theme ----------
 const lightTheme = {
   isDark: false,
+  typography: typography,
   colors: {
-    primary: "rgb(231, 76, 60)", // Coral Red
-    primaryDark: "rgb(192, 57, 43)", // Deep Coral
-    secondary: "rgb(241, 196, 15)", // Sunny Yellow
-    background: "rgb(255, 250, 248)", // Warm Cream
-    surface: "rgb(255, 255, 255)", // Pure White
-    text: "rgb(84, 75, 82)", // Warm Charcoal
-    textSecondary: "rgb(133, 119, 128)", // Muted Purple-Grey
-    inputBackground: "rgb(253, 237, 236)", // Light Pink
-    border: "rgb(220, 204, 214)", // Soft Mauve
-    error: "rgb(220, 53, 69)", // Standard Red
-    success: "rgb(40, 167, 69)", // Standard Green
-    warning: "rgb(255, 165, 0)", // Standard Orange
+    primary: "rgb(231, 76, 60)",
+    primaryDark: "rgb(192, 57, 43)",
+    secondary: "rgb(241, 196, 15)",
+    background: "rgb(255, 250, 248)",
+    surface: "rgb(255, 255, 255)",
+    text: "rgb(84, 75, 82)",
+    textSecondary: "rgb(133, 119, 128)",
+    inputBackground: "rgb(253, 237, 236)",
+    border: "rgb(220, 204, 214)",
+    error: "rgb(220, 53, 69)",
+    success: "rgb(40, 167, 69)",
+    warning: "rgb(255, 165, 0)",
     navbar: {
       default: "rgba(255, 250, 248, 0.95)",
       scrolled: "rgb(255, 250, 248)",
@@ -43,19 +46,20 @@ const lightTheme = {
 // ---------- Dark Theme ----------
 const darkTheme = {
   isDark: true,
+  typography: typography,
   colors: {
-    primary: "rgb(255, 107, 107)", // Bright Coral
+    primary: "rgb(255, 107, 107)",
     primaryDark: "rgb(231, 76, 60)",
-    secondary: "rgb(255, 234, 167)", // Warm Light Yellow
-    background: "rgb(47, 39, 39)", // Dark Plum
-    surface: "rgb(68, 56, 56)", // Dark Mauve
-    text: "rgb(255, 242, 240)", // Warm White
-    textSecondary: "rgb(205, 180, 175)", // Dusty Rose
-    inputBackground: "rgb(86, 70, 70)", // Medium Plum
-    border: "rgb(119, 98, 98)", // Light Plum
-    error: "rgb(220, 53, 69)", // Standard Red
-    success: "rgb(40, 167, 69)", // Standard Green
-    warning: "rgb(255, 165, 0)", // Standard Orange
+    secondary: "rgb(255, 234, 167)",
+    background: "rgb(47, 39, 39)",
+    surface: "rgb(68, 56, 56)",
+    text: "rgb(255, 242, 240)",
+    textSecondary: "rgb(205, 180, 175)",
+    inputBackground: "rgb(86, 70, 70)",
+    border: "rgb(119, 98, 98)",
+    error: "rgb(220, 53, 69)",
+    success: "rgb(40, 167, 69)",
+    warning: "rgb(255, 165, 0)",
     navbar: {
       default: "rgba(47, 39, 39, 0.95)",
       scrolled: "rgb(47, 39, 39)",
@@ -81,7 +85,7 @@ const darkTheme = {
   },
 };
 
-// ---------- Shared Base Theme (unchanged, re-included for completeness) ----------
+// ---------- Shared Base Theme ----------
 const baseTheme = {
   spacing: {
     xs: "0.25rem",
@@ -92,37 +96,14 @@ const baseTheme = {
     "2xl": "2.5rem",
     "3xl": "3rem",
   },
-  typography: {
-    fontFamily:
-      "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
-    codeFontFamily:
-      "source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace",
-    fontSizes: {
-      xs: "0.75rem",
-      sm: "0.875rem",
-      base: "1rem",
-      lg: "1.125rem",
-      xl: "1.5rem",
-      "2xl": "2rem",
-      "3xl": "2.5rem",
-      "4xl": "3rem",
-      "5xl": "4rem",
-    },
-    fontWeights: {
-      light: 300,
-      normal: 400,
-      medium: 500,
-      semibold: 600,
-      bold: 700,
-    },
-    lineHeights: {
-      none: 1,
-      tight: 1.25,
-      snug: 1.375,
-      normal: 1.5,
-      relaxed: 1.625,
-      loose: 2,
-    },
+  typography: typography,
+  lineHeights: {
+    none: 1,
+    tight: 1.25,
+    snug: 1.375,
+    normal: 1.5,
+    relaxed: 1.625,
+    loose: 2,
   },
   borderRadius: {
     none: "0",
