@@ -1,8 +1,9 @@
-import styled, { keyframes } from "styled-components"; // Import keyframes
+import styled, { keyframes } from "styled-components";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
-import { Outlet } from "react-router-dom";
-import { Suspense } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { Suspense, useEffect } from "react";
+import { useRoutePrefetch } from "./utils/routePrefetcher";
 
 // Define a simple pulse animation
 const pulse = keyframes`
@@ -32,6 +33,14 @@ const LoadingText = styled.div`
 `;
 
 const AppLayout = () => {
+  const location = useLocation();
+  useRoutePrefetch();
+
+  useEffect(() => {
+    // Add smooth scroll to top when route changes
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
+
   return (
     <>
       <Navbar />

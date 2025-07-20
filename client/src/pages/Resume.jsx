@@ -92,7 +92,7 @@ const DownloadBtn = styled(motion.a)`
 
 // --- Component ---
 const Resume = () => {
-  const GOOGLE_DRIVE_RESUME_ID = "1itkVXP-E3p9_VLePpiS9f8u6vXa42Vyo";
+  const GOOGLE_DRIVE_RESUME_ID = "1lC3uGeCbvYE70zs9M9qsBmc-06wglHxP";
 
   // Construct URLs clearly.
   const embedUrl = `https://drive.google.com/file/d/${GOOGLE_DRIVE_RESUME_ID}/preview`;

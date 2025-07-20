@@ -15,7 +15,7 @@ const router = createBrowserRouter(
   [
     {
       path: "/",
-      element: <AppLayout />, // AppLayout will handle Suspense for its children
+      element: <AppLayout />,
       children: [
         { path: "/", element: <Home /> },
         { path: "/about", element: <About /> },
