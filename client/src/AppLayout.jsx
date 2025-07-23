@@ -1,17 +1,13 @@
-import styled, { keyframes } from "styled-components";
-import Navbar from "./components/Navbar.jsx";
-import Footer from "./components/Footer.jsx";
+import styled from "styled-components";
 import { Outlet, useLocation } from "react-router-dom";
 import { Suspense, useEffect } from "react";
+
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
+import Loading from "./components/Loading.jsx";
 import { useRoutePrefetch } from "./utils/routePrefetcher";
 
-// Define a simple pulse animation
-const pulse = keyframes`
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
-`;
-
+// Styled main content wrapper
 const MainContent = styled.main`
   padding-top: 50px;
   min-height: calc(100vh - 80px);
@@ -20,37 +16,22 @@ const MainContent = styled.main`
   flex-direction: column;
 `;
 
-const LoadingText = styled.div`
-  flex-grow: 1; /* Allows it to take available space */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  animation: ${pulse} 1.5s infinite ease-in-out;
-  text-align: center;
-`;
-
 const AppLayout = () => {
   const location = useLocation();
   useRoutePrefetch();
 
   useEffect(() => {
-    // Add smooth scroll to top when route changes
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
 
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <Navbar />
       <MainContent>
-        <Suspense fallback={<LoadingText>Loading content...</LoadingText>}>
-          <Outlet />
-        </Suspense>
+        <Outlet />
       </MainContent>
       <Footer />
-    </>
+    </Suspense>
   );
 };
 
