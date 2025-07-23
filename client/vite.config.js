@@ -9,20 +9,28 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Vendor chunks
-          vendor: ['react', 'react-dom', 'react-router-dom', 'styled-components'],
-          
+          vendor: [
+            "react",
+            "react-dom",
+            "react-router-dom",
+            "styled-components",
+          ],
+
           // Third-party libraries
-          'lottie-web': ['lottie-web'],
-          'framer-motion': ['framer-motion'],
-          'react-icons': ['react-icons'],
-          
+          "lottie-web": ["lottie-web"],
+          "framer-motion": ["framer-motion"],
+          "react-icons": ["react-icons"],
+
+          // Custom chunks Loading Component
+          loading: ["./src/components/Loading.jsx"],
+
           // Custom chunks for pages
-          hero: ['./src/pages/Hero.jsx'],
-          about: ['./src/pages/About.jsx'],
-          projects: ['./src/pages/Projects.jsx'],
-          contact: ['./src/pages/Contact.jsx'],
-          blog: ['./src/pages/Blog.jsx'],
-          resume: ['./src/pages/Resume.jsx']
+          hero: ["./src/pages/Hero.jsx"],
+          about: ["./src/pages/About.jsx"],
+          projects: ["./src/pages/Projects.jsx"],
+          contact: ["./src/pages/Contact.jsx"],
+          blog: ["./src/pages/Blog.jsx"],
+          resume: ["./src/pages/Resume.jsx"],
         },
       },
     },
@@ -36,6 +44,14 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', 'styled-components', 'framer-motion', 'lottie-web', 'react-icons'],
+    include: [
+      "react",
+      "react-dom",
+      "react-router-dom",
+      "styled-components",
+      "framer-motion",
+      "lottie-web",
+      "react-icons",
+    ],
   },
 });

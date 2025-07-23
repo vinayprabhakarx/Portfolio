@@ -1,5 +1,3 @@
-// src/components/Loading.jsx
-
 import styled, { keyframes, css } from "styled-components";
 
 // Animation keyframes
