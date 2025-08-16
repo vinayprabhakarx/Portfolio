@@ -30,7 +30,7 @@ const DeveloperAnimation = () => {
       ref={animationContainer}
       style={{
         width: "100%",
-        maxWidth: "400px",
+        maxWidth: "450px",
         height: "auto",
       }}
     />
