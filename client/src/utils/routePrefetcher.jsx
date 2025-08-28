@@ -6,7 +6,6 @@ const routeComponents = {
   "/about": () => import("../pages/About.jsx"),
   "/projects": () => import("../pages/Projects.jsx"),
   "/contact": () => import("../pages/Contact.jsx"),
-  "/blog": () => import("../pages/Blog.jsx"),
   "/resume": () => import("../pages/Resume.jsx"),
 };
 

@@ -9,7 +9,6 @@ import logo from "../assets/logo.svg";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Mobile menu open state
   const [scrolled, setScrolled] = useState(false); // Track scroll for style change
-
   const location = useLocation();
   const { isDarkMode, toggleTheme } = useTheme();
 
@@ -30,7 +29,6 @@ const Navbar = () => {
         ticking = true;
       }
     };
-
     window.addEventListener("scroll", throttledScroll, { passive: true });
     return () => window.removeEventListener("scroll", throttledScroll);
   }, [handleScroll]);
@@ -43,27 +41,36 @@ const Navbar = () => {
   // Close mobile menu if resizing to desktop view
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768 && isOpen) {
+      if (window.innerWidth >= 775 && isOpen) {
         setIsOpen(false);
       }
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [isOpen]);
 
   const navItems = useMemo(
     () => [
-      { path: "/", label: "Home" },
-      { path: "/about", label: "About" },
-      { path: "/projects", label: "Projects" },
-      { path: "/resume", label: "Resume" },
-      { path: "/contact", label: "Contact" },
+      { path: "/", label: "Home", internal: true },
+      {
+        path: "https://blog.vinayprabhakar.dev",
+        label: "Blog",
+        internal: false,
+      },
+      { path: "/about", label: "About", internal: true },
+      { path: "/projects", label: "Projects", internal: true },
+      { path: "/resume", label: "Resume", internal: true },
+      { path: "/contact", label: "Contact", internal: true },
     ],
     []
   );
 
-  const toggleMobileMenu = useCallback(() => setIsOpen((prev) => !prev), []);
+  const toggleMobileMenu = useCallback(() => {
+    // Only toggle if we're in mobile view
+    if (window.innerWidth < 775) {
+      setIsOpen((prev) => !prev);
+    }
+  }, []);
   const closeMobileMenu = useCallback(() => setIsOpen(false), []);
 
   // Animation variants for overlay opacity
@@ -101,15 +108,26 @@ const Navbar = () => {
           </LogoLink>
 
           <DesktopNav>
-            {navItems.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                $isActive={location.pathname === item.path}
-              >
-                {item.label}
-              </NavLink>
-            ))}
+            {navItems.map((item) =>
+              item.internal ? (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  $isActive={location.pathname === item.path}
+                >
+                  {item.label}
+                </NavLink>
+              ) : (
+                <ExternalNavLink
+                  key={item.path}
+                  href={item.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.label}
+                </ExternalNavLink>
+              )
+            )}
             <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
               {isDarkMode ? "🌙" : "☀️"}
             </ThemeToggle>
@@ -125,20 +143,32 @@ const Navbar = () => {
       </NavContainer>
 
       <AnimatePresence mode="wait">
-        {isOpen && (
+        {isOpen && window.innerWidth < 775 && (
           <>
             <MobileMenuOverlay {...overlayVariants} onClick={closeMobileMenu} />
             <MobileNav {...mobileNavVariants}>
-              {navItems.map((item) => (
-                <MobileNavLink
-                  key={item.path}
-                  to={item.path}
-                  $isActive={location.pathname === item.path}
-                  onClick={closeMobileMenu}
-                >
-                  {item.label}
-                </MobileNavLink>
-              ))}
+              {navItems.map((item) =>
+                item.internal ? (
+                  <MobileNavLink
+                    key={item.path}
+                    to={item.path}
+                    $isActive={location.pathname === item.path}
+                    onClick={closeMobileMenu}
+                  >
+                    {item.label}
+                  </MobileNavLink>
+                ) : (
+                  <MobileExternalNavLink
+                    key={item.path}
+                    href={item.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeMobileMenu}
+                  >
+                    {item.label}
+                  </MobileExternalNavLink>
+                )
+              )}
               <MobileThemeToggle
                 onClick={toggleTheme}
                 aria-label="Toggle Theme"
@@ -202,7 +232,6 @@ const StyledLogo = styled.img`
   width: auto;
   transition: filter 0.1s ease;
   filter: ${({ $isDark }) => ($isDark ? "brightness(0) invert(1)" : "none")};
-
   @media (max-width: 992px) {
     height: 35px;
   }
@@ -225,7 +254,6 @@ const DesktopNav = styled.div`
   display: none;
   gap: 2rem;
   align-items: center;
-
   @media (min-width: 775px) {
     display: flex;
   }
@@ -239,7 +267,6 @@ const NavLink = styled(Link)`
     $isActive ? theme.colors.primary : theme.colors.text};
   position: relative;
   padding: 0.5rem 0;
-
   &::after {
     content: "";
     position: absolute;
@@ -250,9 +277,35 @@ const NavLink = styled(Link)`
     background: ${({ theme }) => theme.colors.primary};
     transition: width 0.3s ease;
   }
-
   &:hover::after {
     width: 100%;
+  }
+`;
+
+// New styled component for external links
+const ExternalNavLink = styled.a`
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.text};
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: ${({ theme }) => theme.colors.primary};
+    transition: width 0.3s ease;
+  }
+  &:hover::after {
+    width: 100%;
+  }
+  &:hover {
+    color: ${({ theme }) => theme.colors.secondary};
   }
 `;
 
@@ -264,7 +317,6 @@ const ThemeToggle = styled.button`
   padding: 0.5rem;
   border-radius: 50%;
   transition: transform 0.3s ease;
-
   &:hover {
     transform: rotate(360deg);
   }
@@ -279,7 +331,6 @@ const MobileMenuButton = styled.button`
   color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
   padding: 0.4rem;
-
   @media (min-width: 775px) {
     display: none;
   }
@@ -311,7 +362,6 @@ const MobileNav = styled(motion.div)`
   overflow-y: auto;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-
   @media (min-width: 480px) {
     width: 40%;
   }
@@ -323,7 +373,17 @@ const MobileNavLink = styled(Link)`
   color: ${({ theme, $isActive }) =>
     $isActive ? theme.colors.primary : theme.colors.text};
   text-decoration: none;
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
 
+// New styled component for mobile external links
+const MobileExternalNavLink = styled.a`
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: ${({ theme }) => theme.colors.text};
+  text-decoration: none;
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }

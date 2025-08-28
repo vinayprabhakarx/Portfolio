@@ -29,7 +29,6 @@ export default defineConfig({
           about: ["./src/pages/About.jsx"],
           projects: ["./src/pages/Projects.jsx"],
           contact: ["./src/pages/Contact.jsx"],
-          blog: ["./src/pages/Blog.jsx"],
           resume: ["./src/pages/Resume.jsx"],
         },
       },
