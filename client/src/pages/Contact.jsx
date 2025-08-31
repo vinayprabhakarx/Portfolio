@@ -188,7 +188,7 @@ const Contact = () => {
                   role="alert"
                   aria-live="polite"
                 >
-                  ✅ Form submitted successfully!
+                  Form submitted successfully!
                 </SuccessMessage>
               )}
             </AnimatePresence>

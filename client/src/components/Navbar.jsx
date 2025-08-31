@@ -52,14 +52,14 @@ const Navbar = () => {
   const navItems = useMemo(
     () => [
       { path: "/", label: "Home", internal: true },
+      { path: "/about", label: "About", internal: true },
+      { path: "/projects", label: "Projects", internal: true },
+      { path: "/resume", label: "Resume", internal: true },
       {
         path: "https://blog.vinayprabhakar.dev",
         label: "Blog",
         internal: false,
       },
-      { path: "/about", label: "About", internal: true },
-      { path: "/projects", label: "Projects", internal: true },
-      { path: "/resume", label: "Resume", internal: true },
       { path: "/contact", label: "Contact", internal: true },
     ],
     []
