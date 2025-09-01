@@ -6,12 +6,12 @@ import {
   FaReact,
   FaNodeJs,
   FaGitAlt,
-  FaFedora,
   FaGithub,
   FaAws,
   FaDocker,
   FaDatabase,
 } from "react-icons/fa";
+import { GrArchlinux } from "react-icons/gr";
 import {
   SiC,
   SiMongodb,
@@ -158,8 +158,8 @@ export const skills = {
   ],
   "Tools & Technologies": [
     {
-      name: "Fedora (Linux)",
-      icon: FaFedora,
+      name: "Arch Linux",
+      icon: GrArchlinux,
     },
     {
       name: "Git",
