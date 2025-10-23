@@ -21,15 +21,7 @@ const LoadingContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: ${({ theme }) => `
-    linear-gradient(
-      135deg,
-      ${theme.colors.background}f0,
-      ${theme.colors.primary}20,
-      ${theme.colors.background}f0
-    )
-  `};
-  backdrop-filter: blur(10px);
+  background: ${({ theme }) => theme.colors.background};
   z-index: 1000;
   padding: 2rem;
   text-align: center;

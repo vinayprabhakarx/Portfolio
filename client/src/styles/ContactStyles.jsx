@@ -108,7 +108,7 @@ export const FormLabel = styled.label`
 export const FormInput = styled.input`
   width: 100%;
   padding: 0.8rem;
-  border: 2px solid ${({ theme }) => theme.colors.border};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 10px;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -146,7 +146,7 @@ export const FormInput = styled.input`
 export const FormTextarea = styled.textarea`
   width: 100%;
   padding: 0.8rem;
-  border: 2px solid ${({ theme }) => theme.colors.border};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 10px;
   font-size: 1rem;
   resize: vertical;

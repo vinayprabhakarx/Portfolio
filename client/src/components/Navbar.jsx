@@ -207,13 +207,21 @@ const NavContainer = styled.nav`
 `;
 
 const NavContent = styled.div`
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
+
+  @media (max-width: 1400px) {
+    max-width: 1200px;
+  }
+
+  @media (max-width: 775px) {
+    padding: 1rem;
+  }
 `;
 
 const LogoLink = styled(Link)`
@@ -228,12 +236,12 @@ const LogoContainer = styled.div`
 `;
 
 const StyledLogo = styled.img`
-  height: 35px;
+  height: 40px;
   width: auto;
   transition: filter 0.1s ease;
   filter: ${({ $isDark }) => ($isDark ? "brightness(0) invert(1)" : "none")};
   @media (max-width: 992px) {
-    height: 35px;
+    height: 38px;
   }
 `;
 
@@ -243,16 +251,20 @@ const Logo = styled.span`
 `;
 
 const LogoName = styled.span`
-  font-size: 1.4rem;
-  font-weight: 700;
+  font-size: 1.6rem;
+  font-weight: 600;
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   margin-right: 1rem;
+
+  @media (max-width: 992px) {
+    font-size: 1.4rem;
+  }
 `;
 
 const DesktopNav = styled.div`
   display: none;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: center;
   @media (min-width: 775px) {
     display: flex;
@@ -260,13 +272,15 @@ const DesktopNav = styled.div`
 `;
 
 const NavLink = styled(Link)`
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   text-decoration: none;
   color: ${({ theme, $isActive }) =>
     $isActive ? theme.colors.primary : theme.colors.text};
   position: relative;
   padding: 0.5rem 0;
+  transition: color 0.3s ease;
+
   &::after {
     content: "";
     position: absolute;
@@ -277,6 +291,11 @@ const NavLink = styled(Link)`
     background: ${({ theme }) => theme.colors.primary};
     transition: width 0.3s ease;
   }
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+
   &:hover::after {
     width: 100%;
   }
@@ -284,13 +303,14 @@ const NavLink = styled(Link)`
 
 // New styled component for external links
 const ExternalNavLink = styled.a`
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.text};
   position: relative;
   padding: 0.5rem 0;
   transition: color 0.3s ease;
+
   &::after {
     content: "";
     position: absolute;
@@ -301,11 +321,13 @@ const ExternalNavLink = styled.a`
     background: ${({ theme }) => theme.colors.primary};
     transition: width 0.3s ease;
   }
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+
   &:hover::after {
     width: 100%;
-  }
-  &:hover {
-    color: ${({ theme }) => theme.colors.secondary};
   }
 `;
 
