@@ -222,10 +222,10 @@ const PaginationButton = styled.button`
     $active ? theme.gradients.primary : theme.gradients.primaryTransparent};
   color: ${({ theme }) => theme.colors.text};
   border-radius: ${({ theme }) => theme.borderRadius.xl};
-  transition: all 0.3s ease;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 900;
+  font-size: ${({ theme }) => theme.typography.fontSizes.base};
+  font-family: ${({ theme }) => theme.typography.fontFamily};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.extrabold};
   transition: ${({ theme }) => theme.transitions.default};
   user-select: none;
   outline: none;
@@ -259,10 +259,11 @@ const ArrowButton = styled.button`
   color: ${({ theme, disabled }) =>
     disabled ? theme.colors.disabled || "#ccc" : theme.colors.primary};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
+  font-family: ${({ theme }) => theme.typography.fontFamily};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-  transition: all 0.3s ease;
+  transition: ${({ theme }) => theme.transitions.default};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   outline: none;
 
@@ -281,7 +282,7 @@ const ArrowButton = styled.button`
   }
 
   @media (max-width: ${({ theme }) => theme?.breakpoints?.sm || "640px"}) {
-    font-size: 1.25rem;
+    font-size: ${({ theme }) => theme.typography.fontSizes["xl"]};
   }
 `;
 

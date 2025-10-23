@@ -13,7 +13,7 @@ const CardContainer = styled(motion.div)`
   overflow: hidden;
   position: relative;
   z-index: 1;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: ${({ theme }) => theme.transitions.default};
 
   &:hover {
     transform: translateY(-5px);
@@ -28,68 +28,90 @@ const CardContainer = styled(motion.div)`
 const CardGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: ${({ theme }) => theme.spacing.xl};
+  margin-top: ${({ theme }) => theme.spacing.xl};
 
   @media (min-width: 1400px) {
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 2.5rem;
+    gap: ${({ theme }) => theme.spacing["2xl"]};
   }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: ${({ theme }) => theme.spacing.lg};
   }
 `;
 
 const CardTitle = styled.h3`
   color: ${({ theme }) => theme.colors.text};
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
+  font-size: ${({ theme }) => theme.typography.fontSizes["3xl"]};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  line-height: ${({ theme }) => theme.lineHeights.tight};
+
+  @media (max-width: 768px) {
+    font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
+  }
 `;
 
 const CardDescription = styled.p`
   color: ${({ theme }) => theme.colors.text};
-  margin: 1rem 0;
-  line-height: 1.6;
+  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
+  margin: ${({ theme }) => theme.spacing.sm} 0;
+  line-height: ${({ theme }) => theme.lineHeights.relaxed};
+
+  @media (max-width: 768px) {
+    font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+  }
 `;
 
 const HighlightsList = styled.div`
-  margin: 1rem 0;
+  margin: ${({ theme }) => theme.spacing.sm} 0;
 `;
 
 const HighlightItem = styled.div`
   color: ${({ theme }) => theme.colors.textSecondary};
   font-style: italic;
-  font-size: 0.9rem;
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
-  margin: 0.5rem 0;
-  line-height: 1.4;
+  gap: ${({ theme }) => theme.spacing.sm};
+  margin: ${({ theme }) => theme.spacing.sm} 0;
+  line-height: ${({ theme }) => theme.lineHeights.relaxed};
+
+  @media (max-width: 768px) {
+    font-size: ${({ theme }) => theme.typography.fontSizes.base};
+  }
 `;
 
 const TagContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  gap: ${({ theme }) => theme.spacing.sm};
+  margin-top: ${({ theme }) => theme.spacing.sm};
 `;
 
 const Tag = styled.span`
   background: ${({ theme }) => theme.gradients.primaryTransparent};
   color: ${({ theme }) => theme.colors.primary};
-  padding: 0.3rem 0.8rem;
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
   border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: ${({ theme }) => theme.typography.fontSizes.base};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+
+  @media (max-width: 768px) {
+    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+    padding: ${({ theme }) => theme.spacing.xs}
+      ${({ theme }) => theme.spacing.sm};
+  }
 `;
 
 const WorkPeriod = styled.span`
   color: ${({ theme }) => theme.colors.textSecondary};
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: ${({ theme }) => theme.typography.fontSizes.base};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
 `;
 
 const GradientBackground = styled.div`

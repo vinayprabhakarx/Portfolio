@@ -209,7 +209,7 @@ const NavContainer = styled.nav`
 const NavContent = styled.div`
   max-width: 1600px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -220,7 +220,7 @@ const NavContent = styled.div`
   }
 
   @media (max-width: 775px) {
-    padding: 1rem;
+    padding: ${({ theme }) => theme.spacing.md};
   }
 `;
 
@@ -232,7 +232,7 @@ const LogoLink = styled(Link)`
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: ${({ theme }) => theme.spacing.sm};
 `;
 
 const StyledLogo = styled.img`
@@ -246,25 +246,25 @@ const StyledLogo = styled.img`
 `;
 
 const Logo = styled.span`
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
 `;
 
 const LogoName = styled.span`
-  font-size: 1.6rem;
-  font-weight: 600;
+  font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
-  margin-right: 1rem;
+  margin-right: ${({ theme }) => theme.spacing.md};
 
   @media (max-width: 992px) {
-    font-size: 1.4rem;
+    font-size: ${({ theme }) => theme.typography.fontSizes.xl};
   }
 `;
 
 const DesktopNav = styled.div`
   display: none;
-  gap: 2.5rem;
+  gap: ${({ theme }) => theme.spacing["2xl"]};
   align-items: center;
   @media (min-width: 775px) {
     display: flex;
@@ -272,14 +272,18 @@ const DesktopNav = styled.div`
 `;
 
 const NavLink = styled(Link)`
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
   text-decoration: none;
   color: ${({ theme, $isActive }) =>
     $isActive ? theme.colors.primary : theme.colors.text};
   position: relative;
-  padding: 0.5rem 0;
-  transition: color 0.3s ease;
+  padding: ${({ theme }) => theme.spacing.sm} 0;
+  transition: ${({ theme }) => theme.transitions.default};
+
+  @media (max-width: 768px) {
+    font-size: ${({ theme }) => theme.typography.fontSizes.base};
+  }
 
   &::after {
     content: "";
@@ -289,7 +293,7 @@ const NavLink = styled(Link)`
     width: ${({ $isActive }) => ($isActive ? "100%" : "0")};
     height: 2px;
     background: ${({ theme }) => theme.colors.primary};
-    transition: width 0.3s ease;
+    transition: ${({ theme }) => theme.transitions.default};
   }
 
   &:hover {
@@ -303,13 +307,17 @@ const NavLink = styled(Link)`
 
 // New styled component for external links
 const ExternalNavLink = styled.a`
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
   text-decoration: none;
   color: ${({ theme }) => theme.colors.text};
   position: relative;
   padding: 0.5rem 0;
   transition: color 0.3s ease;
+
+  @media (max-width: 768px) {
+    font-size: ${({ theme }) => theme.typography.fontSizes.base};
+  }
 
   &::after {
     content: "";
@@ -335,10 +343,10 @@ const ThemeToggle = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.2rem;
-  padding: 0.5rem;
+  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
+  padding: ${({ theme }) => theme.spacing.sm};
   border-radius: 50%;
-  transition: transform 0.3s ease;
+  transition: ${({ theme }) => theme.transitions.default};
   &:hover {
     transform: rotate(360deg);
   }
@@ -352,7 +360,7 @@ const MobileMenuButton = styled.button`
   border: none;
   color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
-  padding: 0.4rem;
+  padding: ${({ theme }) => theme.spacing.xs};
   @media (min-width: 775px) {
     display: none;
   }
@@ -375,10 +383,10 @@ const MobileNav = styled(motion.div)`
   width: 50%;
   max-width: 400px;
   background: ${({ theme }) => theme.colors.background};
-  padding: 2rem;
+  padding: ${({ theme }) => theme.spacing.xl};
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: ${({ theme }) => theme.spacing.lg};
   box-shadow: ${({ theme }) => theme.shadows.medium};
   z-index: 999;
   overflow-y: auto;
@@ -390,11 +398,16 @@ const MobileNav = styled(motion.div)`
 `;
 
 const MobileNavLink = styled(Link)`
-  font-weight: 600;
-  font-size: 1.1rem;
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   color: ${({ theme, $isActive }) =>
     $isActive ? theme.colors.primary : theme.colors.text};
   text-decoration: none;
+
+  @media (max-width: 768px) {
+    font-size: ${({ theme }) => theme.typography.fontSizes.base};
+  }
+
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }
@@ -402,10 +415,15 @@ const MobileNavLink = styled(Link)`
 
 // New styled component for mobile external links
 const MobileExternalNavLink = styled.a`
-  font-weight: 600;
-  font-size: 1.1rem;
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   color: ${({ theme }) => theme.colors.text};
   text-decoration: none;
+
+  @media (max-width: 768px) {
+    font-size: ${({ theme }) => theme.typography.fontSizes.base};
+  }
+
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }
@@ -420,7 +438,7 @@ const MobileThemeToggle = styled.button`
   justify-content: center;
   align-items: center;
   padding: 0;
-  gap: 0.6rem;
+  gap: ${({ theme }) => theme.spacing.sm};
 `;
 
 const ToggleTrack = styled.div`
@@ -443,7 +461,7 @@ const ToggleKnob = styled(motion.div)`
   border-radius: ${({ theme }) => theme.borderRadius.full};
   background: ${({ theme }) => theme.colors.surface};
   color: ${({ theme }) => theme.colors.text};
-  font-size: 1.3rem;
+  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
   display: flex;
   align-items: center;
   justify-content: center;

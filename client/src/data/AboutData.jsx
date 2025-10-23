@@ -13,7 +13,6 @@ import {
   FaLinux,
 } from "react-icons/fa";
 import {
-  SiC,
   SiMongodb,
   SiMysql,
   SiTensorflow,
@@ -48,7 +47,7 @@ export const education = [
     description: "Affiliated with Aryabhatta Knowledge University, Patna",
   },
   {
-    degree: "Intermediate (Science)",
+    degree: "Intermediate of Science",
     institution: "S.K. College, Lohanda, Jamui",
     period: "2018 – 2020",
     description: "Affiliated with Bihar School Examination Board",

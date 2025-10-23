@@ -11,8 +11,8 @@ import {
 } from "react-icons/fa6";
 const SocialLinksContainer = styled.div`
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: ${({ theme }) => theme.spacing.md};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 
   @media (max-width: 968px) {
     justify-content: center;
@@ -21,8 +21,8 @@ const SocialLinksContainer = styled.div`
 
 const SocialIcon = styled.a`
   color: ${({ theme }) => theme.colors.primary};
-  font-size: 1.5rem;
-  transition: all 0.3s ease;
+  font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
+  transition: ${({ theme }) => theme.transitions.default};
 
   &:hover {
     color: ${({ theme }) => theme.colors.secondary};
@@ -43,16 +43,19 @@ const SocialLinks = () => {
 
   return (
     <SocialLinksContainer>
-      {socialLinks.map(({ href, icon: Icon }, index) => (
-        <SocialIcon
-          key={index}
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon />
-        </SocialIcon>
-      ))}
+      {socialLinks.map(({ href, icon }, index) => {
+        const IconComponent = icon;
+        return (
+          <SocialIcon
+            key={index}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconComponent />
+          </SocialIcon>
+        );
+      })}
     </SocialLinksContainer>
   );
 };

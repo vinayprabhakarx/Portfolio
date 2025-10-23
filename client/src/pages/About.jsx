@@ -21,6 +21,7 @@ import {
   CourseItem,
   SkillsContainer,
   SkillName,
+  SkillCategoryTitle,
 } from "../styles/AboutStyles";
 
 const About = () => {
@@ -75,7 +76,7 @@ const About = () => {
           >
             {Object.entries(skills).map(([category, skillList]) => (
               <div key={category}>
-                <h3 style={{ marginBottom: "1rem" }}>{category}</h3>
+                <SkillCategoryTitle>{category}</SkillCategoryTitle>
                 <div
                   style={{
                     display: "grid",

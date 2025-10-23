@@ -76,7 +76,7 @@ export const MemoizedProjectLink = styled(ProjectLink).withConfig({
     font-weight: 600;
   `}
 
-  ${({ disabled, theme }) =>
+  ${({ disabled }) =>
     disabled &&
     `
     opacity: 0.5;

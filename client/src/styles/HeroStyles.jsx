@@ -7,6 +7,7 @@ export const ContentWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 4rem;
   padding: 2rem 0 4rem;
@@ -84,83 +85,88 @@ export const LeftSection = styled(motion.div)`
 
 // "Welcome" text styling
 export const WelcomeText = styled.h2`
-  font-size: 2rem;
+  font-size: ${({ theme }) => theme.typography.fontSizes["3xl"]};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
   color: ${({ theme }) => theme.colors.text};
-  margin-bottom: 1rem;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
   user-select: none;
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
   }
 `;
 
 // Animated gradient name styling
 export const GradientName = styled.h1`
-  font-size: 4rem;
-  font-weight: 700;
+  font-size: ${({ theme }) => theme.typography.fontSizes["6xl"]};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
   background: ${({ theme }) => theme.gradients.primary};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% 200%;
   animation: ${gradientAnimation} 4s ease infinite;
-  margin-bottom: 1.5rem;
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
   user-select: none;
 
   @media (max-width: 1200px) {
-    font-size: 3.5rem;
+    font-size: ${({ theme }) => theme.typography.fontSizes["5xl"]};
   }
 
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: ${({ theme }) => theme.typography.fontSizes["4xl"]};
   }
 `;
 
 // Container for typewriter effect text
 export const TypewriterContainer = styled.div`
-  font-size: 2rem;
+  font-size: ${({ theme }) => theme.typography.fontSizes["3xl"]};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   color: ${({ theme }) => theme.colors.text};
-  margin-bottom: 1.5rem;
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
   user-select: none;
 
   @media (max-width: 1200px) {
-    font-size: 1.8rem;
+    font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
   }
 
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: ${({ theme }) => theme.typography.fontSizes.xl};
   }
 `;
 
 // Description paragraph styling
 export const Description = styled.p`
-  font-size: 1.2rem;
+  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   color: ${({ theme }) => theme.colors.textSecondary};
-  margin-bottom: 2.5rem;
-  line-height: 1.8;
+  margin-bottom: ${({ theme }) => theme.spacing["2xl"]};
+  line-height: ${({ theme }) => theme.lineHeights.relaxed};
   max-width: 650px;
   user-select: none;
 
   @media (max-width: 1200px) {
-    font-size: 1.1rem;
+    font-size: ${({ theme }) => theme.typography.fontSizes.lg};
     max-width: 600px;
   }
 
   @media (max-width: 968px) {
-    margin: 0 auto 2rem;
+    margin: 0 auto ${({ theme }) => theme.spacing.xl};
   }
 `;
 
 // Call-to-action button, animated with Framer Motion
 export const CTAButton = styled(motion.button)`
-  padding: 1rem 2.5rem;
-  font-size: 1.15rem;
+  padding: ${({ theme }) => theme.spacing.md}
+    ${({ theme }) => theme.spacing["2xl"]};
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   border: none;
   border-radius: 25px;
   background: ${({ theme }) => theme.gradients.primary};
   color: white;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: ${({ theme }) => theme.transitions.default};
   display: inline-block;
   user-select: none;
   outline: none;
@@ -172,7 +178,7 @@ export const CTAButton = styled(motion.button)`
   }
 
   svg {
-    font-size: 1rem;
+    font-size: ${({ theme }) => theme.typography.fontSizes.base};
   }
 
   &:disabled {
@@ -181,8 +187,9 @@ export const CTAButton = styled(motion.button)`
   }
 
   @media (max-width: 768px) {
-    padding: 0.8rem 2rem;
-    font-size: 1.1rem;
+    padding: ${({ theme }) => theme.spacing.sm}
+      ${({ theme }) => theme.spacing.xl};
+    font-size: ${({ theme }) => theme.typography.fontSizes.base};
   }
 `;
 
