@@ -65,6 +65,44 @@ const GlobalStyle = createGlobalStyle`
   code {
     font-family: ${({ theme }) => theme.typography.codeFontFamily};
   }
+
+  /* React Toastify Custom Styles */
+  .Toastify__toast {
+    font-family: ${typography.fontFamily};
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .Toastify__toast--success {
+    background: ${({ theme }) => theme.gradients.primary};
+  }
+
+  .Toastify__toast--error {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  }
+
+  .Toastify__toast-body {
+    color: white;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .Toastify__progress-bar--success {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .Toastify__progress-bar--error {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .Toastify__close-button {
+    color: white;
+    opacity: 0.8;
+  }
+
+  .Toastify__close-button:hover {
+    opacity: 1;
+  }
 `;
 
 export default GlobalStyle;

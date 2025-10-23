@@ -17,16 +17,19 @@ export const Header = styled.div`
 // Wrapper for contact info and form, uses grid layout
 export const ContentWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2.5rem;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
   align-items: start;
+  max-width: 1400px;
+  margin: 0 auto;
 
   @media (min-width: 1400px) {
-    gap: 3rem;
+    gap: 3.5rem;
   }
 
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 `;
 

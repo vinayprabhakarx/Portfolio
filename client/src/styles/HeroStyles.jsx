@@ -7,7 +7,6 @@ export const ContentWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 4rem;
   padding: 2rem 0 4rem;
@@ -191,8 +190,7 @@ export const CTAButton = styled(motion.button)`
 export const RightSection = styled(motion.div)`
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   max-width: 600px;
 

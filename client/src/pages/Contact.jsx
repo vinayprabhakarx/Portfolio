@@ -1,5 +1,7 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { FaPaperPlane } from "react-icons/fa6";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import SocialLinks from "../components/SocialLinks";
 import Container from "../components/Container";
 import GradientTitle from "../components/GradientTitle";
@@ -18,8 +20,6 @@ import {
   FormInput,
   FormTextarea,
   SubmitButton,
-  SuccessMessage,
-  ErrorMessage,
 } from "../styles/ContactStyles";
 
 const Contact = () => {
@@ -34,6 +34,18 @@ const Contact = () => {
 
   return (
     <Container>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Header>
         <GradientTitle>Get In Touch</GradientTitle>
       </Header>
@@ -176,37 +188,6 @@ const Contact = () => {
                 </>
               )}
             </SubmitButton>
-
-            {/* Animated Feedback Messages */}
-            <AnimatePresence>
-              {status.submitted && (
-                <SuccessMessage
-                  as={motion.div}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  role="alert"
-                  aria-live="polite"
-                >
-                  Form submitted successfully!
-                </SuccessMessage>
-              )}
-            </AnimatePresence>
-
-            <AnimatePresence>
-              {status.error && (
-                <ErrorMessage
-                  as={motion.div}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  role="alert"
-                  aria-live="assertive"
-                >
-                  {status.message}
-                </ErrorMessage>
-              )}
-            </AnimatePresence>
           </ContactForm>
         </FormSection>
       </ContentWrapper>

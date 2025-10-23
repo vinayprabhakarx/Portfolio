@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from "react";
+import { toast } from "react-toastify";
 import { CONFIG } from "../config/contactConfig";
 
 // Validation utilities
@@ -343,6 +344,20 @@ export const useContactForm = () => {
 
         console.log("✅ Message sent successfully:", response);
 
+        // Show success toast
+        toast.success(
+          response.message ||
+            "Message sent successfully! I'll get back to you soon.",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          }
+        );
+
         updateStatus({
           submitting: false,
           submitted: true,
@@ -356,11 +371,23 @@ export const useContactForm = () => {
       } catch (error) {
         console.error("❌ Submission error:", error);
 
+        const errorMessage =
+          error.message || "Failed to send message. Please try again later.";
+
+        // Show error toast
+        toast.error(errorMessage, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+
         updateStatus({
           submitting: false,
           error: true,
-          message:
-            error.message || "Failed to send message. Please try again later.",
+          message: errorMessage,
         });
       }
     },

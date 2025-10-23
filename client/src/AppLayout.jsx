@@ -10,8 +10,8 @@ import AnimatedBackground from "./components/AnimatedBackground.jsx";
 
 // Styled main content wrapper
 const MainContent = styled.main`
-  padding-top: 50px;
-  min-height: calc(100vh - 80px);
+  padding-top: 70px;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
