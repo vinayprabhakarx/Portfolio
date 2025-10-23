@@ -1,3 +1,4 @@
+import React, { Suspense } from "react";
 import Typewriter from "typewriter-effect";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
@@ -13,10 +14,13 @@ import {
   RightSection,
   Wave,
 } from "../styles/HeroStyles";
-import DeveloperAnimation from "../components/DeveloperAnimation";
+
+const DeveloperAnimation = React.lazy(() =>
+  import("../components/DeveloperAnimation")
+);
 
 const Hero = () => (
-  <Container>
+  <Container role="banner">
     <BackgroundAnimation />
     <ContentWrapper>
       <LeftSection
@@ -27,11 +31,13 @@ const Hero = () => (
         <WelcomeText>
           Hi There! <Wave>👋</Wave> I'm
         </WelcomeText>
-        <GradientName>Vinay Prabhakar</GradientName>{" "}
+
+        <GradientName>Vinay Prabhakar</GradientName>
+
         <TypewriterContainer>
           <Typewriter
             options={{
-              strings: ["Web Developer", "Machine Learning Engineer"],
+              strings: ["Web Developer"],
               autoStart: true,
               loop: true,
               deleteSpeed: 50,
@@ -39,15 +45,25 @@ const Hero = () => (
             }}
           />
         </TypewriterContainer>
+
         <Description>
           Welcome to my portfolio. Explore my work, discover my professional
-          background and projects, and feel free to reach out.
+          background and projects, read my{" "}
+          <a
+            href="https://blog.vinayprabhakar.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            blog
+          </a>{" "}
+          for insights, and feel free to reach out.
         </Description>
+
         <CTAButton
           as={Link}
           to="/contact"
-          whilehover={{ scale: 1.05 }}
-          whiletap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           Get in Touch
         </CTAButton>
@@ -58,7 +74,9 @@ const Hero = () => (
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.3 }}
       >
-        <DeveloperAnimation />
+        <Suspense fallback={<div>Loading animation...</div>}>
+          <DeveloperAnimation />
+        </Suspense>
       </RightSection>
     </ContentWrapper>
   </Container>

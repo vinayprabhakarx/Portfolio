@@ -54,7 +54,7 @@ const Navbar = () => {
       { path: "/", label: "Home", internal: true },
       { path: "/about", label: "About", internal: true },
       { path: "/projects", label: "Projects", internal: true },
-      { path: "/resume", label: "Resume", internal: true },
+      // { path: "/resume", label: "Resume", internal: true },
       {
         path: "https://blog.vinayprabhakar.dev",
         label: "Blog",

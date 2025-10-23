@@ -10,8 +10,8 @@ import {
   FaAws,
   FaDocker,
   FaDatabase,
+  FaLinux,
 } from "react-icons/fa";
-import { GrArchlinux } from "react-icons/gr";
 import {
   SiC,
   SiMongodb,
@@ -23,7 +23,6 @@ import {
   SiStreamlit,
   SiExpress,
   SiJupyter,
-  SiGooglecolab,
   SiPostman,
   SiCloudflare,
   SiDigitalocean,
@@ -33,11 +32,11 @@ import { VscVscode } from "react-icons/vsc";
 
 export const experience = [
   {
-    title: "Web Developer & Aspiring Machine Learning Engineer",
-    company: "Open for Opportunities",
+    title: "Open for Opportunities",
+    company: "",
     period: "Present",
     description:
-      "Looking for opportunities to apply my knowledge in Machine Learning, Web Development, and Data Structures & Algorithms. Focused on building practical solutions to real-world problems.",
+      "Looking for opportunities to apply my knowledge in Web Development.",
   },
 ];
 
@@ -45,7 +44,7 @@ export const education = [
   {
     degree: "Bachelor of Computer Applications (BCA)",
     institution: "Indian Institute of Business Management, Patna",
-    period: "2022 – Present",
+    period: "2022 – 2025",
     description: "Affiliated with Aryabhatta Knowledge University, Patna",
   },
   {
@@ -70,10 +69,6 @@ export const skills = {
     {
       name: "JavaScript",
       icon: FaJsSquare,
-    },
-    {
-      name: "C",
-      icon: SiC,
     },
   ],
   "Machine Learning": [
@@ -158,8 +153,8 @@ export const skills = {
   ],
   "Tools & Technologies": [
     {
-      name: "Arch Linux",
-      icon: GrArchlinux,
+      name: "Linux (Daily Driver)",
+      icon: FaLinux,
     },
     {
       name: "Git",
@@ -181,19 +176,13 @@ export const skills = {
       name: "Jupyter Notebook",
       icon: SiJupyter,
     },
-    {
-      name: "Google Colab",
-      icon: SiGooglecolab,
-    },
   ],
 };
 
 export const bioText = `
-My name is Vinay Prabhakar, a Bachelor of Computer Applications student with a strong interest in web development and machine learning. I focus on building full-stack applications using the MERN stack.
+My name is Vinay Prabhakar. I have a strong interest in web development and focus on building full-stack applications using the MERN stack.
 
-In machine learning, I work primarily with Python, using libraries such as scikit-learn, Pandas, and NumPy. I have experience developing classification models and implementing basic computer vision techniques.
+Along with this, I also explore machine learning using Python and libraries like scikit-learn and Pandas.
 
-Currently, I’m engaged in projects that apply machine learning to real-world problems, including a disease prediction system and a cleanliness rating tool.
-
-My objective is to begin my career in the IT industry and advance as a Machine Learning Engineer, dedicated to building intelligent, practical solutions.
+My goal is to start my career as a Web Developer and continue improving my skills through real-world projects.
 `;

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaGraduationCap, FaBriefcase, FaCode } from "react-icons/fa";
@@ -20,7 +21,7 @@ import {
   CourseItem,
   SkillsContainer,
   SkillName,
-} from "../styles/AboutStyles"; // Styled components
+} from "../styles/AboutStyles";
 
 const About = () => {
   const theme = useTheme();

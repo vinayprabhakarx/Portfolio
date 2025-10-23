@@ -203,7 +203,7 @@ const Contact = () => {
                   role="alert"
                   aria-live="assertive"
                 >
-                  ❌ {status.message}
+                  {status.message}
                 </ErrorMessage>
               )}
             </AnimatePresence>
