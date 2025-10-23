@@ -6,7 +6,11 @@ import Card from "../components/Card";
 import GradientTitle from "../components/GradientTitle";
 import Pagination from "../components/Pagination";
 import Container from "../components/Container";
-import { ProjectLinks, ProjectLink } from "../styles/ProjectStyles";
+import {
+  ProjectLinks,
+  ProjectLink,
+  ProjectCardWrapper,
+} from "../styles/ProjectStyles";
 import { projects, categories } from "../data/ProjectData";
 
 // Animated Project Card
@@ -15,50 +19,56 @@ const ProjectCard = memo(({ project, index }) => (
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
+    style={{ height: "100%" }}
   >
-    <Card key={project.id || index}>
-      <Card.Title>{project.title}</Card.Title>
-      <Card.Description>{project.description}</Card.Description>
+    <ProjectCardWrapper>
+      <Card
+        key={project.id || index}
+        style={{ height: "100%", display: "flex", flexDirection: "column" }}
+      >
+        <Card.Title>{project.title}</Card.Title>
+        <Card.Description>{project.description}</Card.Description>
 
-      {project.highlights?.length > 0 && (
-        <Card.HighlightsList>
-          {project.highlights.map((highlight, hIndex) => (
-            <Card.HighlightItem key={`highlight-${index}-${hIndex}`}>
-              • {highlight}
-            </Card.HighlightItem>
+        {project.highlights?.length > 0 && (
+          <Card.HighlightsList>
+            {project.highlights.map((highlight, hIndex) => (
+              <Card.HighlightItem key={`highlight-${index}-${hIndex}`}>
+                • {highlight}
+              </Card.HighlightItem>
+            ))}
+          </Card.HighlightsList>
+        )}
+
+        <Card.TagContainer>
+          {project.tags.map((tag, tagIndex) => (
+            <Card.Tag key={`tag-${index}-${tagIndex}`}>{tag}</Card.Tag>
           ))}
-        </Card.HighlightsList>
-      )}
+        </Card.TagContainer>
 
-      <Card.TagContainer>
-        {project.tags.map((tag, tagIndex) => (
-          <Card.Tag key={`tag-${index}-${tagIndex}`}>{tag}</Card.Tag>
-        ))}
-      </Card.TagContainer>
-
-      <ProjectLinks>
-        {project.github && (
-          <ProjectLink
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`View ${project.title} source code on GitHub`}
-          >
-            <FaGithub /> Code
-          </ProjectLink>
-        )}
-        {project.demo && (
-          <ProjectLink
-            href={project.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`View ${project.title} live demo`}
-          >
-            <FaExternalLinkAlt /> Demo
-          </ProjectLink>
-        )}
-      </ProjectLinks>
-    </Card>
+        <ProjectLinks>
+          {project.github && (
+            <ProjectLink
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View ${project.title} source code on GitHub`}
+            >
+              <FaGithub /> Code
+            </ProjectLink>
+          )}
+          {project.demo && (
+            <ProjectLink
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View ${project.title} live demo`}
+            >
+              <FaExternalLinkAlt /> Demo
+            </ProjectLink>
+          )}
+        </ProjectLinks>
+      </Card>
+    </ProjectCardWrapper>
   </motion.div>
 ));
 
@@ -105,8 +115,8 @@ const Projects = memo(() => {
 
   // Update currentProjects on category or page change
   useEffect(() => {
-    const start = (currentPage - 1) * 3;
-    const end = start + 3;
+    const start = (currentPage - 1) * 4;
+    const end = start + 4;
     setCurrentProjects(filteredProjects.slice(start, end));
   }, [filteredProjects, currentPage]);
 
@@ -163,10 +173,10 @@ const Projects = memo(() => {
       </Card.Grid>
 
       {/* Pagination */}
-      {filteredProjects.length > 3 && (
+      {filteredProjects.length > 4 && (
         <Pagination
           data={filteredProjects}
-          itemsPerPage={3}
+          itemsPerPage={4}
           currentPage={currentPage}
           onPageChange={handlePageChange}
           maxVisiblePages={6}

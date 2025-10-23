@@ -86,7 +86,7 @@ export const SkillsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
 `;
 

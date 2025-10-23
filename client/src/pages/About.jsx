@@ -79,7 +79,8 @@ const About = () => {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                    gridTemplateColumns:
+                      "repeat(auto-fill, minmax(220px, 1fr))",
                     gap: "1.5rem",
                   }}
                 >
@@ -97,6 +98,7 @@ const About = () => {
                           display: "flex",
                           gap: "0.75rem",
                           alignItems: "flex-start",
+                          maxWidth: "350px",
                         }}
                       >
                         {Icon && (

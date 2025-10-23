@@ -59,14 +59,11 @@ const Hero = () => (
           for insights, and feel free to reach out.
         </Description>
 
-        <CTAButton
-          as={Link}
-          to="/contact"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Get in Touch
-        </CTAButton>
+        <Link to="/contact" style={{ textDecoration: "none" }}>
+          <CTAButton whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            Get in Touch
+          </CTAButton>
+        </Link>
       </LeftSection>
 
       <RightSection

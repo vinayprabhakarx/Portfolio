@@ -3,20 +3,27 @@ import { motion } from "framer-motion";
 
 // Wrapper for the main content within Hero section
 export const ContentWrapper = styled.div`
-  max-width: 1200px;
+  max-width: 1600px;
   width: 100%;
   margin: 0 auto;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  padding: 2rem 0;
-  margin-top: 0;
+  gap: 4rem;
+  padding: 2rem 0 4rem;
+  min-height: calc(100vh - 120px);
+
+  @media (max-width: 1400px) {
+    max-width: 1200px;
+    gap: 3rem;
+  }
 
   @media (max-width: 968px) {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    gap: 2rem;
+    padding: 2rem 0;
   }
 `;
 
@@ -78,23 +85,31 @@ export const LeftSection = styled(motion.div)`
 
 // "Welcome" text styling
 export const WelcomeText = styled.h2`
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: ${({ theme }) => theme.colors.text};
   margin-bottom: 1rem;
   user-select: none;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
 `;
 
 // Animated gradient name styling
 export const GradientName = styled.h1`
-  font-size: 3.5rem;
+  font-size: 4rem;
   font-weight: 700;
   background: ${({ theme }) => theme.gradients.primary};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% 200%;
   animation: ${gradientAnimation} 4s ease infinite;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   user-select: none;
+
+  @media (max-width: 1200px) {
+    font-size: 3.5rem;
+  }
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -103,10 +118,14 @@ export const GradientName = styled.h1`
 
 // Container for typewriter effect text
 export const TypewriterContainer = styled.div`
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: ${({ theme }) => theme.colors.text};
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   user-select: none;
+
+  @media (max-width: 1200px) {
+    font-size: 1.8rem;
+  }
 
   @media (max-width: 768px) {
     font-size: 1.2rem;
@@ -115,12 +134,17 @@ export const TypewriterContainer = styled.div`
 
 // Description paragraph styling
 export const Description = styled.p`
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: ${({ theme }) => theme.colors.textSecondary};
-  margin-bottom: 2rem;
-  line-height: 1.6;
-  max-width: 600px;
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
+  max-width: 650px;
   user-select: none;
+
+  @media (max-width: 1200px) {
+    font-size: 1.1rem;
+    max-width: 600px;
+  }
 
   @media (max-width: 968px) {
     margin: 0 auto 2rem;
@@ -129,8 +153,8 @@ export const Description = styled.p`
 
 // Call-to-action button, animated with Framer Motion
 export const CTAButton = styled(motion.button)`
-  padding: 0.8rem 2rem;
-  font-size: 1.1rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.15rem;
   border: none;
   border-radius: 25px;
   background: ${({ theme }) => theme.gradients.primary};
@@ -156,6 +180,11 @@ export const CTAButton = styled(motion.button)`
     opacity: 0.7;
     cursor: not-allowed;
   }
+
+  @media (max-width: 768px) {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+  }
 `;
 
 // Right section of the Hero content, animated with Framer Motion
@@ -165,6 +194,11 @@ export const RightSection = styled(motion.div)`
   justify-content: center;
   align-items: center;
   position: relative;
+  max-width: 600px;
+
+  @media (max-width: 968px) {
+    max-width: 400px;
+  }
 `;
 
 // Waving hand emoji styling

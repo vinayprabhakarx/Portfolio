@@ -18,8 +18,12 @@ export const Header = styled.div`
 export const ContentWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: start;
+
+  @media (min-width: 1400px) {
+    gap: 3rem;
+  }
 
   @media (max-width: 968px) {
     grid-template-columns: 1fr;

@@ -12,16 +12,36 @@ export const CategoryContainer = styled.div`
 // Grid layout for displaying project cards.
 export const ProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: ${({ theme }) => theme.spacing["2xl"]};
   margin-top: ${({ theme }) => theme.spacing["2xl"]};
+  grid-auto-rows: 1fr;
+
+  @media (min-width: 1400px) {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: ${({ theme }) => theme.spacing["3xl"]};
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.spacing.xl};
+  }
+`;
+
+// Wrapper for individual project card with consistent height
+export const ProjectCardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
 `;
 
 // Container for project links (e.g., GitHub, live demo).
 export const ProjectLinks = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.md};
-  margin-top: ${({ theme }) => theme.spacing.xl};
+  margin-top: auto;
+  padding-top: ${({ theme }) => theme.spacing.lg};
 `;
 
 // Styling for an individual project link.
@@ -39,7 +59,6 @@ export const ProjectLink = styled.a`
     transform: translateY(-2px);
   }
 `;
-
 
 // Memoized version of ProjectsGrid for performance.
 export const MemoizedProjectsGrid = styled(ProjectsGrid).withConfig({
@@ -128,7 +147,6 @@ export const AnimatedProjectCard = styled(ProjectCard)`
     animation-delay: 0.2s;
   }
 `;
-
 
 // Loading card with a shimmer effect.
 export const LoadingCard = styled.div`
