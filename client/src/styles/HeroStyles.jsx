@@ -10,7 +10,7 @@ export const ContentWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 4rem;
-  padding: 2rem 0 4rem;
+  padding: 2rem 3rem 4rem 3rem;
   min-height: calc(100vh - 120px);
 
   @media (max-width: 1400px) {
@@ -198,11 +198,13 @@ export const RightSection = styled(motion.div)`
   flex: 1;
   display: flex;
   align-items: flex-start;
+  justify-content: flex-end;
   position: relative;
   max-width: 600px;
 
   @media (max-width: 968px) {
     max-width: 400px;
+    justify-content: center;
   }
 `;
 

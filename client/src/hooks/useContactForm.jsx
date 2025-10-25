@@ -333,7 +333,6 @@ export const useContactForm = () => {
       });
 
       try {
-        console.log("📤 Sending message...");
 
         const response = await httpClient.postWithRetry(CONFIG.API_URL, {
           userName: formData.userName.trim(),
@@ -342,7 +341,6 @@ export const useContactForm = () => {
           message: formData.message.trim(),
         });
 
-        console.log("✅ Message sent successfully:", response);
 
         // Show success toast
         toast.success(
@@ -369,7 +367,6 @@ export const useContactForm = () => {
         // Reset form after successful submission
         setTimeout(resetForm, 2000);
       } catch (error) {
-        console.error("❌ Submission error:", error);
 
         const errorMessage =
           error.message || "Failed to send message. Please try again later.";
