@@ -25,15 +25,39 @@ const CardContainer = styled(motion.div)`
   }
 `;
 
+const CardImage = styled.img`
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  background: ${({ theme }) => theme.colors.background};
+`;
+
+const CardImagePlaceholder = styled.div`
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 2.5rem;
+`;
+
 const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: ${({ theme }) => theme.spacing.xl};
   margin-top: ${({ theme }) => theme.spacing.xl};
 
   @media (min-width: 1400px) {
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: ${({ theme }) => theme.spacing["2xl"]};
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @media (max-width: 768px) {
@@ -162,5 +186,11 @@ Card.WorkPeriod.displayName = "Card.WorkPeriod";
 
 Card.GradientBackground = memo(GradientBackground);
 Card.GradientBackground.displayName = "Card.GradientBackground";
+
+Card.Image = memo(CardImage);
+Card.Image.displayName = "Card.Image";
+
+Card.ImagePlaceholder = memo(CardImagePlaceholder);
+Card.ImagePlaceholder.displayName = "Card.ImagePlaceholder";
 
 export default Card;

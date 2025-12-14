@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, memo, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaCode } from "react-icons/fa";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import GradientTitle from "../components/GradientTitle";
@@ -26,6 +26,13 @@ const ProjectCard = memo(({ project, index }) => (
         key={project.id || index}
         style={{ height: "100%", display: "flex", flexDirection: "column" }}
       >
+        {project.image ? (
+          <Card.Image src={project.image} alt={project.title} />
+        ) : (
+          <Card.ImagePlaceholder>
+            <FaCode />
+          </Card.ImagePlaceholder>
+        )}
         <Card.Title>{project.title}</Card.Title>
         <Card.Description>{project.description}</Card.Description>
 

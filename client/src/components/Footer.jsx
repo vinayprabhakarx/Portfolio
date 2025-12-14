@@ -37,9 +37,6 @@ const Footer = memo(() => {
 
   return (
     <FooterContainer>
-      <Tagline>
-        Made with <strong>React</strong> and ❤️
-      </Tagline>
       <CopyrightText>
         &copy;{currentYear} <strong>VinayPrabhakarX</strong>. All rights
         reserved.

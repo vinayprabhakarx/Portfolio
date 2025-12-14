@@ -1,6 +1,11 @@
+import blogAppImage from "../assets/projects/blog-app.png";
+import portfolio from "../assets/projects/portfolio.png";
+import plantDiseaseImage from "../assets/projects/plant.png";
+
 export const projects = [
   {
     title: "Blog App",
+    image: blogAppImage,
     description:
       "Full-stack blogging platform with authentication, blog publishing, comments, likes, notifications, and admin/user role management.",
     tags: [
@@ -24,11 +29,12 @@ export const projects = [
   },
   {
     title: "Portfolio Website",
+    image: portfolio,
     description:
       "Modern portfolio website built with React and styled-components featuring interactive animations.",
     tags: ["React.js", "Express.js", "Node.js", "Cloudflare"],
     github: "https://github.com/VinayPrabhakarX/Portfolio",
-    demo: "https://vinayprabhakar.tech",
+    demo: "https://vinayprabhakar.dev",
     category: "web",
     highlights: [
       "Showcases my work, skills, and background",
@@ -38,6 +44,7 @@ export const projects = [
   },
   {
     title: "Online Examination System",
+    image: "",
     description:
       "Web-based platform for managing and conducting online exams with role-based access and secure exam flow.",
     tags: ["React.js", "Node.js", "MongoDB", "Tailwind CSS"],
@@ -52,6 +59,7 @@ export const projects = [
   },
   {
     title: "Plant Disease Recognition System",
+    image: plantDiseaseImage,
     description:
       "Agricultural system that identifies potential plant diseases based on uploaded images using deep learning algorithms.",
     tags: ["Python", "Deep Learning", "TensorFlow", "Keras"],
@@ -66,6 +74,7 @@ export const projects = [
   },
   {
     title: "Course Selling App",
+    image: "",
     description:
       "Scalable Node.js backend with MongoDB for an online course platform featuring JWT authentication, course management and secure payment tracking.",
     tags: ["Node.js", "Express.js", "MongoDB", "JWT"],

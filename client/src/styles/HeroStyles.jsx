@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 // Wrapper for the main content within Hero section
 export const ContentWrapper = styled.div`
-  max-width: 1600px;
+  max-width: 2000px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -12,6 +12,10 @@ export const ContentWrapper = styled.div`
   gap: 4rem;
   padding: 2rem 3rem 4rem 3rem;
   min-height: calc(100vh - 120px);
+
+  @media (min-width: 2560px) {
+    max-width: 2400px;
+  }
 
   @media (max-width: 1400px) {
     max-width: 1200px;

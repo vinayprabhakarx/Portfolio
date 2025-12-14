@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiMoon, FiSun } from "react-icons/fi";
 import { useTheme } from "../contexts/ThemeContext";
 import logo from "../assets/logo.svg";
 
@@ -129,16 +129,21 @@ const Navbar = () => {
               )
             )}
             <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
-              {isDarkMode ? "🌙" : "☀️"}
+              {isDarkMode ? <FiMoon size={20} /> : <FiSun size={20} />}
             </ThemeToggle>
           </DesktopNav>
 
-          <MobileMenuButton
-            onClick={toggleMobileMenu}
-            aria-label="Toggle mobile menu"
-          >
-            {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-          </MobileMenuButton>
+          <MobileControls>
+            <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
+              {isDarkMode ? <FiMoon size={20} /> : <FiSun size={20} />}
+            </ThemeToggle>
+            <MobileMenuButton
+              onClick={toggleMobileMenu}
+              aria-label="Toggle mobile menu"
+            >
+              {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            </MobileMenuButton>
+          </MobileControls>
         </NavContent>
       </NavContainer>
 
@@ -169,19 +174,6 @@ const Navbar = () => {
                   </MobileExternalNavLink>
                 )
               )}
-              <MobileThemeToggle
-                onClick={toggleTheme}
-                aria-label="Toggle Theme"
-              >
-                <ToggleTrack $dark={isDarkMode}>
-                  <ToggleKnob
-                    layout
-                    transition={{ type: "spring", stiffness: 500, damping: 20 }}
-                  >
-                    {isDarkMode ? "🌙" : "☀️"}
-                  </ToggleKnob>
-                </ToggleTrack>
-              </MobileThemeToggle>
             </MobileNav>
           </>
         )}
@@ -347,8 +339,23 @@ const ThemeToggle = styled.button`
   padding: ${({ theme }) => theme.spacing.sm};
   border-radius: 50%;
   transition: ${({ theme }) => theme.transitions.default};
+  color: ${({ theme }) => theme.colors.text};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
-    transform: rotate(360deg);
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+const MobileControls = styled.div`
+  display: none;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+
+  @media (max-width: 774px) {
+    display: flex;
   }
 `;
 
@@ -361,9 +368,6 @@ const MobileMenuButton = styled.button`
   color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
   padding: ${({ theme }) => theme.spacing.xs};
-  @media (min-width: 775px) {
-    display: none;
-  }
 `;
 
 const MobileMenuOverlay = styled(motion.div)`

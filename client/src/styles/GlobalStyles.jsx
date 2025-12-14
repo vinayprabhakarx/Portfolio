@@ -2,11 +2,14 @@ import { createGlobalStyle } from "styled-components";
 import { typography } from "./Typography";
 
 const GlobalStyle = createGlobalStyle`
-  * {
+  *,
+  *::before,
+  *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   html {
@@ -25,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: ${typography.lineHeights.base};
     font-size: ${typography.fontSizes.base};
     letter-spacing: -0.01em;
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   .app-container {
@@ -38,9 +42,13 @@ const GlobalStyle = createGlobalStyle`
   .main-content {
     flex: 1;
     width: 100%;
-    max-width: 1200px;
+    max-width: 2000px;
     margin: 0 auto;
     padding: 64px 1rem 1rem;
+
+    @media (min-width: 2560px) {
+      max-width: 2400px;
+    }
   }
 
   a {

@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  max-width: 1600px;
+  max-width: 2000px;
   margin: 0 auto;
   padding: ${({ theme }) => theme.spacing["3xl"]}
     ${({ theme }) => theme.spacing["2xl"]};
+
+  @media (min-width: 2560px) {
+    max-width: 2400px;
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     max-width: 1400px;
