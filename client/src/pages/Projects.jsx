@@ -183,7 +183,7 @@ const Projects = memo(() => {
       {filteredProjects.length > 4 && (
         <Pagination
           data={filteredProjects}
-          itemsPerPage={4}
+          itemsPerPage={6}
           currentPage={currentPage}
           onPageChange={handlePageChange}
           maxVisiblePages={6}

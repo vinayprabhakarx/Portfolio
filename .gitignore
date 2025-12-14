@@ -97,7 +97,7 @@ jspm_packages/
 *.bak
 
 # Environment variables
-.env
+/api/.env
 .env.local
 .env.development.local
 .env.test.local
