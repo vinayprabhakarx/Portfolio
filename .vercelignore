@@ -1,0 +1,29 @@
+# Development files
+
+node_modules
+\*.log
+.env.local
+.env.development
+.DS_Store
+
+# Client build artifacts (will be rebuilt)
+
+client/dist
+client/node_modules
+
+# API development files
+
+api/node_modules
+api/.env
+
+# Git files
+
+.git
+.gitignore
+
+# Editor files
+
+.vscode
+.idea
+_.swp
+_.swo

@@ -156,3 +156,5 @@ cypress/screenshots/
 .env.test
 .env.production
 .DS_Store
+.vercel
+.env*.local
