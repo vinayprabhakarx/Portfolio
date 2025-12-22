@@ -129,13 +129,21 @@ const Navbar = () => {
               )
             )}
             <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
-              {isDarkMode ? <FiMoon size={20} /> : <FiSun size={20} />}
+              {isDarkMode ? (
+                <FiSun size={20} color="#f5bf41ff" />
+              ) : (
+                <FiMoon size={20} />
+              )}
             </ThemeToggle>
           </DesktopNav>
 
           <MobileControls>
             <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
-              {isDarkMode ? <FiMoon size={20} /> : <FiSun size={20} />}
+              {isDarkMode ? (
+                <FiSun size={20} color="#f5bf41ff" />
+              ) : (
+                <FiMoon size={20} />
+              )}
             </ThemeToggle>
             <MobileMenuButton
               onClick={toggleMobileMenu}
