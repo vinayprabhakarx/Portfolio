@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback, memo, useEffect } from "react";
+import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt, FaCode } from "react-icons/fa";
 import Button from "../components/Button";
 import Card from "../components/Card";
