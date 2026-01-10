@@ -159,7 +159,7 @@ const Navbar = () => {
         {isOpen && window.innerWidth < 775 && (
           <>
             <MobileMenuOverlay {...overlayVariants} onClick={closeMobileMenu} />
-            <MobileNav {...mobileNavVariants}>
+            <MobileNav {...mobileNavVariants} aria-label="Mobile navigation">
               {navItems.map((item) =>
                 item.internal ? (
                   <MobileNavLink
@@ -387,7 +387,7 @@ const MobileMenuOverlay = styled(motion.div)`
   z-index: 998;
 `;
 
-const MobileNav = styled(motion.div)`
+const MobileNav = styled(motion.nav)`
   position: fixed;
   top: 50px;
   right: 0;

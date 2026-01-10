@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 
 // Wrapper for the main content within Hero section
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled.section`
   max-width: 2000px;
   width: 100%;
   margin: 0 auto;

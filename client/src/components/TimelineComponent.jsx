@@ -43,7 +43,7 @@ const Timeline = styled.div`
 `;
 
 // Styled individual timeline entry with animation
-const TimelineItem = styled(motion.div)`
+const TimelineItem = styled(motion.article)`
   position: relative;
   margin-left: 30px;
   padding: ${({ theme }) => theme.spacing.lg};

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 // Section for profile image and intro
-export const ProfileSection = styled.div`
+export const ProfileSection = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +37,7 @@ export const BioText = styled.p`
 `;
 
 // Container for tab-specific content
-export const TabContent = styled.div`
+export const TabContent = styled.section`
   margin-top: ${({ theme }) => theme.spacing["3xl"]};
 
   @media (max-width: 768px) {
@@ -82,15 +82,17 @@ export const SkillTag = styled.span`
 `;
 
 // Container for a list of courses
-export const CourseList = styled.div`
+export const CourseList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.sm};
   margin-top: ${({ theme }) => theme.spacing.md};
+  list-style: none;
+  padding: 0;
 `;
 
 // Styling for an individual course item
-export const CourseItem = styled.div`
+export const CourseItem = styled.li`
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
   background: ${({ theme }) => `${theme.colors.primary}10`};
   color: ${({ theme }) => theme.colors.text};
@@ -100,7 +102,7 @@ export const CourseItem = styled.div`
 `;
 
 // Main container for skills sections
-export const SkillsContainer = styled.div`
+export const SkillsContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.sm};

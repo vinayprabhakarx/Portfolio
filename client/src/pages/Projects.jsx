@@ -169,7 +169,7 @@ const Projects = memo(() => {
       </motion.div>
 
       {/* Project Cards */}
-      <Card.Grid role="main" aria-label="Projects grid">
+      <Card.Grid aria-label="Projects grid">
         {currentProjects.map((project, index) => (
           <ProjectCard
             key={project.id || `project-${index}`}

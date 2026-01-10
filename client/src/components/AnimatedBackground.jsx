@@ -127,7 +127,7 @@ const AnimatedBackground = ({
 
   if (!isDarkMode) return null;
 
-  return <Canvas ref={canvasRef} />;
+  return <Canvas ref={canvasRef} aria-hidden="true" />;
 };
 
 export default AnimatedBackground;

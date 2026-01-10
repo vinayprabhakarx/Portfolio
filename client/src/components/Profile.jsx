@@ -24,7 +24,7 @@ const ProfileSection = styled.div`
 `;
 
 // Container for the profile photo, with a decorative border/background.
-const PhotoContainer = styled.div`
+const PhotoContainer = styled.figure`
   flex-shrink: 0;
   width: 280px;
   height: 280px;

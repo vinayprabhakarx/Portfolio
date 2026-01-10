@@ -75,7 +75,7 @@ const About = () => {
             style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
           >
             {Object.entries(skills).map(([category, skillList]) => (
-              <div key={category}>
+              <section key={category}>
                 <SkillCategoryTitle>{category}</SkillCategoryTitle>
                 <div
                   style={{
@@ -115,7 +115,7 @@ const About = () => {
                     );
                   })}
                 </div>
-              </div>
+              </section>
             ))}
           </SkillsContainer>
         );

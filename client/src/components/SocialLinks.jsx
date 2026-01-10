@@ -9,7 +9,7 @@ import {
   FaTumblr,
   FaKaggle,
 } from "react-icons/fa6";
-const SocialLinksContainer = styled.div`
+const SocialLinksContainer = styled.nav`
   display: flex;
   gap: ${({ theme }) => theme.spacing.md};
   margin-bottom: ${({ theme }) => theme.spacing.md};
@@ -42,7 +42,7 @@ const SocialLinks = () => {
   ];
 
   return (
-    <SocialLinksContainer>
+    <SocialLinksContainer aria-label="Social media links">
       {socialLinks.map(({ href, icon }, index) => {
         const IconComponent = icon;
         return (

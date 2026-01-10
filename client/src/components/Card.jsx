@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 // ─── Styled Components ───
 
-const CardContainer = styled(motion.div)`
+const CardContainer = styled(motion.article)`
   background: ${({ theme }) => theme.colors.surface};
   padding: ${({ theme }) => theme.spacing.xl};
   border-radius: 20px;

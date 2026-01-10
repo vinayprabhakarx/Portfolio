@@ -9,13 +9,13 @@ export const gradientAnimation = keyframes`
 `;
 
 // Header section styling
-export const Header = styled.div`
+export const Header = styled.header`
   text-align: center;
   margin-bottom: ${({ theme }) => theme.spacing["4xl"]};
 `;
 
 // Wrapper for contact info and form, uses grid layout
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   gap: ${({ theme }) => theme.spacing["3xl"]};
@@ -34,7 +34,7 @@ export const ContentWrapper = styled.div`
 `;
 
 // Styling for the contact info card
-export const InfoCard = styled.div`
+export const InfoCard = styled.aside`
   background: ${({ theme }) => theme.colors.surface};
   padding: ${({ theme }) => theme.spacing.xl};
   border-radius: 20px;
@@ -87,7 +87,7 @@ export const InfoText = styled.p`
 `;
 
 // Container for the contact form
-export const FormSection = styled.div`
+export const FormSection = styled.section`
   background: ${({ theme }) => theme.colors.surface};
   box-shadow: 0 4px 15px ${({ theme }) => theme.shadows.small};
   border-radius: 20px;

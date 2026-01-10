@@ -157,7 +157,7 @@ const Pagination = memo(
       <>
         {/* You can render your data here, or return it via onDataChange */}
         {totalPages > 1 && (
-          <PaginationContainer>
+          <PaginationContainer aria-label="Pagination">
             <ArrowButton
               onClick={handlePrevious}
               disabled={isFirstPage}
@@ -207,7 +207,7 @@ const Pagination = memo(
 Pagination.displayName = "Pagination";
 
 // Styled components
-const PaginationContainer = styled.div`
+const PaginationContainer = styled.nav`
   display: flex;
   justify-content: center;
   gap: ${({ theme }) => theme.spacing.md};

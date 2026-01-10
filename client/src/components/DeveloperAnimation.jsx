@@ -28,6 +28,8 @@ const DeveloperAnimation = () => {
   return (
     <div
       ref={animationContainer}
+      role="img"
+      aria-label="Developer working animation"
       style={{
         width: "100%",
         maxWidth: "450px",

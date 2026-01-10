@@ -21,7 +21,7 @@ const NotFound = () => {
 };
 
 // Wrapper centers content vertically and horizontally
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   height: 65vh;
   display: flex;
   flex-direction: column;
