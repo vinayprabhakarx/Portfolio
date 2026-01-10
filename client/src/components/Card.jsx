@@ -16,8 +16,8 @@ const CardContainer = styled(motion.article)`
   transition: ${({ theme }) => theme.transitions.default};
 
   &:hover {
-    transform: translateY(-5px);
     box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+    border-color: ${({ theme }) => theme.colors.primary}80;
 
     &::before {
       opacity: 1;
@@ -28,9 +28,10 @@ const CardContainer = styled(motion.article)`
 const CardImage = styled.img`
   width: 100%;
   aspect-ratio: 16 / 9;
-  object-fit: contain;
+  object-fit: cover; /* Zoom to fill */
+  object-position: top; /* Show top of website/code */
   border-radius: 12px;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
   background: ${({ theme }) => theme.colors.background};
 `;
 
@@ -41,14 +42,14 @@ const CardImagePlaceholder = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
+  margin-bottom: ${({ theme }) => theme.spacing.xl}; /* Increased margin */
   color: ${({ theme }) => theme.colors.primary};
   font-size: 2.5rem;
 `;
 
 const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* 2 Columns for 2x2 Layout */
   gap: ${({ theme }) => theme.spacing.xl};
   margin-top: ${({ theme }) => theme.spacing.xl};
 
@@ -72,6 +73,7 @@ const CardTitle = styled.h3`
   font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
   margin-bottom: ${({ theme }) => theme.spacing.sm};
   line-height: ${({ theme }) => theme.lineHeights.tight};
+  text-align: center; /* Center Title */
 
   @media (max-width: 768px) {
     font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
@@ -84,6 +86,7 @@ const CardDescription = styled.p`
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   margin: ${({ theme }) => theme.spacing.sm} 0;
   line-height: ${({ theme }) => theme.lineHeights.relaxed};
+  text-align: center; /* Center Content */
 
   @media (max-width: 768px) {
     font-size: ${({ theme }) => theme.typography.fontSizes.lg};
@@ -92,6 +95,11 @@ const CardDescription = styled.p`
 
 const HighlightsList = styled.div`
   margin: ${({ theme }) => theme.spacing.sm} 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  text-align: left;
 `;
 
 const HighlightItem = styled.div`
@@ -113,6 +121,7 @@ const HighlightItem = styled.div`
 const TagContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center; /* Center Tags */
   gap: ${({ theme }) => theme.spacing.sm};
   margin-top: ${({ theme }) => theme.spacing.sm};
 `;

@@ -39,6 +39,7 @@ export const ProjectCardWrapper = styled.div`
 // Container for project links (e.g., GitHub, live demo).
 export const ProjectLinks = styled.div`
   display: flex;
+  justify-content: center;
   gap: ${({ theme }) => theme.spacing.md};
   margin-top: auto;
   padding-top: ${({ theme }) => theme.spacing.lg};

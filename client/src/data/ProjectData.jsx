@@ -1,6 +1,6 @@
-import blogAppImage from "../assets/projects/blog-app.png";
-import portfolio from "../assets/projects/portfolio.png";
-import plantDiseaseImage from "../assets/projects/plant.png";
+import blogAppImage from "../assets/projects/blog-app.webp";
+import portfolio from "../assets/projects/portfolio.webp";
+import plantDiseaseImage from "../assets/projects/plant.webp";
 
 export const projects = [
   {

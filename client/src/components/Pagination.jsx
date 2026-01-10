@@ -39,46 +39,26 @@ const Pagination = memo(
     );
 
     useEffect(() => {
-      if (!onDataChange) return;
-      const last = lastNotifiedRef.current;
-      const hasChanged =
-        last.page !== safeCurrentPage ||
-        last.totalItems !== totalItems ||
-        last.itemsPerPage !== safeItemsPerPage;
-
-      if (hasChanged) {
-        onDataChange(paginatedData, pageInfo);
+      // Notify parent component of data changes
+      // Prevent running on initial mount if desired, but typically we want the initial data
+      if (
+        lastNotifiedRef.current.page !== safeCurrentPage ||
+        lastNotifiedRef.current.totalItems !== totalItems ||
+        lastNotifiedRef.current.itemsPerPage !== safeItemsPerPage
+      ) {
+        onDataChange?.(paginatedData, pageInfo);
         lastNotifiedRef.current = {
           page: safeCurrentPage,
           totalItems,
           itemsPerPage: safeItemsPerPage,
         };
       }
-    }, [
-      onDataChange,
-      paginatedData,
-      pageInfo,
-      safeCurrentPage,
-      totalItems,
-      safeItemsPerPage,
-    ]);
+    }, [safeCurrentPage, totalItems, safeItemsPerPage, onDataChange, paginatedData, pageInfo]);
 
-    // Always call onDataChange on mount to ensure initial data is provided
-    useEffect(() => {
-      if (onDataChange && lastNotifiedRef.current.page === 0) {
-        onDataChange(paginatedData, pageInfo);
-        lastNotifiedRef.current = {
-          page: safeCurrentPage,
-          totalItems,
-          itemsPerPage: safeItemsPerPage,
-        };
-      }
-    }, []);
-
-    const createEllipsis = (targetPage) => ({
+    const createEllipsis = useCallback((targetPage) => ({
       type: "ellipsis",
       targetPage: Math.min(Math.max(targetPage, 1), totalPages),
-    });
+    }), [totalPages]);
 
     const pageNumbers = useMemo(() => {
       if (totalPages <= safeMaxVisiblePages) {
@@ -119,7 +99,7 @@ const Pagination = memo(
       }
 
       return pages;
-    }, [safeCurrentPage, totalPages, safeMaxVisiblePages]);
+    }, [safeCurrentPage, totalPages, safeMaxVisiblePages, createEllipsis]);
 
     const handlePageClick = useCallback(
       (page) => {
