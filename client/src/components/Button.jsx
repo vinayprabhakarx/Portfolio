@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 // Container for a group of tab buttons
 export const TabContainer = styled.div`
@@ -10,16 +11,17 @@ export const TabContainer = styled.div`
 `;
 
 // Styled button component for tabs
-const Button = styled.button`
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
+const Button = styled(motion.button)`
+  padding: 0.75rem 1.5rem; /* Match Resume Button padding */
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
-  border: 0.1px solid ${({ theme }) => theme.colors.border};
+  border: none; /* Remove border to match Resume Button */
   border-radius: 25px;
   background: ${({ $active, theme }) =>
     $active ? theme.gradients.primary : theme.gradients.primaryTransparent};
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme, $active }) =>
+    $active ? "white" : theme.colors.text}; /* White text when active */
   transition: ${({ theme }) => theme.transitions.default};
   user-select: none;
   outline: none;
@@ -35,6 +37,7 @@ const Button = styled.button`
   &:hover {
     background: ${({ theme }) => theme.gradients.primaryHover};
     color: ${({ theme }) => theme.colors.secondary};
+    transform: scale(1.05); /* CSS Scale fallback */
     &::before {
       opacity: 1;
     }

@@ -22,6 +22,8 @@ import {
   SkillsContainer,
   SkillName,
   SkillCategoryTitle,
+  SkillTag,
+  SkillTags,
 } from "../styles/AboutStyles";
 
 const About = () => {
@@ -92,44 +94,28 @@ const About = () => {
             {Object.entries(skills).map(([category, skillList]) => (
               <section key={category}>
                 <SkillCategoryTitle>{category}</SkillCategoryTitle>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns:
-                      "repeat(auto-fill, minmax(220px, 1fr))",
-                    gap: "1.5rem",
-                  }}
-                >
+                <SkillTags>
                   {skillList.map((skill, index) => {
                     const Icon = skill.icon;
                     return (
-                      <Card
+                      <SkillTag
                         key={index}
                         as={motion.div}
-                        initial={{ y: 20 }}
-                        animate={{ y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.05 }}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: index * 0.05 }}
                         style={{
-                          padding: "0.75rem",
                           display: "flex",
-                          gap: "0.75rem",
-                          alignItems: "flex-start",
-                          maxWidth: "350px",
+                          alignItems: "center",
+                          gap: "0.5rem",
                         }}
                       >
-                        {Icon && (
-                          <Icon size={28} color={theme.colors.primary} />
-                        )}
-                        <div>
-                          <SkillName style={{ fontWeight: 600 }}>
-                            {skill.name}
-                          </SkillName>
-                          {skill.details}
-                        </div>
-                      </Card>
+                        {Icon && <Icon size={26} />}
+                        {skill.name}
+                      </SkillTag>
                     );
                   })}
-                </div>
+                </SkillTags>
               </section>
             ))}
           </SkillsContainer>
@@ -159,7 +145,12 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * index, duration: 0.4 }}
           >
-            <Button $active={activeTab === id} onClick={() => handleTabClick(id)}>
+            <Button
+              $active={activeTab === id}
+              onClick={() => handleTabClick(id)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <Icon /> {label}
             </Button>
           </motion.div>

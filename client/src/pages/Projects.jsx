@@ -99,6 +99,8 @@ const CategoryTab = memo(({ category, isActive, onClick, index }) => {
         onClick={onClick}
         aria-pressed={isActive}
         role="tab"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
         {formatted}
       </Button>

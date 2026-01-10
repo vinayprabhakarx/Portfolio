@@ -16,7 +16,7 @@
     "test": "echo \"Add test runner here, e.g., 'vitest --run'\" && exit 0"
   },
   "dependencies": {
-    "framer-motion": "^12.16.0",
+    "framer-motion": "^12.25.0",
     "lottie-web": "^5.13.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

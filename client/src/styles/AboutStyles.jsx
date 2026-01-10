@@ -69,15 +69,17 @@ export const SkillTags = styled.div`
 export const SkillTag = styled.span`
   background: ${({ theme }) => `${theme.colors.primary}20`};
   color: ${({ theme }) => theme.colors.primary};
-  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-  border-radius: 15px;
-  font-size: ${({ theme }) => theme.typography.fontSizes.base};
+  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
+  border-radius: 25px;
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  white-space: nowrap;
+  flex-shrink: 0;
 
   @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-    padding: ${({ theme }) => theme.spacing.xs}
-      ${({ theme }) => theme.spacing.sm};
+    font-size: ${({ theme }) => theme.typography.fontSizes.base};
+    padding: ${({ theme }) => theme.spacing.sm}
+      ${({ theme }) => theme.spacing.lg};
   }
 `;
 
