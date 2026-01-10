@@ -7,32 +7,22 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Vendor chunks
-          vendor: [
-            "react",
-            "react-dom",
-            "react-router-dom",
-            "styled-components",
-          ],
+          manualChunks: {
+            // Vendor chunks (Core optimized)
+            vendor: [
+              "react",
+              "react-dom",
+              "react-router-dom",
+              "styled-components",
+            ],
 
-          // Third-party libraries
-          "lottie-web": ["lottie-web"],
-          "framer-motion": ["framer-motion"],
-          "react-icons": ["react-icons"],
-
-          // Custom chunks Loading Component
-          loading: ["./src/components/Loading.jsx"],
-
-          // Custom chunks for pages
-          hero: ["./src/pages/Hero.jsx"],
-          about: ["./src/pages/About.jsx"],
-          projects: ["./src/pages/Projects.jsx"],
-          contact: ["./src/pages/Contact.jsx"],
-          resume: ["./src/pages/Resume.jsx"],
+            // Heavy libraries separated for caching
+            "lottie-web": ["lottie-web"],
+            "framer-motion": ["framer-motion"],
+            "react-icons": ["react-icons"],
+          },
         },
       },
-    },
     chunkSizeWarningLimit: 500,
     minify: true,
     terserOptions: {

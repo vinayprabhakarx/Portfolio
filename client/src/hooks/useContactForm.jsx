@@ -293,7 +293,7 @@ export const useContactForm = () => {
         }, CONFIG.MESSAGE_DISMISS_TIME);
       }
     },
-    [CONFIG.MESSAGE_DISMISS_TIME]
+    []
   );
 
   // Handle form submission
