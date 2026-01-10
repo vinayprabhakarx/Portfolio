@@ -8,7 +8,10 @@ const FooterContainer = styled.footer`
   background: ${({ theme }) => theme.colors.background};
   border-top: 1px solid ${({ theme }) => theme.colors.border};
   text-align: center;
-  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
 `;
 
 // Styling for a tagline within the footer.

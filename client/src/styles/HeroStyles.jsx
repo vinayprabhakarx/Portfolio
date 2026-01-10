@@ -1,5 +1,9 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { motion } from "framer-motion";
+import {
+  gradientAnimation,
+  waveAnimation,
+} from "./animations";
 
 // Wrapper for the main content within Hero section
 export const ContentWrapper = styled.section`
@@ -31,33 +35,20 @@ export const ContentWrapper = styled.section`
   }
 `;
 
-// Helper to create keyframe animations
-const createAnimation = (keyframesDef) => keyframes`${keyframesDef}`;
+// Wrapper for the entire Hero section
+export const HeroContainer = styled.div`
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
 
-// Animation for floating elements
-export const floatAnimation = createAnimation`
-  0% { transform: translateY(0px) rotate(0deg); background-position: 0 50%; }
-  50% { transform: translateY(-20px) rotate(5deg); background-position: 100% 50%; }
-  100% { transform: translateY(0px) rotate(0deg); background-position: 0 50%; }
-`;
-
-// Animation for gradient backgrounds
-export const gradientAnimation = createAnimation`
-  0% { background-position: 0 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0 50%; }
-`;
-
-// Animation for a waving hand gesture
-export const waveAnimation = createAnimation`
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(24deg); }
-  20% { transform: rotate(-18deg); }
-  30% { transform: rotate(24deg); }
-  40% { transform: rotate(-14deg); }
-  50% { transform: rotate(20deg); }
-  60% { transform: rotate(0deg); }
-  100% { transform: rotate(0deg); }
+  @media (max-width: 768px) {
+    padding: 2rem 0;
+  }
 `;
 
 // Background animation for the Hero section

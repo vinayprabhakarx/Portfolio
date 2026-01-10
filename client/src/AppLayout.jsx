@@ -18,6 +18,7 @@ const AppWrapper = styled.div`
 // Styled main content wrapper
 const MainContent = styled.main`
   padding-top: 70px;
+  padding-bottom: 60px; /* Space for Fixed Footer */
   flex: 1;
   width: 100%;
   display: flex;

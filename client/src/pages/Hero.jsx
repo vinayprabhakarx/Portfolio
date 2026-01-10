@@ -55,7 +55,7 @@ const Hero = () => (
         >
           blog
         </a>{" "}
-        for insights, and feel free to reach out.
+        and feel free to reach out.
       </Description>
 
       <Link to="/contact" style={{ textDecoration: "none" }}>

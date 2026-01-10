@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiMoon, FiSun } from "react-icons/fi";
-import { useTheme } from "../contexts/ThemeContext";
+import { useTheme } from "../hooks/useTheme";
 import logo from "../assets/logo.svg";
 
 const Navbar = () => {
@@ -54,7 +54,7 @@ const Navbar = () => {
       { path: "/", label: "Home", internal: true },
       { path: "/about", label: "About", internal: true },
       { path: "/projects", label: "Projects", internal: true },
-      // { path: "/resume", label: "Resume", internal: true },
+      { path: "/resume", label: "Resume", internal: true },
       {
         path: "https://blog.vinayprabhakar.dev",
         label: "Blog",
@@ -209,7 +209,7 @@ const NavContainer = styled.nav`
 const NavContent = styled.div`
   max-width: 1600px;
   margin: 0 auto;
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing.md} clamp(1rem, 3vw, 2rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -264,7 +264,7 @@ const LogoName = styled.span`
 
 const DesktopNav = styled.div`
   display: none;
-  gap: ${({ theme }) => theme.spacing["2xl"]};
+  gap: clamp(1.5rem, 3vw, 3rem);
   align-items: center;
   @media (min-width: 775px) {
     display: flex;
