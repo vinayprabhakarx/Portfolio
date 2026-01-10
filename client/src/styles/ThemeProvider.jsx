@@ -1,8 +1,6 @@
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
-import {
-  ThemeProvider as CustomThemeProvider,
-  useTheme,
-} from "../contexts/ThemeContext.jsx";
+import { ThemeProvider as CustomThemeProvider } from "../contexts/ThemeProvider.jsx";
+import { useTheme } from "../hooks/useTheme";
 import GlobalStyle from "./GlobalStyles.jsx";
 import Theme from "./Theme.jsx";
 
