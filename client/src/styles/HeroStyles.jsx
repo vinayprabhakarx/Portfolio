@@ -123,6 +123,9 @@ export const GradientName = styled.h1`
 
 // Container for typewriter effect text
 export const TypewriterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: ${({ theme }) => theme.typography.fontSizes["3xl"]};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   color: ${({ theme }) => theme.colors.text};
@@ -135,6 +138,7 @@ export const TypewriterContainer = styled.div`
 
   @media (max-width: 768px) {
     font-size: ${({ theme }) => theme.typography.fontSizes.xl};
+    justify-content: center;
   }
 `;
 

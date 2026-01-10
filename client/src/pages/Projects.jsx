@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, memo, useEffect } from "react";
+import { useState, useMemo, useCallback, memo, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt, FaCode } from "react-icons/fa";
 import Button from "../components/Button";
@@ -113,6 +113,7 @@ const Projects = memo(() => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [currentProjects, setCurrentProjects] = useState([]);
+  const projectsGridRef = useRef(null);
 
   // Filtered list based on category
   const filteredProjects = useMemo(() => {
@@ -131,10 +132,28 @@ const Projects = memo(() => {
   const handleCategoryChange = useCallback((category) => {
     setSelectedCategory(category);
     setCurrentPage(1); // Reset to page 1
+    // Scroll to projects grid after a short delay
+    setTimeout(() => {
+      if (projectsGridRef.current) {
+        const navbarHeight = 80; // Account for fixed navbar + padding
+        const elementPosition = projectsGridRef.current.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - navbarHeight;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      }
+    }, 100);
   }, []);
 
   const handlePageChange = useCallback((page) => {
     setCurrentPage(page);
+    // Scroll to projects grid after a short delay
+    setTimeout(() => {
+      if (projectsGridRef.current) {
+        const navbarHeight = 80;
+        const elementPosition = projectsGridRef.current.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - navbarHeight;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      }
+    }, 100);
   }, []);
 
   const categoryHandlers = useMemo(() => {
@@ -169,7 +188,7 @@ const Projects = memo(() => {
       </motion.div>
 
       {/* Project Cards */}
-      <Card.Grid aria-label="Projects grid">
+      <Card.Grid ref={projectsGridRef} aria-label="Projects grid">
         {currentProjects.map((project, index) => (
           <ProjectCard
             key={project.id || `project-${index}`}

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { FaGraduationCap, FaBriefcase, FaCode } from "react-icons/fa";
 import profilePhoto from "../assets/photo.png";
@@ -27,6 +27,21 @@ import {
 const About = () => {
   const theme = useTheme();
   const [activeTab, setActiveTab] = useState("experience");
+  const tabContentRef = useRef(null);
+
+  // Handle tab click with scroll
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+    // Scroll to tab content after a short delay to allow content to render
+    setTimeout(() => {
+      if (tabContentRef.current) {
+        const navbarHeight = 80; // Account for fixed navbar + some padding
+        const elementPosition = tabContentRef.current.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - navbarHeight;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      }
+    }, 100);
+  };
 
   const tabs = [
     { id: "experience", icon: FaBriefcase, label: "Experience" },
@@ -144,14 +159,14 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * index, duration: 0.4 }}
           >
-            <Button $active={activeTab === id} onClick={() => setActiveTab(id)}>
+            <Button $active={activeTab === id} onClick={() => handleTabClick(id)}>
               <Icon /> {label}
             </Button>
           </motion.div>
         ))}
       </Button.TabContainer>
 
-      <TabContent>{renderTabContent()}</TabContent>
+      <TabContent ref={tabContentRef}>{renderTabContent()}</TabContent>
     </Container>
   );
 };

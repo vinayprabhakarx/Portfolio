@@ -33,9 +33,10 @@ const Hero = () => (
       <GradientName>Vinay Prabhakar</GradientName>
 
       <TypewriterContainer>
+        A{" "}
         <Typewriter
           options={{
-            strings: ["Web Developer"],
+            strings: ["Web Developer", "Problem Solver"],
             autoStart: true,
             loop: true,
             deleteSpeed: 50,
