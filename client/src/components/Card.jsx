@@ -14,6 +14,8 @@ const CardContainer = styled(motion.article)`
   position: relative;
   z-index: 1;
   transition: ${({ theme }) => theme.transitions.default};
+  max-width: 90%; /* Restrict card width */
+  margin: 0 auto; /* Center card in grid cell */
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
@@ -26,23 +28,23 @@ const CardContainer = styled(motion.article)`
 `;
 
 const CardImage = styled.img`
-  width: 100%;
-  aspect-ratio: 16 / 9;
+  width: 100%; /* Revert to full width */
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
+  aspect-ratio: 2 / 1;
   object-fit: cover; /* Zoom to fill */
   object-position: top; /* Show top of website/code */
   border-radius: 12px;
-  margin-bottom: ${({ theme }) => theme.spacing.xl};
   background: ${({ theme }) => theme.colors.background};
 `;
 
 const CardImagePlaceholder = styled.div`
-  width: 100%;
-  aspect-ratio: 16 / 9;
+  width: 100%; /* Revert to full width */
+  aspect-ratio: 2 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  margin-bottom: ${({ theme }) => theme.spacing.xl}; /* Increased margin */
+  margin-bottom: ${({ theme }) => theme.spacing.sm}; /* Reduced margin */
   color: ${({ theme }) => theme.colors.primary};
   font-size: 2.5rem;
 `;
