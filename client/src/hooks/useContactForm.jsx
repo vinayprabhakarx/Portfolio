@@ -4,7 +4,8 @@ import { CONFIG } from "../config/contactConfig";
 
 // Validation utilities
 const validateEmail = (email) => {
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  // Use a permissive regex to ensure valid emails
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
 
