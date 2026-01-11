@@ -31,6 +31,7 @@ const Contact = () => {
     validationErrors,
     formFields,
     handleChange,
+    handleBlur,
     handleSubmit,
   } = useContactForm();
 
@@ -97,6 +98,7 @@ const Contact = () => {
                     name={name}
                     value={formData[name]}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     required
                     disabled={status.submitting}
                     autoComplete={autoComplete}
@@ -136,6 +138,7 @@ const Contact = () => {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 required
                 rows="6"
                 disabled={status.submitting}

@@ -39,6 +39,30 @@ const validateForm = (formData) => {
   return errors;
 };
 
+const validateField = (name, value) => {
+  const trimmedValue = value?.trim() || "";
+  
+  // If empty, no validation error for individual field constraints
+  // (Required check is handled separately in form submission)
+  if (!trimmedValue) return null;
+
+  switch (name) {
+    case "userName":
+      if (trimmedValue.length < 2) return "Name must be at least 2 characters";
+      break;
+    case "email":
+      if (!validateEmail(trimmedValue)) return "Please enter a valid email address";
+      break;
+    case "subject":
+      if (trimmedValue.length < 3) return "Subject must be at least 3 characters";
+      break;
+    case "message":
+      if (trimmedValue.length < 10) return "Message must be at least 10 characters";
+      break;
+  }
+  return null;
+};
+
 // HTTP client with timeout and retry logic
 const httpClient = {
   async post(url, data, options = {}) {
@@ -262,6 +286,22 @@ export const useContactForm = () => {
     [validationErrors]
   );
 
+  // Handle input blur (validate field if not empty)
+  const handleBlur = useCallback((e) => {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+
+    setValidationErrors((prev) => {
+      const newErrors = { ...prev };
+      if (error) {
+        newErrors[name] = error;
+      } else {
+        delete newErrors[name];
+      }
+      return newErrors;
+    });
+  }, []);
+
   // Reset form
   const resetForm = useCallback(() => {
     setFormData({
@@ -398,6 +438,7 @@ export const useContactForm = () => {
     validationErrors,
     formFields,
     handleChange,
+    handleBlur,
     handleSubmit,
   };
 };

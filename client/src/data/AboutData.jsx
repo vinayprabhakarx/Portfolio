@@ -1,5 +1,6 @@
 import {
   FaPython,
+  FaJava,
   FaJsSquare,
   FaHtml5,
   FaCss3Alt,
@@ -70,6 +71,10 @@ export const skills = {
     {
       name: "Python",
       icon: FaPython,
+    },
+    {
+      name: "Java",
+      icon: FaJava,
     },
     {
       name: "JavaScript",
