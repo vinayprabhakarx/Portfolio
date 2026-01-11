@@ -4,8 +4,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SocialLinks from "../components/SocialLinks";
 import Container from "../components/Container";
+import Button from "../components/Button";
 import GradientTitle from "../components/GradientTitle";
 import { useContactForm } from "../hooks/useContactForm";
+import { useTheme } from "styled-components";
 import {
   Header,
   ContentWrapper,
@@ -19,10 +21,10 @@ import {
   FormLabel,
   FormInput,
   FormTextarea,
-  SubmitButton,
 } from "../styles/ContactStyles";
 
 const Contact = () => {
+  const theme = useTheme();
   const {
     formData,
     status,
@@ -87,7 +89,7 @@ const Contact = () => {
               ({ name, type, label, autoComplete, maxLength }) => (
                 <FormGroup key={name}>
                   <FormLabel htmlFor={name}>
-                    {label} <span style={{ color: "#ef4444" }}>*</span>
+                    {label} <span style={{ color: theme.colors.error }}>*</span>
                   </FormLabel>
                   <FormInput
                     type={type}
@@ -101,7 +103,7 @@ const Contact = () => {
                     maxLength={maxLength}
                     style={{
                       borderColor: validationErrors[name]
-                        ? "#ef4444"
+                        ? theme.colors.error
                         : undefined,
                     }}
                     aria-invalid={!!validationErrors[name]}
@@ -113,7 +115,7 @@ const Contact = () => {
                     <div
                       id={`${name}-error`}
                       style={{
-                        color: "#ef4444",
+                        color: theme.colors.error,
                         fontSize: "0.875rem",
                         marginTop: "0.25rem",
                       }}
@@ -127,7 +129,7 @@ const Contact = () => {
 
             <FormGroup>
               <FormLabel htmlFor="message">
-                Message <span style={{ color: "#ef4444" }}>*</span>
+                Message <span style={{ color: theme.colors.error }}>*</span>
               </FormLabel>
               <FormTextarea
                 id="message"
@@ -140,7 +142,7 @@ const Contact = () => {
                 autoComplete="off"
                 maxLength={2000}
                 style={{
-                  borderColor: validationErrors.message ? "#ef4444" : undefined,
+                  borderColor: validationErrors.message ? theme.colors.error : undefined,
                 }}
                 aria-invalid={!!validationErrors.message}
                 aria-describedby={
@@ -151,7 +153,7 @@ const Contact = () => {
                 <div
                   id="message-error"
                   style={{
-                    color: "#ef4444",
+                    color: theme.colors.error,
                     fontSize: "0.875rem",
                     marginTop: "0.25rem",
                   }}
@@ -162,7 +164,7 @@ const Contact = () => {
               <div
                 style={{
                   fontSize: "0.75rem",
-                  color: "#6b7280",
+                  color: theme.colors.textSecondary,
                   marginTop: "0.25rem",
                 }}
               >
@@ -170,12 +172,11 @@ const Contact = () => {
               </div>
             </FormGroup>
 
-            <SubmitButton
+            <Button
               type="submit"
               disabled={status.submitting}
-              whileHover={status.submitting ? {} : { scale: 1.02 }}
-              whileTap={status.submitting ? {} : { scale: 0.98 }}
               style={{
+                width: "100%",
                 opacity: status.submitting ? 0.7 : 1,
                 cursor: status.submitting ? "not-allowed" : "pointer",
               }}
@@ -187,7 +188,7 @@ const Contact = () => {
                   Send Message <FaPaperPlane style={{ marginLeft: "8px" }} />
                 </>
               )}
-            </SubmitButton>
+            </Button>
           </ContactForm>
         </FormSection>
       </ContentWrapper>

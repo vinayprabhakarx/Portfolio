@@ -194,44 +194,7 @@ export const FormTextarea = styled.textarea`
   }
 `;
 
-// Styling for the form submission button
-export const SubmitButton = styled(motion.button)`
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
-  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-  font-family: ${({ theme }) => theme.typography.fontFamily};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
-  border: none;
-  border-radius: 25px;
-  background: ${({ theme }) => theme.gradients.primary};
-  color: white;
-  cursor: pointer;
-  transition: ${({ theme }) => theme.transitions.default};
-  width: 100%;
-  outline: none;
-  display: inline-block;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
 
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-    padding: ${({ theme }) => theme.spacing.sm}
-      ${({ theme }) => theme.spacing.lg};
-  }
-
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-
-  svg {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-  }
-
-  &:hover:not(:disabled) {
-    background: ${({ theme }) => theme.gradients.primaryHover};
-    color: ${({ theme }) => theme.colors.secondary};
-  }
-`;
 
 // Reusable styles for status messages
 const messageStyles = `

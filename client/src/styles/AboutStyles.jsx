@@ -67,20 +67,14 @@ export const SkillTags = styled.div`
 
 // Styling for an individual skill tag
 export const SkillTag = styled.span`
-  background: ${({ theme }) => `${theme.colors.primary}20`};
+  background: ${({ theme }) => theme.gradients.primaryTransparent};
   color: ${({ theme }) => theme.colors.primary};
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
   border-radius: 25px;
-  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+  font-size: ${({ theme }) => theme.typography.fontSizes.base};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   white-space: nowrap;
   flex-shrink: 0;
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-    padding: ${({ theme }) => theme.spacing.sm}
-      ${({ theme }) => theme.spacing.lg};
-  }
 `;
 
 // Container for a list of courses

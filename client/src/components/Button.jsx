@@ -11,38 +11,59 @@ export const TabContainer = styled.div`
 `;
 
 // Styled button component for tabs
-const Button = styled(motion.button)`
-  padding: 0.75rem 1.5rem; /* Match Resume Button padding */
-  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+const StyledButton = styled(motion.button)`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
   font-family: ${({ theme }) => theme.typography.fontFamily};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
-  border: none; /* Remove border to match Resume Button */
+  font-weight: 600;
+  border: none;
   border-radius: 25px;
-  background: ${({ $active, theme }) =>
+  background: ${({ $active = true, theme }) =>
     $active ? theme.gradients.primary : theme.gradients.primaryTransparent};
-  color: ${({ theme, $active }) =>
-    $active ? "white" : theme.colors.text}; /* White text when active */
-  transition: ${({ theme }) => theme.transitions.default};
+  color: ${({ $active = true, theme }) =>
+    $active ? "white" : theme.colors.text};
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
   user-select: none;
   outline: none;
-  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-    padding: ${({ theme }) => theme.spacing.sm}
-      ${({ theme }) => theme.spacing.lg};
-  }
 
   &:hover {
     background: ${({ theme }) => theme.gradients.primaryHover};
-    color: ${({ theme }) => theme.colors.secondary};
-    transform: scale(1.05); /* CSS Scale fallback */
-    &::before {
-      opacity: 1;
-    }
+    color: ${({ theme, $active = true }) => 
+        !$active ? theme.colors.secondary : "white"};
+    /* transform handled by framer-motion */
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
   }
 `;
+
+const Button = ({ children, ...props }) => {
+  return (
+    <StyledButton
+      whileHover={{ scale: 1.05, y: -2 }}
+      whileTap={{ scale: 0.95 }}
+      {...props}
+    >
+      {children}
+    </StyledButton>
+  );
+};
 
 Button.TabContainer = TabContainer;
 export default Button;

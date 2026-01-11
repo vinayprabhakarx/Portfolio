@@ -5,6 +5,7 @@ import { FaDownload } from "react-icons/fa6";
 import { Document, Page, pdfjs } from "react-pdf";
 import GradientTitle from "../components/GradientTitle";
 import Container from "../components/Container";
+import Button from "../components/Button";
 import resumePdf from "../assets/resume.pdf";
 
 // Set up PDF.js worker using local bundled worker
@@ -18,28 +19,7 @@ const ResumeContainer = styled.div`
   gap: ${({ theme }) => theme.spacing.xl};
 `;
 
-const DownloadBtn = styled(motion.a)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-  background: ${({ theme }) => theme.gradients.primary};
-  border: none;
-  border-radius: 25px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  max-width: 250px;
-  
-  &:hover {
-    background: ${({ theme }) => theme.gradients.primaryHover};
-    transform: translateY(-2px);
-  }
-`;
+
 
 const ResumeWrapper = styled.div`
   display: flex;
@@ -59,7 +39,7 @@ const ResumeWrapper = styled.div`
   }
   
   .react-pdf__Page {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: ${({ theme }) => theme.shadows.large};
     border-radius: 8px;
     overflow: hidden;
   }
@@ -76,9 +56,9 @@ const LoadingContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: white;
+  background: ${({ theme }) => theme.colors.surface};
   border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: ${({ theme }) => theme.shadows.large};
   
   /* Responsive sizing - use 90% of viewport width up to max */
   width: 90vw;
@@ -122,16 +102,15 @@ const Resume = () => {
       <GradientTitle>Resume</GradientTitle>
       <ResumeContainer>
         {/* Download Button - Top */}
-        <DownloadBtn
+        <Button
+          as={motion.a}
           href={resumePdf}
           target="_blank"
           rel="noopener noreferrer"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
         >
           <FaDownload size={16} />
           Download CV
-        </DownloadBtn>
+        </Button>
 
         {/* PDF Viewer */}
         <ResumeWrapper>

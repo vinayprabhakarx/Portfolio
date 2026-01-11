@@ -11,6 +11,7 @@ import {
   FaDocker,
   FaDatabase,
   FaLinux,
+  FaBrain,
 } from "react-icons/fa";
 import {
   SiMongodb,
@@ -26,6 +27,11 @@ import {
   SiCloudflare,
   SiDigitalocean,
   SiNginx,
+  SiTailwindcss,
+  SiRedux,
+  SiVite,
+  SiKeras,
+  SiJsonwebtokens,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 
@@ -95,6 +101,14 @@ export const skills = {
       name: "Streamlit",
       icon: SiStreamlit,
     },
+    {
+      name: "Keras",
+      icon: SiKeras,
+    },
+    {
+      name: "Deep Learning",
+      icon: FaBrain,
+    },
   ],
   "Web Development": [
     {
@@ -116,6 +130,22 @@ export const skills = {
     {
       name: "Express.js",
       icon: SiExpress,
+    },
+    {
+      name: "Tailwind CSS",
+      icon: SiTailwindcss,
+    },
+    {
+      name: "Redux Toolkit",
+      icon: SiRedux,
+    },
+    {
+      name: "Vite",
+      icon: SiVite,
+    },
+    {
+      name: "JWT",
+      icon: SiJsonwebtokens,
     },
   ],
   Databases: [

@@ -153,44 +153,7 @@ export const Description = styled.p`
   }
 `;
 
-// Call-to-action button, animated with Framer Motion
-export const CTAButton = styled(motion.button)`
-  padding: ${({ theme }) => theme.spacing.md}
-    ${({ theme }) => theme.spacing["2xl"]};
-  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
-  font-family: ${({ theme }) => theme.typography.fontFamily};
-  border: none;
-  border-radius: 25px;
-  background: ${({ theme }) => theme.gradients.primary};
-  color: white;
-  cursor: pointer;
-  transition: ${({ theme }) => theme.transitions.default};
-  display: inline-block;
-  user-select: none;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
 
-  &:hover {
-    background: ${({ theme }) => theme.gradients.primaryHover};
-    color: ${({ theme }) => theme.colors.secondary};
-  }
-
-  svg {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-  }
-
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-
-  @media (max-width: 768px) {
-    padding: ${({ theme }) => theme.spacing.sm}
-      ${({ theme }) => theme.spacing.xl};
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-  }
-`;
 
 // Right section of the Hero content, animated with Framer Motion
 export const RightSection = styled(motion.div)`

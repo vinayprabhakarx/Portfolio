@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import Typewriter from "typewriter-effect";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   BackgroundAnimation,
   ContentWrapper,
@@ -9,7 +10,6 @@ import {
   GradientName,
   TypewriterContainer,
   Description,
-  CTAButton,
   RightSection,
   Wave,
 } from "../styles/HeroStyles";
@@ -17,6 +17,8 @@ import {
 const DeveloperAnimation = React.lazy(() =>
   import("../components/DeveloperAnimation")
 );
+
+import Button from "../components/Button";
 
 const Hero = () => (
   <ContentWrapper role="banner">
@@ -59,9 +61,9 @@ const Hero = () => (
       </Description>
 
       <Link to="/contact" style={{ textDecoration: "none" }}>
-        <CTAButton whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <Button as={motion.button}>
           Get in Touch
-        </CTAButton>
+        </Button>
       </Link>
     </LeftSection>
 

@@ -110,7 +110,7 @@ const About = () => {
                           gap: "0.5rem",
                         }}
                       >
-                        {Icon && <Icon size={26} />}
+                        {Icon && <Icon size={20} />}
                         {skill.name}
                       </SkillTag>
                     );
@@ -148,8 +148,6 @@ const About = () => {
             <Button
               $active={activeTab === id}
               onClick={() => handleTabClick(id)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               <Icon /> {label}
             </Button>

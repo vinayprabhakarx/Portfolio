@@ -131,15 +131,19 @@ const TagContainer = styled.div`
 const Tag = styled.span`
   background: ${({ theme }) => theme.gradients.primaryTransparent};
   color: ${({ theme }) => theme.colors.primary};
-  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-  border-radius: 12px;
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
+  border-radius: 25px; /* Match SkillTag */
   font-size: ${({ theme }) => theme.typography.fontSizes.base};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: ${({ theme }) => theme.transitions.default};
 
   @media (max-width: 768px) {
     font-size: ${({ theme }) => theme.typography.fontSizes.sm};
     padding: ${({ theme }) => theme.spacing.xs}
-      ${({ theme }) => theme.spacing.sm};
+      ${({ theme }) => theme.spacing.md};
   }
 `;
 

@@ -12,47 +12,65 @@ import {
   ProjectCardWrapper,
 } from "../styles/ProjectStyles";
 import { projects, categories } from "../data/ProjectData";
+import { skills } from "../data/AboutData";
 
-// Animated Project Card
-const ProjectCard = memo(({ project, index }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-    style={{ height: "100%" }}
-  >
-    <ProjectCardWrapper>
-      <Card
-        key={project.id || index}
-        style={{ height: "100%", display: "flex", flexDirection: "column" }}
-      >
-        {project.image ? (
-          <Card.Image src={project.image} alt={project.title} />
-        ) : (
-          <Card.ImagePlaceholder>
-            <FaCode />
-          </Card.ImagePlaceholder>
-        )}
-        <Card.Title>{project.title}</Card.Title>
-        <Card.Description>{project.description}</Card.Description>
+const ProjectCard = memo(({ project, index }) => {
+  // Create a flattened map of skill name -> icon
+  const iconMap = useMemo(() => {
+    const map = {};
+    Object.values(skills)
+      .flat()
+      .forEach((skill) => {
+        map[skill.name] = skill.icon;
+      });
+    return map;
+  }, []);
 
-        {project.highlights?.length > 0 && (
-          <Card.HighlightsList>
-            {project.highlights.map((highlight, hIndex) => (
-              <Card.HighlightItem key={`highlight-${index}-${hIndex}`}>
-                • {highlight}
-              </Card.HighlightItem>
-            ))}
-          </Card.HighlightsList>
-        )}
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      style={{ height: "100%" }}
+    >
+      <ProjectCardWrapper>
+        <Card
+          key={project.id || index}
+          style={{ height: "100%", display: "flex", flexDirection: "column" }}
+        >
+          {project.image ? (
+            <Card.Image src={project.image} alt={project.title} />
+          ) : (
+            <Card.ImagePlaceholder>
+              <FaCode />
+            </Card.ImagePlaceholder>
+          )}
+          <Card.Title>{project.title}</Card.Title>
+          <Card.Description>{project.description}</Card.Description>
 
-        <Card.TagContainer>
-          {project.tags.map((tag, tagIndex) => (
-            <Card.Tag key={`tag-${index}-${tagIndex}`}>{tag}</Card.Tag>
-          ))}
-        </Card.TagContainer>
+          {project.highlights?.length > 0 && (
+            <Card.HighlightsList>
+              {project.highlights.map((highlight, hIndex) => (
+                <Card.HighlightItem key={`highlight-${index}-${hIndex}`}>
+                  • {highlight}
+                </Card.HighlightItem>
+              ))}
+            </Card.HighlightsList>
+          )}
 
-        <ProjectLinks>
+          <Card.TagContainer>
+            {project.tags.map((tag, tagIndex) => {
+              const Icon = iconMap[tag];
+              return (
+                <Card.Tag key={`tag-${index}-${tagIndex}`}>
+                  {Icon && <Icon size={16} />}
+                  {tag}
+                </Card.Tag>
+              );
+            })}
+          </Card.TagContainer>
+
+          <ProjectLinks>
           {project.github && (
             <ProjectLink
               href={project.github}
@@ -77,7 +95,8 @@ const ProjectCard = memo(({ project, index }) => (
       </Card>
     </ProjectCardWrapper>
   </motion.div>
-));
+  );
+});
 
 ProjectCard.displayName = "ProjectCard";
 
@@ -99,8 +118,6 @@ const CategoryTab = memo(({ category, isActive, onClick, index }) => {
         onClick={onClick}
         aria-pressed={isActive}
         role="tab"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
       >
         {formatted}
       </Button>
