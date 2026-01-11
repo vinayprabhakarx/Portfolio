@@ -42,10 +42,10 @@ const PhotoContainer = styled.figure`
     border-radius: 20px;
     padding: 4px;
     background: ${({ theme }) => theme.gradients.primary};
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(${({ theme }) => theme.colors.white} 0 0) content-box, linear-gradient(${({ theme }) => theme.colors.white} 0 0);
     mask-composite: exclude;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(${({ theme }) => theme.colors.white} 0 0) content-box,
+      linear-gradient(${({ theme }) => theme.colors.white} 0 0);
     -webkit-mask-composite: xor;
     will-change: transform;
   }

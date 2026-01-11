@@ -78,38 +78,48 @@ const GlobalStyle = createGlobalStyle`
   .Toastify__toast {
     font-family: ${typography.fontFamily};
     border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background: ${({ theme }) => theme.colors.toastBackground} !important;
+    border: 1px solid ${({ theme }) => theme.colors.toastBorder};
+    box-shadow: ${({ theme }) => theme.shadows.large};
   }
 
   .Toastify__toast--success {
-    background: ${({ theme }) => theme.gradients.primary};
+    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
   }
 
   .Toastify__toast--error {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    box-shadow: ${({ theme }) => theme.shadows.errorGlow};
   }
 
   .Toastify__toast-body {
-    color: white;
+    color: ${({ theme }) => theme.colors.toastText};
     font-size: 0.95rem;
     line-height: 1.5;
   }
 
   .Toastify__progress-bar--success {
-    background: rgba(255, 255, 255, 0.7);
+    background: ${({ theme }) => theme.colors.toastProgressBar};
   }
 
   .Toastify__progress-bar--error {
-    background: rgba(255, 255, 255, 0.7);
+    background: ${({ theme }) => theme.colors.toastProgressBar};
   }
 
   .Toastify__close-button {
-    color: white;
+    color: ${({ theme }) => theme.colors.toastText};
     opacity: 0.8;
   }
 
   .Toastify__close-button:hover {
     opacity: 1;
+  }
+
+  .Toastify__toast-icon svg {
+    fill: ${({ theme }) => theme.colors.success};
+  }
+
+  .Toastify__toast--error .Toastify__toast-icon svg {
+    fill: ${({ theme }) => theme.colors.error};
   }
 `;
 

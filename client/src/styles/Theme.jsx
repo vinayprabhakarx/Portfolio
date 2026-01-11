@@ -14,18 +14,22 @@ const baseShadows = {
   medium: "0 4px 8px #00000030",
   large: "0 10px 20px #00000040",
   scrolled: "0 2px 10px #00000020",
+  scrolledDark: "0 2px 10px rgba(0, 0, 0, 0.7)",
   primaryGlow: "0 0 12px rgba(231, 76, 60, 0.45)",
+  errorGlow: "0 10px 20px rgba(220, 53, 69, 0.4)",
 };
 
 const darkShadows = {
   ...baseShadows,
   primaryGlow: "0 0 16px rgba(255, 107, 107, 0.6)",
+  errorGlow: "0 10px 20px rgba(239, 68, 68, 0.5)",
 };
 
 const baseGradients = {
   primary: "linear-gradient(120deg, #E74C3C 0%, #F39C12 100%)",
   primaryTransparent: "linear-gradient(120deg, #E74C3C33, #F39C1233)",
   primaryHover: "linear-gradient(120deg, #C0392B 0%, #E74C3C 100%)",
+  error: "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
 };
 
 const spacing = {
@@ -81,6 +85,12 @@ const lightColors = {
   textSecondary: "#78696E",
   inputBackground: "#F9F5F4",
   border: "#C8B9BE",
+  toastBackground: "#FFF5F3",
+  toastBorder: "#E8D5D0",
+  toastText: "#322D2B",
+  toastProgressBar: "rgba(231, 76, 60, 0.3)",
+  disabled: "#D0C4C8",
+  sunIcon: "#F5BF41",
   ...baseColors,
 };
 
@@ -95,6 +105,12 @@ const darkColors = {
   textSecondary: "#C3AAA5",
   inputBackground: "#4A3D3D",
   border: "#645555",
+  toastBackground: "#4A3D3D",
+  toastBorder: "#7A6565",
+  toastText: "#FFF0EC",
+  toastProgressBar: "rgba(255, 107, 107, 0.4)",
+  disabled: "#8A7575",
+  sunIcon: "#F5BF41",
   ...baseColors,
 };
 

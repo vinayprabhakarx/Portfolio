@@ -79,7 +79,7 @@ const ContentContainer = styled.div`
 const Message = styled.p`
   margin-top: 1.5rem;
   font-size: 1rem;
-  color: ${({ theme }) => theme.colors.text || "#444"};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const Loading = () => (

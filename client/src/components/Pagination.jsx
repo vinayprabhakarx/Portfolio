@@ -237,7 +237,7 @@ const ArrowButton = styled.button`
   background: transparent;
   border: none;
   color: ${({ theme, disabled }) =>
-    disabled ? theme.colors.disabled || "#ccc" : theme.colors.primary};
+    disabled ? theme.colors.disabled : theme.colors.primary};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   font-size: ${({ theme }) => theme.typography.fontSizes.xl};
   font-family: ${({ theme }) => theme.typography.fontFamily};

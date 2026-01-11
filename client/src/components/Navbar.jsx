@@ -130,7 +130,7 @@ const Navbar = () => {
             )}
             <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
               {isDarkMode ? (
-                <FiSun size={20} color="#f5bf41ff" />
+                <FiSun size={20} color={"#F5BF41"} />
               ) : (
                 <FiMoon size={20} />
               )}
@@ -140,7 +140,7 @@ const Navbar = () => {
           <MobileControls>
             <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
               {isDarkMode ? (
-                <FiSun size={20} color="#f5bf41ff" />
+                <FiSun size={20} color={"#F5BF41"} />
               ) : (
                 <FiMoon size={20} />
               )}
@@ -200,8 +200,8 @@ const NavContainer = styled.nav`
   background: ${({ theme }) => theme.colors.background};
   backdrop-filter: ${({ $scrolled }) =>
     $scrolled ? "blur(10px)" : "blur(4px)"};
-  box-shadow: ${({ $scrolled }) =>
-    $scrolled ? "0 2px 10px rgba(0, 0, 0, 0.7)" : "none"};
+  box-shadow: ${({ $scrolled, theme }) =>
+    $scrolled ? theme.shadows.scrolledDark : "none"};
   transition: background 0.3s ease, box-shadow 0.3s ease,
     backdrop-filter 0.3s ease;
 `;

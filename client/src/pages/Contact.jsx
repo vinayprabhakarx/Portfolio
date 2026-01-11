@@ -47,7 +47,7 @@ const Contact = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark"
+        theme={theme.isDark ? "dark" : "light"}
       />
       <Header>
         <GradientTitle>Get In Touch</GradientTitle>
