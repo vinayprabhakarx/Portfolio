@@ -17,7 +17,6 @@ export default defineConfig({
             ],
 
             // Heavy libraries separated for caching
-            "lottie-web": ["lottie-web"],
             "framer-motion": ["framer-motion"],
             "react-icons": ["react-icons"],
           },
@@ -39,7 +38,6 @@ export default defineConfig({
       "react-router-dom",
       "styled-components",
       "framer-motion",
-      "lottie-web",
       "react-icons",
     ],
   },

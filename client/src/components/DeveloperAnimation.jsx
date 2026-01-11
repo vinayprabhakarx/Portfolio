@@ -1,10 +1,12 @@
 import { useRef, useEffect } from "react";
-import lottie from "lottie-web";
+import { useTheme } from "styled-components";
+import lottie from "lottie-web/build/player/lottie_light";
 import devAnimation from "../assets/developer.json";
 
 const DeveloperAnimation = () => {
   const animationContainer = useRef(null);
   const lottieInstance = useRef(null);
+  const theme = useTheme();
 
   useEffect(() => {
     if (animationContainer.current) {
@@ -34,6 +36,7 @@ const DeveloperAnimation = () => {
         width: "100%",
         maxWidth: "450px",
         height: "auto",
+        filter: theme.isDark ? "none" : "brightness(0.7) contrast(1.2)",
       }}
     />
   );
