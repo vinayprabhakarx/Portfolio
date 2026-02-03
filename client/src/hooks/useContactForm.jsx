@@ -9,13 +9,18 @@ const validateEmail = (email) => {
   return emailRegex.test(email);
 };
 
+const NAME_REGEX = /^[A-Za-z\s]+$/;
+
 const validateForm = (formData) => {
   const errors = {};
+  const trimmedName = formData.userName?.trim() || "";
 
-  if (!formData.userName?.trim()) {
+  if (!trimmedName) {
     errors.userName = "Name is required";
-  } else if (formData.userName.trim().length < 2) {
+  } else if (trimmedName.length < 2) {
     errors.userName = "Name must be at least 2 characters";
+  } else if (!NAME_REGEX.test(trimmedName)) {
+    errors.userName = "Name can contain only letters and spaces";
   }
 
   if (!formData.email?.trim()) {
@@ -49,6 +54,9 @@ const validateField = (name, value) => {
   switch (name) {
     case "userName":
       if (trimmedValue.length < 2) return "Name must be at least 2 characters";
+      if (!NAME_REGEX.test(trimmedValue)) {
+        return "Name can contain only letters and spaces";
+      }
       break;
     case "email":
       if (!validateEmail(trimmedValue)) return "Please enter a valid email address";
