@@ -9,8 +9,11 @@ import Button from "../components/Button";
 import GradientTitle from "../components/GradientTitle";
 import Profile from "../components/Profile";
 import TimelineComponent from "../components/TimelineComponent";
-import { experience, education, skills, bioText } from "../data/AboutData";
+import aboutData from "../data/aboutData.json";
+import { iconMap } from "../utils/iconMap";
 import { useTheme } from "styled-components";
+
+const { experience, education, skills, bioText } = aboutData;
 import {
   ProfileSection,
   BioSection,
@@ -20,7 +23,6 @@ import {
   CourseList,
   CourseItem,
   SkillsContainer,
-  SkillName,
   SkillCategoryTitle,
   SkillTag,
   SkillTags,
@@ -96,7 +98,7 @@ const About = () => {
                 <SkillCategoryTitle>{category}</SkillCategoryTitle>
                 <SkillTags>
                   {skillList.map((skill, index) => {
-                    const Icon = skill.icon;
+                    const Icon = iconMap[skill.icon];
                     return (
                       <SkillTag
                         key={index}

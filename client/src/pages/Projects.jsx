@@ -11,17 +11,20 @@ import {
   ProjectLink,
   ProjectCardWrapper,
 } from "../styles/ProjectStyles";
-import { projects, categories } from "../data/ProjectData";
-import { skills } from "../data/AboutData";
+import aboutData from "../data/aboutData.json";
+import { iconMap } from "../utils/iconMap";
+import projectsList from "../data/projects.json";
+
+const categories = ["all", "web", "machine-learning"];
 
 const ProjectCard = memo(({ project, index }) => {
   // Create a flattened map of skill name -> icon
-  const iconMap = useMemo(() => {
+  const projectIconMap = useMemo(() => {
     const map = {};
-    Object.values(skills)
+    Object.values(aboutData.skills)
       .flat()
       .forEach((skill) => {
-        map[skill.name] = skill.icon;
+        map[skill.name] = iconMap[skill.icon];
       });
     return map;
   }, []);
@@ -60,7 +63,7 @@ const ProjectCard = memo(({ project, index }) => {
 
           <Card.TagContainer>
             {project.tags.map((tag, tagIndex) => {
-              const Icon = iconMap[tag];
+              const Icon = projectIconMap[tag];
               return (
                 <Card.Tag key={`tag-${index}-${tagIndex}`}>
                   {Icon && <Icon size={16} />}
@@ -136,8 +139,8 @@ const Projects = memo(() => {
 
   // Filtered list based on category
   const filteredProjects = useMemo(() => {
-    if (selectedCategory === "all") return projects;
-    return projects.filter((p) => p.category === selectedCategory);
+    if (selectedCategory === "all") return projectsList;
+    return projectsList.filter((p) => p.category === selectedCategory);
   }, [selectedCategory]);
 
   // Update currentProjects on category or page change
