@@ -3,10 +3,6 @@ import {
   FaLinkedin,
   FaGithub,
   FaXTwitter,
-  FaInstagram,
-  FaFacebook,
-  FaPinterest,
-  FaTumblr,
   FaKaggle,
 } from "react-icons/fa6";
 const SocialLinksContainer = styled.nav`
@@ -36,9 +32,6 @@ const SocialLinks = () => {
     { href: "https://github.com/VinayPrabhakarX", icon: FaGithub },
     { href: "https://www.kaggle.com/vinayprabhakarx", icon: FaKaggle },
     { href: "https://x.com/VinayPrabhakarX", icon: FaXTwitter },
-    { href: "https://instagram.com/VinayPrabhakarX", icon: FaInstagram },
-    { href: "https://www.pinterest.com/vinayprabhakarx/", icon: FaPinterest },
-    { href: "https://vinayprabhakar.tumblr.com/", icon: FaTumblr },
   ];
 
   return (
