@@ -30,6 +30,16 @@ const AppLayout = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Set dynamic route-based document titles for SEO/UX
+    const titleMap = {
+      "/": "Vinay Prabhakar | Full-Stack Developer",
+      "/about": "About | Vinay Prabhakar",
+      "/projects": "Projects | Vinay Prabhakar",
+      "/resume": "Resume | Vinay Prabhakar",
+      "/contact": "Contact | Vinay Prabhakar",
+    };
+    document.title = titleMap[location.pathname] || "Vinay Prabhakar";
   }, [location.pathname]);
 
   return (

@@ -67,7 +67,14 @@ export const SkillTags = styled.div`
 
 // Styling for an individual skill tag
 export const SkillTag = styled.span`
-  background: ${({ theme }) => theme.gradients.primaryTransparent};
+  background: ${({ theme }) =>
+    theme.isDark
+      ? "rgba(255, 107, 107, 0.12)"
+      : "linear-gradient(120deg, rgba(231, 76, 60, 0.08), rgba(243, 156, 18, 0.08))"};
+  border: 1px solid ${({ theme }) =>
+    theme.isDark
+      ? "rgba(255, 107, 107, 0.2) "
+      : "rgba(231, 76, 60, 0.15)"};
   color: ${({ theme }) => theme.colors.primary};
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
   border-radius: 25px;
@@ -77,11 +84,10 @@ export const SkillTag = styled.span`
   flex-shrink: 0;
   transition: all 0.2s ease;
   cursor: default;
-  border: 1px solid transparent;
 
   &:hover {
     transform: translateY(-2px);
-    border-color: ${({ theme }) => theme.colors.primary}44;
+    border-color: ${({ theme }) => theme.colors.primary}80;
     box-shadow: 0 4px 12px ${({ theme }) => theme.colors.primary}22;
   }
 `;

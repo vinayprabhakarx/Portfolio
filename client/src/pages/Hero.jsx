@@ -77,7 +77,6 @@ const Hero = () => (
               strings: [
                 "Full-Stack Developer",
                 "Problem Solver",
-                "ML Enthusiast",
               ],
               autoStart: true,
               loop: true,

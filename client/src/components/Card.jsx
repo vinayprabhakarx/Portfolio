@@ -16,6 +16,9 @@ const CardContainer = styled(motion.article)`
   transition: ${({ theme }) => theme.transitions.default};
   max-width: 90%; /* Restrict card width */
   margin: 0 auto; /* Center card in grid cell */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
@@ -127,7 +130,14 @@ const TagContainer = styled.div`
 `;
 
 const Tag = styled.span`
-  background: ${({ theme }) => theme.gradients.primaryTransparent};
+  background: ${({ theme }) =>
+    theme.isDark
+      ? "rgba(255, 107, 107, 0.12)"
+      : "linear-gradient(120deg, rgba(231, 76, 60, 0.08), rgba(243, 156, 18, 0.08))"};
+  border: 1px solid ${({ theme }) =>
+    theme.isDark
+      ? "rgba(255, 107, 107, 0.25)"
+      : "rgba(231, 76, 60, 0.15)"};
   color: ${({ theme }) => theme.colors.primary};
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
   border-radius: 25px; /* Match SkillTag */
