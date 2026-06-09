@@ -20,12 +20,13 @@ const StyledButton = styled(motion.button)`
   font-size: 1.1rem;
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-weight: 600;
-  border: none;
   border-radius: 25px;
   background: ${({ $active = true, theme }) =>
-    $active ? theme.gradients.primary : theme.gradients.primaryTransparent};
+    $active ? theme.gradients.primary : "transparent"};
   color: ${({ $active = true, theme }) =>
-    $active ? "white" : theme.colors.text};
+    $active ? "white" : theme.colors.primary};
+  border: 2px solid ${({ $active = true, theme }) =>
+    $active ? "transparent" : theme.colors.primary};
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -33,12 +34,11 @@ const StyledButton = styled(motion.button)`
   outline: none;
   -webkit-tap-highlight-color: transparent;
 
-
   &:hover {
-    background: ${({ theme }) => theme.gradients.primaryHover};
-    color: ${({ theme, $active = true }) => 
-        !$active ? theme.colors.secondary : "white"};
-    /* transform handled by framer-motion */
+    background: ${({ $active = true, theme }) =>
+      $active ? theme.gradients.primaryHover : theme.gradients.primary};
+    color: white;
+    border-color: transparent;
   }
 
   @media (max-width: 768px) {
