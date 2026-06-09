@@ -21,7 +21,6 @@ const LoadingContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: ${({ theme }) => theme.colors.background};
   z-index: 1000;
   padding: 2rem;
   text-align: center;

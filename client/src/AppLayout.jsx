@@ -6,7 +6,6 @@ import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Loading from "./components/Loading.jsx";
 import { useRoutePrefetch } from "./utils/routePrefetcher";
-import AnimatedBackground from "./components/AnimatedBackground.jsx";
 
 // Styled wrapper for entire app layout
 const AppWrapper = styled.div`
@@ -35,7 +34,6 @@ const AppLayout = () => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <AnimatedBackground />
       <AppWrapper>
         <Navbar />
         <MainContent>
