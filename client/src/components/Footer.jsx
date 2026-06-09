@@ -10,16 +10,6 @@ const FooterContainer = styled.footer`
   text-align: center;
 `;
 
-// Styling for a tagline within the footer.
-const Tagline = styled.div`
-  color: ${({ theme }) => theme.colors.textSecondary};
-  margin-bottom: 0.25rem;
-
-  strong {
-    color: ${({ theme }) => theme.colors.textPrimary};
-  }
-`;
-
 // Styling for copyright text.
 const CopyrightText = styled.p`
   color: ${({ theme }) => theme.colors.textSecondary};

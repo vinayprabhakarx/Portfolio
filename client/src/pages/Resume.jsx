@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { FaDownload } from "react-icons/fa6";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import { Document, Page, pdfjs } from "react-pdf";
 import GradientTitle from "../components/GradientTitle";
 import Container from "../components/Container";
@@ -17,6 +18,14 @@ const ResumeContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.xl};
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${({ theme }) => theme.spacing.md};
+  flex-wrap: wrap;
 `;
 
 
@@ -101,16 +110,27 @@ const Resume = () => {
     <Container>
       <GradientTitle>Resume</GradientTitle>
       <ResumeContainer>
-        {/* Download Button - Top */}
-        <Button
-          as={motion.a}
-          href={resumePdf}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaDownload size={16} />
-          Download CV
-        </Button>
+        {/* Button Group */}
+        <ButtonGroup>
+          <Button
+            as={motion.a}
+            href={resumePdf}
+            download="Vinay_Prabhakar_Resume.pdf"
+          >
+            <FaDownload size={16} />
+            Download
+          </Button>
+          <Button
+            as={motion.a}
+            href={resumePdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            $active={false}
+          >
+            <FaExternalLinkAlt size={14} />
+            Open in New Tab
+          </Button>
+        </ButtonGroup>
 
         {/* PDF Viewer */}
         <ResumeWrapper>

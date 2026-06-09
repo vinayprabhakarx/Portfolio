@@ -163,15 +163,18 @@ export const TypewriterContainer = styled.div`
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   color: ${({ theme }) => theme.colors.text};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
+  min-height: 2.8em;
   user-select: none;
 
   @media (max-width: 1200px) {
     font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
+    min-height: 2.6em;
   }
 
   @media (max-width: 768px) {
     font-size: ${({ theme }) => theme.typography.fontSizes.xl};
     justify-content: center;
+    min-height: 2.4em;
   }
 `;
 

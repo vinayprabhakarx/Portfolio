@@ -16,17 +16,16 @@ const StyledButton = styled(motion.button)`
   align-items: center;
   justify-content: center;
   gap: ${({ theme }) => theme.spacing.sm};
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
+  padding: ${({ $size }) => ($size === "large" ? "0.9rem 1.8rem" : "0.75rem 1.5rem")};
+  font-size: ${({ $size }) => ($size === "large" ? "1.05rem" : "0.95rem")};
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-weight: 600;
-  border-radius: 25px;
+  border-radius: ${({ $size }) => ($size === "large" ? "24px" : "22px")};
   background: ${({ $active = true, theme }) =>
     $active ? theme.gradients.primary : "transparent"};
   color: ${({ $active = true, theme }) =>
     $active ? "white" : theme.colors.primary};
-  border: 2px solid ${({ $active = true, theme }) =>
-    $active ? "transparent" : theme.colors.primary};
+  border: 2px solid ${({ theme }) => theme.colors.primary};
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -36,14 +35,14 @@ const StyledButton = styled(motion.button)`
 
   &:hover {
     background: ${({ $active = true, theme }) =>
-      $active ? theme.gradients.primaryHover : theme.gradients.primary};
+    $active ? theme.gradients.primaryHover : theme.gradients.primary};
     color: white;
-    border-color: transparent;
+    border-color: ${({ theme }) => theme.colors.primary};
   }
 
   @media (max-width: 768px) {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
+    padding: ${({ $size }) => ($size === "large" ? "0.8rem 1.6rem" : "0.65rem 1.3rem")};
+    font-size: ${({ $size }) => ($size === "large" ? "1rem" : "0.875rem")};
   }
   
   &:disabled {

@@ -18,7 +18,7 @@ export const ProfileSection = styled.section`
 // Container for biographical text
 export const BioSection = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing["4xl"]};
-  text-align: center;
+  text-align: left;
 `;
 
 // Styling for biographical text paragraph
@@ -28,7 +28,7 @@ export const BioText = styled.p`
   line-height: ${({ theme }) => theme.lineHeights.relaxed};
   color: ${({ theme }) => theme.colors.text};
   max-width: 800px;
-  margin: 0 auto;
+  text-align: left;
   user-select: none;
 
   @media (max-width: 768px) {
@@ -75,6 +75,15 @@ export const SkillTag = styled.span`
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   white-space: nowrap;
   flex-shrink: 0;
+  transition: all 0.2s ease;
+  cursor: default;
+  border: 1px solid transparent;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: ${({ theme }) => theme.colors.primary}44;
+    box-shadow: 0 4px 12px ${({ theme }) => theme.colors.primary}22;
+  }
 `;
 
 // Container for a list of courses

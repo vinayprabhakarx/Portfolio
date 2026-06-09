@@ -44,9 +44,10 @@ const CardImagePlaceholder = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  margin-bottom: ${({ theme }) => theme.spacing.sm}; /* Reduced margin */
+  margin-bottom: ${({ theme }) => theme.spacing.xl}; /* Matched margin */
   color: ${({ theme }) => theme.colors.primary};
   font-size: 2.5rem;
+  background: ${({ theme }) => theme.colors.background}; /* Added placeholder bg */
 `;
 
 const CardGrid = styled.div`

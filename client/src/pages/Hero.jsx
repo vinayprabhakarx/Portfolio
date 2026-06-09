@@ -106,10 +106,10 @@ const Hero = () => (
       <motion.div variants={itemVariants}>
         <ButtonRow>
           <Link to="/contact" style={{ textDecoration: "none" }}>
-            <Button as={motion.button}>Get in Touch</Button>
+            <Button as={motion.button} $size="large">Get in Touch</Button>
           </Link>
           <Link to="/projects" style={{ textDecoration: "none" }}>
-            <Button as={motion.button} $active={false}>View Projects</Button>
+            <Button as={motion.button} $active={false} $size="large">View Projects</Button>
           </Link>
         </ButtonRow>
       </motion.div>
