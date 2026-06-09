@@ -5,6 +5,11 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   build: {
+    target: "es2020",
+    minify: "esbuild",
+    esbuild: {
+      drop: ["console", "debugger"],
+    },
     rollupOptions: {
       output: {
           manualChunks: {
@@ -23,13 +28,6 @@ export default defineConfig({
         },
       },
     chunkSizeWarningLimit: 500,
-    minify: true,
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
   },
   optimizeDeps: {
     include: [

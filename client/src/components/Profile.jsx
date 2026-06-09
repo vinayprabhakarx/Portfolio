@@ -57,7 +57,7 @@ const PhotoContainer = styled.figure`
 `;
 
 // Styling for the actual profile image.
-const ProfileImage = styled.img`
+const ProfileImage = styled.img.attrs({ loading: "lazy", decoding: "async" })`
   width: 100%;
   height: 100%;
   object-fit: cover;

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -49,8 +49,19 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
 };
 
-const Hero = () => (
-  <ContentWrapper role="banner">
+const Hero = () => {
+  const [showAnimation, setShowAnimation] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setShowAnimation(true);
+    }, 400);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  return (
+    <ContentWrapper role="banner">
     <BackgroundAnimation />
     <GlowOrb />
 
@@ -115,20 +126,23 @@ const Hero = () => (
 
       <motion.div variants={itemVariants}>
         <SocialRow>
-          {socialLinks.map(({ href, icon: Icon, label }) => (
-            <SocialIconLink
-              key={href}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              as={motion.a}
-              whileHover={{ y: -4, scale: 1.15 }}
-              whileTap={{ scale: 0.92 }}
-            >
-              <Icon size={20} />
-            </SocialIconLink>
-          ))}
+          {socialLinks.map(({ href, icon, label }) => {
+            const IconComp = icon;
+            return (
+              <SocialIconLink
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                as={motion.a}
+                whileHover={{ y: -4, scale: 1.15 }}
+                whileTap={{ scale: 0.92 }}
+              >
+                <IconComp size={20} />
+              </SocialIconLink>
+            );
+          })}
         </SocialRow>
       </motion.div>
     </LeftSection>
@@ -139,7 +153,7 @@ const Hero = () => (
       transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
     >
       <Suspense fallback={null}>
-        <DeveloperAnimation />
+        {showAnimation && <DeveloperAnimation />}
       </Suspense>
     </RightSection>
 
@@ -151,6 +165,7 @@ const Hero = () => (
       <ScrollDot />
     </ScrollIndicator>
   </ContentWrapper>
-);
+  );
+};
 
 export default Hero;

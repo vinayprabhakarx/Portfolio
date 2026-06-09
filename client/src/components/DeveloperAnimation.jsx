@@ -1,7 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useTheme } from "styled-components";
 import lottie from "lottie-web/build/player/lottie_light";
-import devAnimation from "../assets/developer.json";
 
 const DeveloperAnimation = () => {
   const animationContainer = useRef(null);
@@ -9,18 +8,29 @@ const DeveloperAnimation = () => {
   const theme = useTheme();
 
   useEffect(() => {
-    if (animationContainer.current) {
-      lottieInstance.current = lottie.loadAnimation({
-        container: animationContainer.current,
-        renderer: "svg",
-        loop: true,
-        autoplay: true,
-        animationData: devAnimation,
-      });
-    }
+    let cancelled = false;
+    const animationDataUrl = new URL("../assets/developer.json", import.meta.url);
 
-    // Clean up on component unmount
+    const loadAnimation = async () => {
+      const response = await fetch(animationDataUrl);
+      if (cancelled || !response.ok) return;
+      const animationData = await response.json();
+
+      if (animationContainer.current && !cancelled) {
+        lottieInstance.current = lottie.loadAnimation({
+          container: animationContainer.current,
+          renderer: "svg",
+          loop: true,
+          autoplay: true,
+          animationData,
+        });
+      }
+    };
+
+    loadAnimation();
+
     return () => {
+      cancelled = true;
       if (lottieInstance.current) {
         lottieInstance.current.destroy();
       }

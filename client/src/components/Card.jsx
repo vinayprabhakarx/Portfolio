@@ -30,7 +30,7 @@ const CardContainer = styled(motion.article)`
   }
 `;
 
-const CardImage = styled.img`
+const CardImage = styled.img.attrs({ loading: "lazy", decoding: "async" })`
   width: 100%; /* Revert to full width */
   margin-bottom: ${({ theme }) => theme.spacing.xl};
   aspect-ratio: 2 / 1;
