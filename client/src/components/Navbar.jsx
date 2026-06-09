@@ -196,7 +196,7 @@ const NavContainer = styled.nav`
   left: 0;
   right: 0;
   z-index: 1000;
-  height: 64px;
+  height: 4rem;
   background: ${({ theme }) => theme.colors.background};
   backdrop-filter: ${({ $scrolled }) =>
     $scrolled ? "blur(10px)" : "blur(4px)"};
@@ -225,6 +225,10 @@ const NavContent = styled.div`
 `;
 
 const LogoLink = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.text};
 `;
@@ -233,29 +237,40 @@ const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sm};
+  min-height: 100%;
+  padding: ${({ theme }) => theme.spacing.sm} 0;
+  margin-top: 0.125rem;
 `;
 
 const StyledLogo = styled.img`
-  height: 40px;
+  display: block;
+  height: 2.5rem;
   width: auto;
   transition: filter 0.1s ease;
   filter: ${({ $isDark }) => ($isDark ? "brightness(0) invert(1)" : "none")};
   @media (max-width: 992px) {
-    height: 38px;
+    height: 2.375rem;
   }
 `;
 
 const Logo = styled.span`
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
   font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
   font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
 `;
 
 const LogoName = styled.span`
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
   font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
   font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
-  margin-right: ${({ theme }) => theme.spacing.md};
+  margin: 0;
+  padding: 0;
 
   @media (max-width: 992px) {
     font-size: ${({ theme }) => theme.typography.fontSizes.xl};

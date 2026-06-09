@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Profile = ({ src, alt = "Profile Image" }) => (
   <ProfileSection>
     <PhotoContainer>
-      <ProfileImage src={src} alt={alt} />
+      <ProfileImage src={src} alt={alt} width="280" height="280" />
     </PhotoContainer>
   </ProfileSection>
 );
