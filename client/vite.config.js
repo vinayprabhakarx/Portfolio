@@ -4,6 +4,19 @@ import react from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    // Configure MIME types for .mjs files (required for PDF worker)
+    middlewareMode: false,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  },
+  preview: {
+    // Ensure .mjs files are served with correct MIME type
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  },
   build: {
     target: "es2020",
     minify: "esbuild",

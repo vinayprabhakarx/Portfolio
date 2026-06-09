@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 import { FaDownload } from "react-icons/fa6";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { Document, Page, pdfjs } from "react-pdf";
-import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+import workerSrc from "/pdf.worker.min.js?url";
 import GradientTitle from "../components/GradientTitle";
 import Container from "../components/Container";
 import Button from "../components/Button";
 import resumePdf from "../assets/resume.pdf";
 
-// Set up PDF.js worker using local bundled worker
+// Set up PDF.js worker using public static file
 pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
 
 // --- Styled Components ---
