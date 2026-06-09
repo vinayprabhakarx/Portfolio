@@ -60,11 +60,18 @@ const Hero = () => (
         and feel free to reach out.
       </Description>
 
-      <Link to="/contact" style={{ textDecoration: "none" }}>
-        <Button as={motion.button}>
-          Get in Touch
-        </Button>
-      </Link>
+      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+        <Link to="/contact" style={{ textDecoration: "none" }}>
+          <Button as={motion.button}>
+            Get in Touch
+          </Button>
+        </Link>
+        <Link to="/projects" style={{ textDecoration: "none" }}>
+          <Button as={motion.button} $active={false}>
+            View Projects
+          </Button>
+        </Link>
+      </div>
     </LeftSection>
 
     <RightSection
