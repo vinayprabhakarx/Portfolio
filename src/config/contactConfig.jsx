@@ -5,22 +5,14 @@ const isProduction = import.meta.env.PROD;
 // Create final configuration
 export const CONFIG = {
   // API Configuration
-  API_URL: isDevelopment
-    ? import.meta.env.VITE_CONTACT_API_URL_DEV
-    : import.meta.env.VITE_CONTACT_API_URL,
+  API_URL: import.meta.env.VITE_CONTACT_API_URL,
 
   // Request settings
-  REQUEST_TIMEOUT: isDevelopment
-    ? import.meta.env.VITE_REQUEST_TIMEOUT_DEV
-    : import.meta.env.VITE_REQUEST_TIMEOUT,
-  RETRY_ATTEMPTS: isDevelopment
-    ? import.meta.env.VITE_RETRY_ATTEMPTS_DEV
-    : import.meta.env.VITE_RETRY_ATTEMPTS,
+  REQUEST_TIMEOUT: import.meta.env.VITE_REQUEST_TIMEOUT,
+  RETRY_ATTEMPTS: import.meta.env.VITE_RETRY_ATTEMPTS,
 
   // UI settings
-  MESSAGE_DISMISS_TIME: isDevelopment
-    ? import.meta.env.VITE_MESSAGE_DISMISS_TIME_DEV
-    : import.meta.env.VITE_MESSAGE_DISMISS_TIME,
+  MESSAGE_DISMISS_TIME: import.meta.env.VITE_MESSAGE_DISMISS_TIME,
 
   // Environment information
   ENVIRONMENT: {
