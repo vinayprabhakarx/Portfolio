@@ -152,4 +152,6 @@ cypress/screenshots/
 .env.production
 .DS_Store
 .vercel
-.env*.local
+.env
+.env.*
+deploy.sh

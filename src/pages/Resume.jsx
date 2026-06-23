@@ -2,16 +2,15 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { FaDownload } from "react-icons/fa6";
-import { FaExternalLinkAlt } from "react-icons/fa";
 import { Document, Page, pdfjs } from "react-pdf";
-import workerSrc from "/pdf.worker.min.js?url";
 import GradientTitle from "../components/GradientTitle";
 import Container from "../components/Container";
 import Button from "../components/Button";
-import resumePdf from "../assets/resume.pdf";
 
-// Set up PDF.js worker using public static file
-pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
+const resumePdf = import.meta.env.VITE_RESUME_URL;
+
+// Use CDN for worker to completely avoid any bundling or Nginx mime-type issues
+pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 // --- Styled Components ---
 const ResumeContainer = styled.div`
@@ -28,8 +27,6 @@ const ButtonGroup = styled.div`
   gap: ${({ theme }) => theme.spacing.md};
   flex-wrap: wrap;
 `;
-
-
 
 const ResumeWrapper = styled.div`
   display: flex;
@@ -107,6 +104,28 @@ const Resume = () => {
     return 0.6;
   };
 
+  const handleDownload = async (e) => {
+    e.preventDefault();
+    try {
+      // Fetch the file as a Blob to force download for cross-origin URLs
+      const response = await fetch(resumePdf);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = "vinay_resume.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download failed:", error);
+      // Fallback to simply opening the URL if CORS blocks the fetch
+      window.open(resumePdf, '_blank');
+    }
+  };
+
   return (
     <Container>
       <GradientTitle>Resume</GradientTitle>
@@ -114,22 +133,11 @@ const Resume = () => {
         {/* Button Group */}
         <ButtonGroup>
           <Button
-            as={motion.a}
-            href={resumePdf}
-            download="Vinay_Prabhakar_Resume.pdf"
+            as={motion.button}
+            onClick={handleDownload}
           >
             <FaDownload size={16} />
             Download
-          </Button>
-          <Button
-            as={motion.a}
-            href={resumePdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            $active={false}
-          >
-            <FaExternalLinkAlt size={14} />
-            Open in New Tab
           </Button>
         </ButtonGroup>
 
