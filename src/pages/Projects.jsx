@@ -145,8 +145,8 @@ const Projects = memo(() => {
 
   // Update currentProjects on category or page change
   useEffect(() => {
-    const start = (currentPage - 1) * 4;
-    const end = start + 4;
+    const start = (currentPage - 1) * 6;
+    const end = start + 6;
     setCurrentProjects(filteredProjects.slice(start, end));
   }, [filteredProjects, currentPage]);
 
@@ -221,10 +221,10 @@ const Projects = memo(() => {
       </Card.Grid>
 
       {/* Pagination */}
-      {filteredProjects.length > 4 && (
+      {filteredProjects.length > 6 && (
         <Pagination
           data={filteredProjects}
-          itemsPerPage={4}
+          itemsPerPage={6}
           currentPage={currentPage}
           onPageChange={handlePageChange}
           maxVisiblePages={6}
