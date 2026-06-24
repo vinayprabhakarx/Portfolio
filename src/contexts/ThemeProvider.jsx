@@ -6,17 +6,11 @@ export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
 
-    if (savedTheme === "dark") return true;
+    // Only use light mode if explicitly saved by the user
     if (savedTheme === "light") return false;
 
-    // If no saved theme, use system preference
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return true;
-    }
-
-    // If no system preference, fallback to time-based logic
-    const hour = new Date().getHours();
-    return hour >= 21 || hour < 6; // 9 PM to 6 AM is dark
+    // Default to dark mode for all other cases
+    return true;
   });
 
   // Save to localStorage and update document attribute on theme change
@@ -28,21 +22,7 @@ export const ThemeProvider = ({ children }) => {
     );
   }, [isDarkMode]);
 
-  // Listen to system preference change (live)
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-    const handleChange = (e) => {
-      const savedTheme = localStorage.getItem("theme");
-      // Only update if user hasn't manually selected a theme
-      if (!savedTheme) {
-        setIsDarkMode(e.matches);
-      }
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
 
   const toggleTheme = () => {
     setIsDarkMode((prev) => !prev);
