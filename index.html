@@ -21,19 +21,18 @@
     />
     <title>VinayPrabhakarX</title>
 
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-GG42R9PGC3"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
 
-      gtag("config", "G-GG42R9PGC3");
+    <script>
+      (function() {
+        try {
+          var savedTheme = localStorage.getItem("theme");
+          if (savedTheme === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+          } else {
+            document.documentElement.setAttribute("data-theme", "dark");
+          }
+        } catch (e) {}
+      })();
     </script>
   </head>
 
