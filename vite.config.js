@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  assetsInclude: ["**/*.lottie"],
   server: {
     // Configure MIME types for .mjs files (required for PDF worker)
     middlewareMode: false,

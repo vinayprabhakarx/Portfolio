@@ -118,6 +118,12 @@ export const GlowOrb = styled.div`
 export const LeftSection = styled(motion.div)`
   flex: 1;
   z-index: 1;
+  padding-left: 4rem;
+
+  @media (max-width: 968px) {
+    padding-left: 0;
+    padding: 0 1.5rem;
+  }
 `;
 
 // "Welcome" text styling
@@ -241,19 +247,22 @@ export const SocialIconLink = styled.a`
   }
 `;
 
-// Right section of the Hero content, animated with Framer Motion
 export const RightSection = styled(motion.div)`
-  flex: 1;
+  flex: 1.2;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  max-width: 600px;
+  width: 100%;
   z-index: 1;
 
+  @media (max-width: 1400px) {
+    flex: 1.6;
+    transform: scale(1.15);
+  }
+
   @media (max-width: 968px) {
-    max-width: 400px;
-    justify-content: center;
+    transform: none;
   }
 `;
 
