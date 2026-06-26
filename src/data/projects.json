@@ -26,7 +26,12 @@
     "title": "Portfolio Website",
     "image": "https://vuhtdnhmdfjarsefcupx.supabase.co/storage/v1/object/sign/assets/portfolio/portfolio.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV84MzVkYmIyMy05NDAxLTRhMjYtODI3ZC1kYjM0YWNhZmM1ODQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhc3NldHMvcG9ydGZvbGlvL3BvcnRmb2xpby5wbmciLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzgyMjI2ODA3LCJleHAiOjQ5MDQyOTA4MDd9.GJho4dKuy9daJjvL5Xqk_b4hnfCSFQOuNdB-Y1JWddM",
     "description": "Modern portfolio website built with React and styled-components featuring interactive animations.",
-    "tags": ["React.js", "Express.js", "Node.js", "Cloudflare"],
+    "tags": [
+      "React.js",
+      "Express.js",
+      "Node.js",
+      "Cloudflare"
+    ],
     "github": "https://github.com/VinayPrabhakarX/Portfolio",
     "demo": "https://vinayprabhakar.dev",
     "category": "web",
@@ -40,21 +45,31 @@
     "title": "Online Examination System",
     "image": "",
     "description": "Web-based platform for managing and conducting online exams with role-based access and secure exam flow.",
-    "tags": ["React.js", "Node.js", "MongoDB", "Tailwind CSS"],
+    "tags": [
+      "React.js",
+      "Node.js",
+      "MongoDB",
+      "Tailwind CSS"
+    ],
     "github": "https://github.com/VinayPrabhakarX/online-examination-system",
     "demo": "https://vinayprabhakar.tech/oes",
     "category": "web",
     "highlights": [
       "Role-based login for admin, teacher, and student",
       "Secure exam setup and automated evaluation",
-      "Still under development — more features coming soon"
+      "Still under development \u2014 more features coming soon"
     ]
   },
   {
     "title": "Plant Disease Recognition System",
     "image": "https://vuhtdnhmdfjarsefcupx.supabase.co/storage/v1/object/sign/assets/portfolio/plant.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV84MzVkYmIyMy05NDAxLTRhMjYtODI3ZC1kYjM0YWNhZmM1ODQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJhc3NldHMvcG9ydGZvbGlvL3BsYW50LnBuZyIsInNjb3BlIjoiZG93bmxvYWQiLCJpYXQiOjE3ODIyMjY4NzQsImV4cCI6NDkwNDI5MDg3NH0.x-Uk2l3OLier-U3UTuaDy1HFUU4jygRezm2BvUUBPUY",
     "description": "Agricultural system that identifies potential plant diseases based on uploaded images using deep learning algorithms.",
-    "tags": ["Python", "Deep Learning", "TensorFlow", "Keras"],
+    "tags": [
+      "Python",
+      "Deep Learning",
+      "TensorFlow",
+      "Keras"
+    ],
     "github": "https://github.com/vinayprabhakar-in/plant_disease_model",
     "demo": "https://vinayprabhakar-plant.streamlit.app/",
     "category": "machine-learning",
@@ -68,7 +83,12 @@
     "title": "Course Selling App",
     "image": "",
     "description": "Scalable Node.js backend with MongoDB for an online course platform featuring JWT authentication, course management and secure payment tracking.",
-    "tags": ["Node.js", "Express.js", "MongoDB", "JWT"],
+    "tags": [
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "JWT"
+    ],
     "github": "https://github.com/VinayPrabhakarX/course-selling-app",
     "demo": "https://github.com/VinayPrabhakarX/course-selling-app?tab=readme-ov-file#-installation",
     "category": "web",
@@ -76,6 +96,26 @@
       "JWT authentication for admins and users",
       "Course management with Cloudinary image uploads",
       "Secure course purchase system"
+    ]
+  },
+  {
+    "title": "Vinay / Docs",
+    "image": "",
+    "description": "A personal repository for technical notes, project documentation, and ongoing learning. Built to track my progress and explore new things.",
+    "tags": [
+      "Next.js",
+      "React.js",
+      "Fumadocs",
+      "Tailwind CSS",
+      "MDX"
+    ],
+    "github": "https://github.com/vinayprabhakar-in/docs-app",
+    "demo": "https://docs.vinayprabhakar.dev",
+    "category": "web",
+    "highlights": [
+      "Extremely fast, static-site generated documentation with full-text search",
+      "MDX support for writing rich content alongside React components",
+      "Automated Git timestamps and metadata parsing for dynamic sidebar routing"
     ]
   }
 ]
