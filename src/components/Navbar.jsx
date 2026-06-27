@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiX, FiMoon, FiSun } from "react-icons/fi";
+import { Menu as FiMenu, X as FiX, Moon as FiMoon, Sun as FiSun } from "lucide-react";
 import { useTheme } from "../hooks/useTheme";
 import logo from "../assets/logo.svg";
 

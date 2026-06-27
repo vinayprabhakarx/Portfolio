@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaGraduationCap, FaBriefcase, FaCode } from "react-icons/fa";
+import { GraduationCap as FaGraduationCap, Briefcase as FaBriefcase, Code as FaCode } from "lucide-react";
 import profilePhoto from "../assets/photo.png";
 import Container from "../components/Container";
 import Card from "../components/Card";

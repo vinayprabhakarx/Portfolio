@@ -2,12 +2,8 @@ import React, { Suspense, useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaKaggle,
-  FaXTwitter,
-} from "react-icons/fa6";
+import { iconMap } from "../utils/iconMap";
+
 import {
   BackgroundAnimation,
   ContentWrapper,
@@ -33,10 +29,10 @@ const DeveloperAnimation = React.lazy(() =>
 import Button from "../components/Button";
 
 const socialLinks = [
-  { href: "https://github.com/VinayPrabhakarX", icon: FaGithub, label: "GitHub" },
-  { href: "https://www.linkedin.com/in/VinayPrabhakarX/", icon: FaLinkedin, label: "LinkedIn" },
-  { href: "https://www.kaggle.com/vinayprabhakarx", icon: FaKaggle, label: "Kaggle" },
-  { href: "https://x.com/VinayPrabhakarX", icon: FaXTwitter, label: "X / Twitter" },
+  { href: "https://github.com/VinayPrabhakarX", icon: iconMap.FaGithub, label: "GitHub" },
+  { href: "https://www.linkedin.com/in/VinayPrabhakarX/", icon: iconMap.FaLinkedin, label: "LinkedIn" },
+  { href: "https://www.kaggle.com/vinayprabhakarx", icon: iconMap.FaKaggle, label: "Kaggle" },
+  { href: "https://x.com/VinayPrabhakarX", icon: iconMap.FaXTwitter, label: "X / Twitter" },
 ];
 
 const containerVariants = {
@@ -126,8 +122,7 @@ const Hero = () => {
 
       <motion.div variants={itemVariants}>
         <SocialRow>
-          {socialLinks.map(({ href, icon, label }) => {
-            const IconComp = icon;
+          {socialLinks.map(({ href, icon: IconComponent, label }) => {
             return (
               <SocialIconLink
                 key={href}
@@ -139,7 +134,7 @@ const Hero = () => {
                 whileHover={{ y: -4, scale: 1.15 }}
                 whileTap={{ scale: 0.92 }}
               >
-                <IconComp size={20} />
+                <IconComponent size={20} />
               </SocialIconLink>
             );
           })}

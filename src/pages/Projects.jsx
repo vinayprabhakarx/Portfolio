@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, memo, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaCode } from "react-icons/fa";
+import { ExternalLink as FaExternalLinkAlt, Code as FaCode } from "lucide-react";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import GradientTitle from "../components/GradientTitle";
@@ -20,7 +20,10 @@ const categories = ["all", "web", "machine-learning"];
 const ProjectCard = memo(({ project, index }) => {
   // Create a flattened map of skill name -> icon
   const projectIconMap = useMemo(() => {
-    const map = {};
+    const map = {
+      "Next.js": iconMap.SiNextdotjs,
+      "MDX": iconMap.SiMdx,
+    };
     Object.values(aboutData.skills)
       .flat()
       .forEach((skill) => {
@@ -81,7 +84,7 @@ const ProjectCard = memo(({ project, index }) => {
               rel="noopener noreferrer"
               aria-label={`View ${project.title} source code on GitHub`}
             >
-              <FaGithub /> Code
+              <iconMap.FaGithub /> Code
             </ProjectLink>
           )}
           {project.demo && (

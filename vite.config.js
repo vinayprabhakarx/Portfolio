@@ -1,9 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import svgr from "vite-plugin-svgr";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), svgr()],
   assetsInclude: ["**/*.lottie"],
   server: {
     // Configure MIME types for .mjs files (required for PDF worker)
@@ -26,21 +27,21 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-          manualChunks: {
-            // Vendor chunks (Core optimized)
-            vendor: [
-              "react",
-              "react-dom",
-              "react-router-dom",
-              "styled-components",
-            ],
-
-            // Heavy libraries separated for caching
-            "framer-motion": ["framer-motion"],
-            "react-icons": ["react-icons"],
-          },
+        manualChunks: {
+          // Vendor chunks (Core optimized)
+          vendor: [
+            "react",
+            "react-dom",
+            "react-router-dom",
+            "styled-components",
+          ],
+          // Heavy libraries separated for caching
+          "framer-motion": ["framer-motion"],
+          "lucide-react": ["lucide-react"],
+          "simple-icons": ["simple-icons"],
         },
       },
+    },
     chunkSizeWarningLimit: 500,
   },
   optimizeDeps: {
@@ -50,7 +51,8 @@ export default defineConfig({
       "react-router-dom",
       "styled-components",
       "framer-motion",
-      "react-icons",
+      "lucide-react",
+      "simple-icons",
     ],
   },
 });

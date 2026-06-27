@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { FaDownload } from "react-icons/fa6";
+import { Download as FaDownload } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
 import GradientTitle from "../components/GradientTitle";
 import Container from "../components/Container";

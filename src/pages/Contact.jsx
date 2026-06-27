@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaPaperPlane } from "react-icons/fa6";
+import { Send as FaPaperPlane } from "lucide-react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SocialLinks from "../components/SocialLinks";
