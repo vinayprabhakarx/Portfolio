@@ -47,6 +47,7 @@ export const BioText = styled.p`
 
 // Container for tab-specific content
 export const TabContent = styled.section`
+  width: 100%;
   margin-top: ${({ theme }) => theme.spacing["3xl"]};
 `;
 

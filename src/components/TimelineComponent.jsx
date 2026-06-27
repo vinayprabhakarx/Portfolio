@@ -24,6 +24,7 @@ const TimelineComponent = ({ items }) => (
 // Timeline wrapper with vertical line
 const Timeline = styled.div`
   position: relative;
+  width: 100%;
   max-width: 1000px;
   margin: 0 auto;
 
@@ -122,6 +123,12 @@ const TimelineHeader = styled.div`
   align-items: center;
   gap: ${({ theme }) => theme.spacing.lg};
   margin-bottom: ${({ theme }) => theme.spacing.md};
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: ${({ theme }) => theme.spacing.xs};
+  }
 
   h3 {
     color: ${({ theme }) => theme.colors.text};

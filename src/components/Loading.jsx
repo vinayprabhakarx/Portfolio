@@ -11,6 +11,7 @@ const LoadingContainer = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  background-color: ${({ theme }) => theme.colors.background};
 `;
 
 const SimpleSpinner = styled.div`

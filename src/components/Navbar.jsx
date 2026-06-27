@@ -244,13 +244,10 @@ const LogoContainer = styled.div`
 
 const StyledLogo = styled.img`
   display: block;
-  height: 2.5rem;
+  height: 2rem;
   width: auto;
   transition: filter 0.1s ease;
   filter: ${({ $isDark }) => ($isDark ? "brightness(0) invert(1)" : "none")};
-  @media (max-width: 992px) {
-    height: 2.375rem;
-  }
 `;
 
 const Logo = styled.span`
