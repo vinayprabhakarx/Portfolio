@@ -45,26 +45,6 @@ export const HeroContainer = styled.div`
   overflow: hidden;
 `;
 
-// Background animation for the Hero section
-export const BackgroundAnimation = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1;
-
-  &::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: ${({ theme }) => theme.colors.background};
-    opacity: 0.1;
-    animation: ${gradientAnimation} 15s ease infinite;
-  }
-`;
 
 // Subtle gradient orb behind the left text
 export const GlowOrb = styled.div`

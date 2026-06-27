@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { iconMap } from "../utils/iconMap";
 
 import {
-  BackgroundAnimation,
   ContentWrapper,
   LeftSection,
   WelcomeText,
@@ -61,7 +60,6 @@ const Hero = () => {
 
   return (
     <ContentWrapper role="banner">
-    <BackgroundAnimation />
     <GlowOrb />
 
     <LeftSection
