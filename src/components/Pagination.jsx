@@ -1,6 +1,17 @@
 import { memo, useMemo, useCallback, useRef, useEffect } from "react";
 import styled from "styled-components";
 
+/**
+ * Reusable data pagination controller.
+ * Handles the calculation of visible pages, ellipsis logic, and chunking of data arrays.
+ * 
+ * @param {Array} data - The complete dataset to be paginated.
+ * @param {number} itemsPerPage - Number of items to display per page slice.
+ * @param {number} currentPage - Currently active page index (1-indexed).
+ * @param {Function} onPageChange - Callback invoked when a user selects a new page.
+ * @param {Function} onDataChange - Callback invoked with the sliced data whenever pagination state changes.
+ * @param {number} maxVisiblePages - Maximum number of pagination buttons to render before collapsing into ellipses.
+ */
 const Pagination = memo(
   ({
     data = [],
@@ -39,8 +50,8 @@ const Pagination = memo(
     );
 
     useEffect(() => {
-      // Notify parent component of data changes
-      // Prevent running on initial mount if desired, but typically we want the initial data
+      // Broadcast the newly sliced data payload to the parent component
+      // We skip emitting if the underlying pagination state hasn't meaningfully changed
       if (
         lastNotifiedRef.current.page !== safeCurrentPage ||
         lastNotifiedRef.current.totalItems !== totalItems ||
@@ -132,7 +143,7 @@ const Pagination = memo(
     const isFirstPage = safeCurrentPage <= 1;
     const isLastPage = safeCurrentPage >= totalPages;
 
-    // Always return the component, but only show pagination controls when needed
+    // Return the pagination UI only if the data spans multiple pages
     return (
       <>
         {/* You can render your data here, or return it via onDataChange */}
@@ -260,8 +271,8 @@ const ArrowButton = styled.button`
     outline-offset: 2px;
   }
 
-  @media (max-width: ${({ theme }) => theme?.breakpoints?.sm || "640px"}) {
-    font-size: ${({ theme }) => theme.typography.fontSizes["xl"]};
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.typography.fontSizes.xl};
   }
 `;
 

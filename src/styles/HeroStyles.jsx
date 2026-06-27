@@ -20,34 +20,18 @@ const orbFloat = keyframes`
 
 // Wrapper for the main content within Hero section
 export const ContentWrapper = styled.section`
-  max-width: 2000px;
+  max-width: min(100%, 120rem);
   width: 100%;
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 4rem;
-  padding: 2rem 3rem 4rem 3rem;
-  min-height: calc(100vh - 64px);
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(2rem, 5vh, 4rem) clamp(1.5rem, 5vw, 4rem);
+  min-height: calc(100vh - ${({ theme }) => theme.layout.navbarHeight});
   position: relative;
   overflow: hidden;
-
-  @media (min-width: 2560px) {
-    max-width: 2400px;
-  }
-
-  @media (max-width: 1400px) {
-    max-width: 1200px;
-    gap: 3rem;
-  }
-
-  @media (max-width: 968px) {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 2rem;
-    padding: 2rem 1.5rem 4rem;
-  }
 `;
 
 // Wrapper for the entire Hero section
@@ -56,14 +40,9 @@ export const HeroContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 2rem;
-  padding-top: 80px;
+  padding: clamp(2rem, 5vh, 5rem) 0;
   position: relative;
   overflow: hidden;
-
-  @media (max-width: 768px) {
-    padding: 2rem 0;
-  }
 `;
 
 // Background animation for the Hero section
@@ -90,10 +69,10 @@ export const BackgroundAnimation = styled.div`
 // Subtle gradient orb behind the left text
 export const GlowOrb = styled.div`
   position: absolute;
-  top: 10%;
-  left: -5%;
-  width: 500px;
-  height: 500px;
+  top: clamp(5%, 10vh, 10%);
+  left: clamp(-10%, -5vw, -5%);
+  width: clamp(18.75rem, 40vw, 31.25rem);
+  height: clamp(18.75rem, 40vw, 31.25rem);
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -105,25 +84,18 @@ export const GlowOrb = styled.div`
   animation: ${orbFloat} 12s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
-
-  @media (max-width: 968px) {
-    width: 300px;
-    height: 300px;
-    top: 5%;
-    left: -10%;
-  }
 `;
 
 // Left section of the Hero content, animated with Framer Motion
 export const LeftSection = styled(motion.div)`
-  flex: 1;
+  flex: 1 1 30rem;
   z-index: 1;
-  padding-left: 4rem;
-
-  @media (max-width: 968px) {
-    padding-left: 0;
-    padding: 0 1.5rem;
-  }
+  padding: 0 clamp(1rem, 3vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 `;
 
 // "Welcome" text styling
@@ -133,10 +105,6 @@ export const WelcomeText = styled.h2`
   color: ${({ theme }) => theme.colors.text};
   margin-bottom: ${({ theme }) => theme.spacing.md};
   user-select: none;
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
-  }
 `;
 
 // Animated gradient name styling
@@ -150,20 +118,13 @@ export const GradientName = styled.h1`
   animation: ${gradientAnimation} 4s ease infinite;
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   user-select: none;
-
-  @media (max-width: 1200px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes["5xl"]};
-  }
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes["4xl"]};
-  }
 `;
 
 // Container for typewriter effect text
 export const TypewriterContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-size: ${({ theme }) => theme.typography.fontSizes["3xl"]};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
@@ -171,17 +132,6 @@ export const TypewriterContainer = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   min-height: 2.8em;
   user-select: none;
-
-  @media (max-width: 1200px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
-    min-height: 2.6em;
-  }
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.xl};
-    justify-content: center;
-    min-height: 2.4em;
-  }
 `;
 
 // Description paragraph styling
@@ -191,51 +141,36 @@ export const Description = styled.p`
   color: ${({ theme }) => theme.colors.textSecondary};
   margin-bottom: ${({ theme }) => theme.spacing["2xl"]};
   line-height: ${({ theme }) => theme.lineHeights.relaxed};
-  max-width: 650px;
+  max-width: min(100%, 40.625rem);
   user-select: none;
-
-  @media (max-width: 1200px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-    max-width: 600px;
-  }
-
-  @media (max-width: 968px) {
-    margin: 0 auto ${({ theme }) => theme.spacing.xl};
-  }
 `;
 
 // Row for CTA buttons side by side
 export const ButtonRow = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: ${({ theme }) => theme.spacing.md};
   margin-bottom: ${({ theme }) => theme.spacing.xl};
   flex-wrap: wrap;
-
-  @media (max-width: 968px) {
-    justify-content: center;
-  }
 `;
 
 // Social icons row
 export const SocialRow = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: ${({ theme }) => theme.spacing.sm};
-
-  @media (max-width: 968px) {
-    justify-content: center;
-  }
 `;
 
 export const SocialIconLink = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 2.625rem;
+  height: 2.625rem;
   border-radius: 50%;
-  border: 1.5px solid ${({ theme }) => theme.colors.border};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   color: ${({ theme }) => theme.colors.textSecondary};
   transition: all 0.25s ease;
   text-decoration: none;
@@ -248,37 +183,28 @@ export const SocialIconLink = styled.a`
 `;
 
 export const RightSection = styled(motion.div)`
-  flex: 1.2;
+  flex: 1.2 1 30rem;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   width: 100%;
   z-index: 1;
-
-  @media (max-width: 1400px) {
-    flex: 1.6;
-    transform: scale(1.15);
-  }
-
-  @media (max-width: 968px) {
-    transform: none;
-  }
 `;
 
 // Scroll indicator container at the bottom-center
 export const ScrollIndicator = styled(motion.div)`
   position: absolute;
-  bottom: 2rem;
+  bottom: ${({ theme }) => theme.spacing.xl};
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 0.375rem;
   z-index: 1;
 
-  @media (max-width: 968px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: none;
   }
 `;

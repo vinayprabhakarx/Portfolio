@@ -9,28 +9,20 @@ export const Header = styled.header`
 
 // Wrapper for contact info and form, uses grid layout
 export const ContentWrapper = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing["3xl"]};
   align-items: start;
-  max-width: 1400px;
+  max-width: 87.5rem;
   margin: 0 auto;
-
-  @media (min-width: 1400px) {
-    gap: ${({ theme }) => theme.spacing["3xl"]};
-  }
-
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-    gap: ${({ theme }) => theme.spacing.xl};
-  }
 `;
 
 // Styling for the contact info card
 export const InfoCard = styled.aside`
+  flex: 1 1 20rem;
   background: ${({ theme }) => theme.colors.surface};
   padding: ${({ theme }) => theme.spacing.xl};
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
   box-shadow: 0 4px 15px ${({ theme }) => theme.shadows.small};
   position: relative;
   overflow: hidden;
@@ -61,10 +53,6 @@ export const InfoTitle = styled.h3`
   font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
   color: ${({ theme }) => theme.colors.text};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
-  }
 `;
 
 // Text content within the info card
@@ -74,17 +62,14 @@ export const InfoText = styled.p`
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   line-height: ${({ theme }) => theme.lineHeights.relaxed};
   margin-bottom: ${({ theme }) => theme.spacing.xl};
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-  }
 `;
 
 // Container for the contact form
 export const FormSection = styled.section`
+  flex: 1.5 1 30rem;
   background: ${({ theme }) => theme.colors.surface};
   box-shadow: 0 4px 15px ${({ theme }) => theme.shadows.small};
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.border};
   transition: all 0.3s ease;
@@ -113,10 +98,6 @@ export const FormLabel = styled.label`
   color: ${({ theme }) => theme.colors.text};
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-  }
 `;
 
 // Styling for text input fields
@@ -124,7 +105,7 @@ export const FormInput = styled.input`
   width: 100%;
   padding: ${({ theme }) => theme.spacing.md};
   border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
@@ -132,11 +113,6 @@ export const FormInput = styled.input`
   background: ${({ theme }) => theme.colors.inputBackground};
   color: ${({ theme }) => theme.colors.text};
   caret-color: ${({ theme }) => theme.colors.text};
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-    padding: ${({ theme }) => theme.spacing.sm};
-  }
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.textSecondary};
@@ -173,16 +149,11 @@ export const FormTextarea = styled.textarea`
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   resize: vertical;
-  min-height: 120px;
+  min-height: 7.5rem;
   transition: ${({ theme }) => theme.transitions.default};
   background: ${({ theme }) => theme.colors.inputBackground};
   color: ${({ theme }) => theme.colors.text};
   caret-color: ${({ theme }) => theme.colors.text};
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-    padding: ${({ theme }) => theme.spacing.sm};
-  }
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.textSecondary};
@@ -201,15 +172,11 @@ export const FormTextarea = styled.textarea`
 const messageStyles = `
   margin-top: ${({ theme }) => theme.spacing.md};
   padding: ${({ theme }) => theme.spacing.md};
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
   text-align: center;
   color: white;
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-  }
 `;
 
 // Styling for a success message

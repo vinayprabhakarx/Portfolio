@@ -34,6 +34,9 @@ import {
   SkillTags,
 } from "../styles/AboutStyles";
 
+// The About page component.
+// Renders the author's biography alongside a tabbed interface
+// detailing experience, education, and technical skills.
 const About = () => {
   const theme = useTheme();
   const [activeTab, setActiveTab] = useState(
@@ -41,10 +44,10 @@ const About = () => {
   );
   const tabContentRef = useRef(null);
 
-  // Handle tab click with scroll
+  // Scroll the viewport down to the tab content area when a new tab is selected,
+  // compensating for the fixed navbar height so content isn't obscured.
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
-    // Scroll to tab content after a short delay to allow content to render
     setTimeout(() => {
       if (tabContentRef.current) {
         const navbarHeight = 80; // Account for fixed navbar + some padding
@@ -134,7 +137,7 @@ const About = () => {
         </BioSection>
       </ProfileSection>
 
-      {/* Animate each tab button */}
+      {/* Animated tab navigation row */}
       <Button.TabContainer>
         {tabs.map(({ id, icon: Icon, label }, index) => (
           <motion.div

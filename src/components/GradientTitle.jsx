@@ -1,13 +1,15 @@
 import styled, { keyframes } from "styled-components";
 
-// Defines a keyframe animation for a gradient effect.
+// CSS keyframes for animating the background gradient position,
+// creating a continuous shimmering effect across the text.
 const gradientAnimation = keyframes`
   0% { background-position: 0 50%; }   
   50% { background-position: 100% 50%; } 
   100% { background-position: 0 50%; } 
 `;
 
-// Styled component for a title with an animated gradient text effect.
+// Reusable animated heading component.
+// Uses webkit background clipping to fill the text with a moving primary gradient.
 const GradientTitle = styled.h2`
   font-size: ${({ theme }) => theme.typography.fontSizes["4xl"]};
   font-weight: ${({ theme }) => theme.typography.fontWeights.bold};

@@ -6,6 +6,9 @@ import { Menu as FiMenu, X as FiX, Moon as FiMoon, Sun as FiSun } from "lucide-r
 import { useTheme } from "../hooks/useTheme";
 import logo from "../assets/logo.svg";
 
+// Global navigation bar component.
+// Features responsive routing, theme toggling, and a sliding mobile drawer menu.
+// Automatically adapts styling based on vertical scroll position.
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Mobile menu open state
   const [scrolled, setScrolled] = useState(false); // Track scroll for style change
@@ -17,7 +20,8 @@ const Navbar = () => {
     setScrolled(window.scrollY > 50);
   }, []);
 
-  // Add scroll listener with throttling using requestAnimationFrame
+  // Attach a passive scroll listener throttled via requestAnimationFrame
+  // This ensures high performance during rapid scrolling events
   useEffect(() => {
     let ticking = false;
     const throttledScroll = () => {
@@ -33,12 +37,12 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", throttledScroll);
   }, [handleScroll]);
 
-  // Close mobile menu on route change
+  // Guarantee the mobile menu closes whenever the route changes
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  // Close mobile menu if resizing to desktop view
+  // Prevent the mobile menu from getting stuck open if the viewport is resized to desktop width
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 775 && isOpen) {
@@ -130,7 +134,7 @@ const Navbar = () => {
             )}
             <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
               {isDarkMode ? (
-                <FiSun size={20} color={"#F5BF41"} />
+                <FiSun size={20} className="sun-icon" />
               ) : (
                 <FiMoon size={20} />
               )}
@@ -140,7 +144,7 @@ const Navbar = () => {
           <MobileControls>
             <ThemeToggle onClick={toggleTheme} aria-label="Toggle theme">
               {isDarkMode ? (
-                <FiSun size={20} color={"#F5BF41"} />
+                <FiSun size={20} className="sun-icon" />
               ) : (
                 <FiMoon size={20} />
               )}
@@ -196,7 +200,7 @@ const NavContainer = styled.nav`
   left: 0;
   right: 0;
   z-index: 1000;
-  height: 4rem;
+  height: ${({ theme }) => theme.layout.navbarHeight};
   background: ${({ theme }) => theme.colors.background};
   backdrop-filter: ${({ $scrolled }) =>
     $scrolled ? "blur(10px)" : "blur(4px)"};
@@ -207,16 +211,16 @@ const NavContainer = styled.nav`
 `;
 
 const NavContent = styled.div`
-  max-width: 1600px;
+  max-width: min(100%, 120rem);
   margin: 0 auto;
-  padding: ${({ theme }) => theme.spacing.md} clamp(1rem, 3vw, 2rem);
+  padding: ${({ theme }) => theme.spacing.md} clamp(1.5rem, 5vw, 4rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
 
   @media (max-width: 1400px) {
-    max-width: 1200px;
+    max-width: min(100%, 80rem);
   }
 
   @media (max-width: 775px) {
@@ -239,12 +243,12 @@ const LogoContainer = styled.div`
   gap: ${({ theme }) => theme.spacing.sm};
   min-height: 100%;
   padding: ${({ theme }) => theme.spacing.sm} 0;
-  margin-top: 0.125rem;
+  margin-top: ${({ theme }) => theme.spacing.xs};
 `;
 
 const StyledLogo = styled.img`
   display: block;
-  height: 2rem;
+  height: ${({ theme }) => theme.spacing.xl};
   width: auto;
   transition: filter 0.1s ease;
   filter: ${({ $isDark }) => ($isDark ? "brightness(0) invert(1)" : "none")};
@@ -268,10 +272,6 @@ const LogoName = styled.span`
   text-transform: uppercase;
   margin: 0;
   padding: 0;
-
-  @media (max-width: 992px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.xl};
-  }
 `;
 
 const DesktopNav = styled.div`
@@ -293,10 +293,6 @@ const NavLink = styled(Link)`
   padding: ${({ theme }) => theme.spacing.sm} 0;
   transition: ${({ theme }) => theme.transitions.default};
 
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-  }
-
   &::after {
     content: "";
     position: absolute;
@@ -317,19 +313,15 @@ const NavLink = styled(Link)`
   }
 `;
 
-// New styled component for external links
+// External anchor link styling for the desktop navigation bar.
 const ExternalNavLink = styled.a`
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
   text-decoration: none;
   color: ${({ theme }) => theme.colors.text};
   position: relative;
-  padding: 0.5rem 0;
+  padding: ${({ theme }) => theme.spacing.sm} 0;
   transition: color 0.3s ease;
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-  }
 
   &::after {
     content: "";
@@ -367,6 +359,10 @@ const ThemeToggle = styled.button`
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }
+
+  .sun-icon {
+    color: ${({ theme }) => theme.colors.sunIcon};
+  }
 `;
 
 const MobileControls = styled.div`
@@ -392,7 +388,7 @@ const MobileMenuButton = styled.button`
 
 const MobileMenuOverlay = styled(motion.div)`
   position: fixed;
-  top: 50px;
+  top: ${({ theme }) => theme.layout.navbarHeight};
   left: 0;
   right: 0;
   bottom: 0;
@@ -401,11 +397,11 @@ const MobileMenuOverlay = styled(motion.div)`
 
 const MobileNav = styled(motion.nav)`
   position: fixed;
-  top: 50px;
+  top: ${({ theme }) => theme.layout.navbarHeight};
   right: 0;
   bottom: flex;
   width: 50%;
-  max-width: 400px;
+  max-width: 25rem;
   background: ${({ theme }) => theme.colors.background};
   padding: ${({ theme }) => theme.spacing.xl};
   display: flex;
@@ -428,25 +424,17 @@ const MobileNavLink = styled(Link)`
     $isActive ? theme.colors.primary : theme.colors.text};
   text-decoration: none;
 
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-  }
-
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
-// New styled component for mobile external links
+// External anchor link styling tailored for the mobile drawer menu.
 const MobileExternalNavLink = styled.a`
   font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   color: ${({ theme }) => theme.colors.text};
   text-decoration: none;
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-  }
 
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
@@ -466,8 +454,8 @@ const MobileThemeToggle = styled.button`
 `;
 
 const ToggleTrack = styled.div`
-  width: 80px;
-  height: 32px;
+  width: 5rem;
+  height: 2rem;
   border-radius: ${({ theme }) => theme.borderRadius.full};
   background: ${({ theme, $dark }) =>
     $dark ? theme.colors.primaryDark : theme.colors.border};
@@ -480,8 +468,8 @@ const ToggleTrack = styled.div`
 `;
 
 const ToggleKnob = styled(motion.div)`
-  width: 50px;
-  height: 32.5px;
+  width: 3.125rem;
+  height: 2rem;
   border-radius: ${({ theme }) => theme.borderRadius.full};
   background: ${({ theme }) => theme.colors.surface};
   color: ${({ theme }) => theme.colors.text};

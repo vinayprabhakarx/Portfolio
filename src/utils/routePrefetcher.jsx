@@ -13,7 +13,7 @@ export const useRoutePrefetch = () => {
   const location = useLocation();
 
   React.useEffect(() => {
-    // Pre-fetch adjacent routes when current route changes
+// Pre-fetch adjacent routes when current route changes
     const currentPath = location.pathname;
     const prefetchPaths = {
       "/": ["/about", "/contact"],
@@ -26,7 +26,7 @@ export const useRoutePrefetch = () => {
 
     const pathsToPrefetch = prefetchPaths[currentPath] || [];
     pathsToPrefetch.forEach((path) => {
-      // Pre-fetch the route component using the map
+// Pre-fetch the route component using the map
       const component = routeComponents[path];
       if (component) {
         component();

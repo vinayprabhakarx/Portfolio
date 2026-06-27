@@ -6,12 +6,12 @@ export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
 
-    // If the user previously changed and saved a theme, use it
+// If the user previously changed and saved a theme, use it
     if (savedTheme) {
       return savedTheme === "dark";
     }
 
-    // Otherwise, detect system default theme
+// Otherwise, detect system default theme
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
       return true;
     }
@@ -19,11 +19,11 @@ export const ThemeProvider = ({ children }) => {
       return false;
     }
 
-    // Default to dark mode for all other cases
+// Default to dark mode for all other cases
     return true;
   });
 
-  // Update document attribute on theme change
+// Update document attribute on theme change
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-theme",
@@ -31,7 +31,7 @@ export const ThemeProvider = ({ children }) => {
     );
   }, [isDarkMode]);
 
-  // Listen for system theme changes if user hasn't explicitly set a preference
+// Listen for system theme changes if user hasn't explicitly set a preference
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = (e) => {

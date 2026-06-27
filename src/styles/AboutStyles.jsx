@@ -3,16 +3,12 @@ import styled from "styled-components";
 // Section for profile image and intro
 export const ProfileSection = styled.section`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: ${({ theme }) => theme.spacing["3xl"]};
-  max-width: 1100px;
+  max-width: 68.75rem;
   margin: 0 auto ${({ theme }) => theme.spacing["3xl"]};
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
 `;
 
 // Container for biographical text
@@ -20,11 +16,6 @@ export const BioSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.lg};
-  transform: translateY(-1.5rem);
-
-  @media (max-width: 1024px) {
-    transform: none;
-  }
 `;
 
 // Styling for biographical text paragraph
@@ -33,16 +24,8 @@ export const BioText = styled.p`
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   line-height: ${({ theme }) => theme.lineHeights.relaxed};
   color: ${({ theme }) => theme.colors.text};
-  max-width: 800px;
+  max-width: 50rem;
   text-align: center;
-
-  @media (max-width: 1024px) {
-    text-align: center;
-  }
-  
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.xl};
-  }
 `;
 
 // Container for tab-specific content
@@ -59,26 +42,17 @@ export const Company = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
-// Skills Section (Bento Grid)
 export const SkillsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(clamp(22rem, 28vw, 28rem), 1fr));
   gap: ${({ theme }) => theme.spacing.xl};
   margin-top: ${({ theme }) => theme.spacing["2xl"]};
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
 `;
 
 export const SkillCategoryCard = styled.div`
   background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
   padding: ${({ theme }) => theme.spacing.xl};
   box-shadow: ${({ theme }) => theme.shadows.light};
   transition: all 0.3s ease;
@@ -107,19 +81,19 @@ export const SkillTags = styled.div`
 export const SkillTag = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing.sm};
   background: ${({ theme }) => theme.colors.background};
   border: 1px solid ${({ theme }) => theme.colors.border};
   color: ${({ theme }) => theme.colors.textSecondary};
-  padding: 8px 16px;
-  border-radius: 12px;
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
   font-size: ${({ theme }) => theme.typography.fontSizes.base};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   white-space: nowrap;
   transition: all 0.2s ease;
 
   svg {
-    font-size: 1.2rem;
+    font-size: ${({ theme }) => theme.typography.fontSizes.xl};
     color: ${({ theme }) => theme.colors.primary};
   }
 
@@ -146,7 +120,7 @@ export const CourseItem = styled.li`
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
   background: ${({ theme }) => `${theme.colors.primary}10`};
   color: ${({ theme }) => theme.colors.text};
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius.md};
   font-size: ${({ theme }) => theme.typography.fontSizes.base};
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
 `;

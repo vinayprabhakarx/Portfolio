@@ -72,6 +72,12 @@ const breakpoints = {
   xl: "1280px",
 };
 
+const layout = {
+  containerMaxWidth: "75rem",
+  sectionPadding: "clamp(2rem, 5vw, 4rem)",
+  navbarHeight: "4rem",
+};
+
 // ---------- Light Theme Colors ----------
 const lightColors = {
   primary: "#E74C3C",
@@ -120,6 +126,7 @@ const baseTheme = {
   borderRadius,
   transitions,
   breakpoints,
+  layout,
   gradients: baseGradients,
 };
 

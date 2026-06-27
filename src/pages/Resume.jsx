@@ -12,7 +12,7 @@ const resumePdf = import.meta.env.VITE_RESUME_URL;
 // Use CDN for worker to completely avoid any bundling or Nginx mime-type issues
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-// --- Styled Components ---
+// ─── Styled Components ───
 const ResumeContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -57,12 +57,12 @@ const ResumeWrapper = styled.div`
   
   .react-pdf__Page {
     box-shadow: ${({ theme }) => theme.shadows.large};
-    border-radius: 8px;
+    border-radius: ${({ theme }) => theme.borderRadius.md};
     overflow: hidden;
   }
   
   .react-pdf__Page__canvas {
-    border-radius: 8px;
+    border-radius: ${({ theme }) => theme.borderRadius.md};
     max-width: 100%;
     height: auto !important;
   }
@@ -70,10 +70,15 @@ const ResumeWrapper = styled.div`
 
 
 
-// --- Component ---
+// ─── Main Component ───
+// Resume page component displaying a PDF viewer.
+// Includes a direct download fallback and dynamically scales the PDF canvas
+// based on the user's viewport width.
 const Resume = () => {
   const [width, setWidth] = useState(1200);
   const [pageLoaded, setPageLoaded] = useState(false);
+
+  // Force Vite HMR to clear cache
 
   useEffect(() => {
     const updateWidth = () => setWidth(window.innerWidth);
@@ -82,12 +87,19 @@ const Resume = () => {
     return () => window.removeEventListener("resize", updateWidth);
   }, []);
 
-  // Calculate scale based on screen width
-  const getScale = () => {
-    if (width > 1200) return 1.5;
-    if (width > 786) return 1.2;
-    if (width > 500) return 0.8;
-    return 0.6;
+  // Calculate optimal width for the PDF page
+  const getPageWidth = () => {
+    // Determine the current rem size based on our clamp(16px, 0.8333vw, 48px)
+    const vw = width / 100;
+    let remSize = 16;
+    if (vw * 0.8333 > 16) remSize = vw * 0.8333;
+    if (remSize > 48) remSize = 48;
+    
+    // We want the resume to take up about 60rem maximum
+    const maxPixelWidth = 60 * remSize;
+    
+    // Return 90% of screen width, but capped at our max preferred width
+    return Math.min(width * 0.9, maxPixelWidth);
   };
 
   const handleDownload = async (e) => {
@@ -135,7 +147,7 @@ const Resume = () => {
           >
             <Page
               pageNumber={1}
-              scale={getScale()}
+              width={getPageWidth()}
               renderTextLayer={false}
               renderAnnotationLayer={false}
               onRenderSuccess={() => setPageLoaded(true)}

@@ -20,6 +20,13 @@ const projectCategories = [...new Set(projectsList.map((p) => p.category).filter
 // Only show "all" button if there are multiple categories
 const categories = projectCategories.length > 1 ? ["all", ...projectCategories] : projectCategories;
 
+/**
+ * Individual project card component.
+ * Memorized to prevent unnecessary re-renders during pagination or category filtering.
+ * 
+ * @param {Object} project - The project data object.
+ * @param {number} index - The index for staggered animation delays.
+ */
 const ProjectCard = memo(({ project, index }) => {
   // Create a flattened map of skill name -> icon
   const projectIconMap = useMemo(() => {
@@ -109,7 +116,7 @@ const ProjectCard = memo(({ project, index }) => {
 
 ProjectCard.displayName = "ProjectCard";
 
-// Animated Category Tab Button
+// Animated tab button used for filtering projects by category.
 const CategoryTab = memo(({ category, isActive, onClick, index }) => {
   const formatted = category
     .split("-")
@@ -136,27 +143,48 @@ const CategoryTab = memo(({ category, isActive, onClick, index }) => {
 
 CategoryTab.displayName = "CategoryTab";
 
-// Main Projects Component
+// The Projects page component.
+// Displays a grid of featured projects with category filtering and dynamic pagination.
 const Projects = memo(() => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0] ?? "all");
   const [currentPage, setCurrentPage] = useState(1);
   const [currentProjects, setCurrentProjects] = useState([]);
   const projectsGridRef = useRef(null);
 
-  // Filtered list based on category
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+
+  // Update items per page based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width > 2500) {
+        setItemsPerPage(8); // 4K TV screens
+      } else if (width > 1024) {
+        setItemsPerPage(6); // Laptops
+      } else {
+        setItemsPerPage(4); // Mobile and Tablets
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Memoize the filtered project list to avoid recalculation unless the category changes
   const filteredProjects = useMemo(() => {
     if (selectedCategory === "all") return projectsList;
     return projectsList.filter((p) => p.category === selectedCategory);
   }, [selectedCategory]);
 
-  // Update currentProjects on category or page change
+  // Slice the filtered projects array based on the current active page and dynamic screen limits
   useEffect(() => {
-    const start = (currentPage - 1) * 6;
-    const end = start + 6;
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
     setCurrentProjects(filteredProjects.slice(start, end));
-  }, [filteredProjects, currentPage]);
+  }, [filteredProjects, currentPage, itemsPerPage]);
 
-  // Category button handlers
+  // Handle category switching, reset pagination to page 1, and scroll back to the grid
   const handleCategoryChange = useCallback((category) => {
     setSelectedCategory(category);
     setCurrentPage(1); // Reset to page 1
@@ -227,10 +255,10 @@ const Projects = memo(() => {
       </Card.Grid>
 
       {/* Pagination */}
-      {filteredProjects.length > 6 && (
+      {filteredProjects.length > itemsPerPage && (
         <Pagination
           data={filteredProjects}
-          itemsPerPage={6}
+          itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           onPageChange={handlePageChange}
           maxVisiblePages={6}

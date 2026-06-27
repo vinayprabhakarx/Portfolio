@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    font-size: 16px;
+    font-size: 16px; /* Dynamically scaled by JS in AppLayout for 4K support */
     scroll-behavior: smooth;
   }
 
@@ -37,18 +37,6 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     justify-content: center;
     align-items: center;
-  }
-
-  .main-content {
-    flex: 1;
-    width: 100%;
-    max-width: 2000px;
-    margin: 0 auto;
-    padding: 64px 1rem 1rem;
-
-    @media (min-width: 2560px) {
-      max-width: 2400px;
-    }
   }
 
   a {

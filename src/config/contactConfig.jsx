@@ -24,22 +24,10 @@ export const CONFIG = {
 
 // Development environment logs
 if (isDevelopment) {
-  // Log configuration details
-  console.log("🔧 Contact Form Configuration:");
-  console.log("Environment:", CONFIG.ENVIRONMENT.mode);
-  console.log("Timeout:", CONFIG.REQUEST_TIMEOUT);
-  console.log("Retries:", CONFIG.RETRY_ATTEMPTS);
-  console.log("Message Timeout:", CONFIG.MESSAGE_DISMISS_TIME);
-  console.log("Client Origin:", window.location.origin);
-
-  // Log API URL only in development
-  console.log("API URL:", CONFIG.API_URL);
-
   // Check for missing environment variables
   if (!import.meta.env.VITE_CONTACT_API_URL) {
     console.warn(
-      "⚠️ Warning: VITE_CONTACT_API_URL not found in environment variables."
+      "⚠️ Warning: VITE_CONTACT_API_URL not found in environment variables. Using fallback API URL."
     );
-    console.log("Using fallback API URL:", CONFIG.API_URL);
   }
 }

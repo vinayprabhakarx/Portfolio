@@ -12,20 +12,10 @@ export const CategoryContainer = styled.div`
 // Grid layout for displaying project cards.
 export const ProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: ${({ theme }) => theme.spacing["2xl"]};
-  margin-top: ${({ theme }) => theme.spacing["2xl"]};
+  grid-template-columns: repeat(auto-fit, minmax(clamp(18rem, 25vw, 25rem), 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: clamp(1.5rem, 4vw, 3rem);
   grid-auto-rows: 1fr;
-
-  @media (min-width: 1400px) {
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: ${({ theme }) => theme.spacing["3xl"]};
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: ${({ theme }) => theme.spacing.xl};
-  }
 `;
 
 export const ProjectCardWrapper = styled.div`
@@ -74,7 +64,7 @@ export const MemoizedProjectLink = styled(ProjectLink).withConfig({
     isActive &&
     `
     color: ${theme.colors.secondary};
-    font-weight: 600;
+    font-weight: ${theme.typography.fontWeights.semibold};
   `}
 
   ${({ disabled }) =>
@@ -96,7 +86,7 @@ export const ProjectsSection = styled.section`
 // Styling for an individual project card, with hover effects.
 export const ProjectCard = styled.div`
   background: ${({ theme }) => theme.colors.cardBackground};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
   padding: ${({ theme }) => theme.spacing.xl};
   border: 1px solid ${({ theme }) => theme.colors.border};
   transition: ${({ theme }) => theme.transitions.smooth};
@@ -109,20 +99,13 @@ export const ProjectCard = styled.div`
 
 // Responsive grid variant for projects.
 export const ResponsiveGrid = styled(ProjectsGrid)`
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: ${({ theme }) => theme.spacing.xl};
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    grid-template-columns: 1fr;
-    gap: ${({ theme }) => theme.spacing.lg};
-  }
+  grid-template-columns: repeat(auto-fit, minmax(clamp(15rem, 20vw, 20rem), 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
 `;
 
 // Compact grid variant for projects.
 export const CompactGrid = styled(ProjectsGrid)`
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
   gap: ${({ theme }) => theme.spacing.lg};
 `;
 
@@ -195,7 +178,7 @@ export const EmptyState = styled.div`
   }
 
   p {
-    max-width: 400px;
+    max-width: 25rem;
     margin: 0 auto;
     line-height: 1.6;
   }

@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const CardContainer = styled(motion.article)`
   background: ${({ theme }) => theme.colors.surface};
   padding: ${({ theme }) => theme.spacing.lg};
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
   border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -15,7 +15,7 @@ const CardContainer = styled(motion.article)`
   z-index: 1;
   transition: all 0.3s ease;
   width: 100%;
-  max-width: 450px;
+  max-width: min(100%, 28rem);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@ const CardContainer = styled(motion.article)`
 const ImageWrapper = styled.div`
   width: 100%;
   aspect-ratio: 2 / 1;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
   overflow: hidden;
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   background: ${({ theme }) => theme.colors.background};
@@ -73,10 +73,10 @@ const CardImagePlaceholder = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   color: ${({ theme }) => theme.colors.primary};
-  font-size: 3rem;
+  font-size: ${({ theme }) => theme.typography.fontSizes["5xl"]};
   background: ${({ theme }) => theme.colors.background};
   transition: color 0.4s ease-in-out;
 
@@ -95,20 +95,11 @@ const CardImagePlaceholderWrapper = memo(({ children, ...props }) => (
 
 const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(clamp(15rem, 25vw, 25rem), 1fr));
   justify-content: center;
   margin: 0 auto;
-  gap: ${({ theme }) => theme.spacing.lg};
-  margin-top: ${({ theme }) => theme.spacing.xl};
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: ${({ theme }) => theme.spacing.md};
-  }
+  gap: clamp(1rem, 3vw, 2rem);
+  margin-top: clamp(1.5rem, 4vw, 3rem);
 `;
 
 const CardTitle = styled.h3`
@@ -123,10 +114,6 @@ const CardTitle = styled.h3`
   ${CardContainer}:hover & {
     color: ${({ theme }) => theme.colors.primary};
   }
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.xl};
-  }
 `;
 
 const CardDescription = styled.p`
@@ -136,10 +123,6 @@ const CardDescription = styled.p`
   margin: ${({ theme }) => theme.spacing.xs} 0;
   line-height: ${({ theme }) => theme.lineHeights.relaxed};
   text-align: center;
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
-  }
 `;
 
 const HighlightsList = styled.div`
@@ -161,10 +144,6 @@ const HighlightItem = styled.div`
   gap: ${({ theme }) => theme.spacing.xs};
   margin: 0 0 ${({ theme }) => theme.spacing.xs} 0;
   line-height: ${({ theme }) => theme.lineHeights.relaxed};
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  }
 `;
 
 const TagContainer = styled.div`
@@ -186,13 +165,13 @@ const Tag = styled.span`
       ? "rgba(255, 255, 255, 0.1)"
       : "rgba(0, 0, 0, 0.1)"};
   color: ${({ theme }) => theme.colors.textSecondary};
-  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.md};
-  border-radius: 20px;
+  padding: clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 2vw, 1rem);
+  border-radius: ${({ theme }) => theme.borderRadius.full};
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: ${({ theme }) => theme.spacing.sm};
   transition: all 0.3s ease;
 
   &:hover {
@@ -206,11 +185,6 @@ const Tag = styled.span`
         : "rgba(231, 76, 60, 0.15)"};
     color: ${({ theme }) => theme.colors.primary};
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.75rem;
-    padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
   }
 `;
 
@@ -229,6 +203,8 @@ const GradientBackground = styled.div`
 `;
 
 // ─── Main Card Component ───
+// Reusable layout component representing a distinct entity (project, experience, etc.).
+// Designed as a flexible grid item utilizing compound components (e.g. Card.Title, Card.Image).
 
 const Card = memo(
   forwardRef(({ children, ...props }, ref) => (
@@ -241,6 +217,7 @@ const Card = memo(
 Card.displayName = "Card";
 
 // ─── Subcomponents ───
+// Compound components attached to the main Card object for semantic structure.
 
 Card.Grid = memo(CardGrid);
 Card.Grid.displayName = "Card.Grid";

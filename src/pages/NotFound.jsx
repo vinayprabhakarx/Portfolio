@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// 404 NotFound page component
+// Standard 404 Not Found error page.
+// Rendered when a user navigates to an undefined route.
 const NotFound = () => {
   return (
     <Wrapper>
@@ -20,7 +21,7 @@ const NotFound = () => {
   );
 };
 
-// Wrapper centers content vertically and horizontally
+// Layout wrapper centering the 404 content vertically and horizontally.
 const Wrapper = styled.section`
   height: 65vh;
   display: flex;
@@ -32,7 +33,7 @@ const Wrapper = styled.section`
   box-sizing: border-box;
 `;
 
-// Title styling uses theme fonts and primary color
+// Typography styling for the 404 heading.
 const Title = styled.h1`
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-size: ${({ theme }) => theme.typography.fontSizes["4xl"]};
@@ -41,12 +42,12 @@ const Title = styled.h1`
   margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
-// Message styled for readability and secondary text color
+// Typography styling for the 404 description message.
 const Message = styled.p`
   font-family: ${({ theme }) => theme.typography.fontFamily};
   font-size: ${({ theme }) => theme.typography.fontSizes.base};
   color: ${({ theme }) => theme.colors.textSecondary};
-  max-width: 600px;
+  max-width: 37.5rem;
   margin-bottom: ${({ theme }) => theme.spacing["2xl"]};
 `;
 

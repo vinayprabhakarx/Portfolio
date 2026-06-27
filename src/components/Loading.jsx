@@ -23,6 +23,8 @@ const SimpleSpinner = styled.div`
   animation: ${spin} 1s linear infinite;
 `;
 
+// Full-screen loading overlay component.
+// Utilizes a simple CSS spinning border animation. Rendered during Suspense boundaries.
 const Loading = () => (
   <LoadingContainer role="status" aria-live="polite" aria-label="Loading content">
     <SimpleSpinner />

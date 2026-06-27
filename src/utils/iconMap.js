@@ -23,7 +23,7 @@ export const iconMap = {
   FaKaggle: (props) => React.createElement(KaggleIcon, { width: props.size || 24, height: props.size || 24, fill: props.color || "currentColor", ...props }),
   FaXTwitter: createIcon(si.siX),
   FaAws: (props) => React.createElement(AwsIcon, { width: props.size || 24, height: props.size || 24, fill: props.color || "currentColor", ...props }),
-  VscVscode: (props) => React.createElement(VscodeIcon, { width: props.size || 24, height: props.size || 24, fill: props.color || "currentColor", ...props }),
+
   FaDocker: createIcon(si.siDocker),
   FaDatabase: Database,
   FaLinux: createIcon(si.siLinux),

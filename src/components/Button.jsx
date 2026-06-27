@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-// Container for a group of tab buttons
+// Container component for arranging tab-style buttons in a horizontal, wrapping row.
 export const TabContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -10,24 +10,26 @@ export const TabContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-// Styled button component for tabs
+// Base styled motion button utilized for interactions and navigations.
+// Adapts its visual appearance based on the `$active` state.
 const StyledButton = styled(motion.button)`
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: ${({ theme }) => theme.spacing.sm};
-  padding: ${({ $size }) => ($size === "large" ? "0.9rem 1.8rem" : "0.75rem 1.5rem")};
-  font-size: ${({ $size }) => ($size === "large" ? "1.05rem" : "0.95rem")};
+  padding: ${({ $size, theme }) => ($size === "large" ? `calc(${theme.spacing.md} + 1px) calc(${theme.spacing.xl} + 1px)` : `calc(${theme.spacing.sm} + 1px) calc(${theme.spacing.lg} + 1px)`)};
+  font-size: ${({ $size, theme }) => ($size === "large" ? theme.typography.fontSizes.lg : theme.typography.fontSizes.base)};
   font-family: ${({ theme }) => theme.typography.fontFamily};
-  font-weight: 600;
-  border-radius: ${({ $size }) => ($size === "large" ? "24px" : "22px")};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
   background: ${({ $active = true, theme }) =>
     $active ? theme.gradients.primary : theme.colors.surface};
   color: ${({ $active = true, theme }) =>
     $active ? "white" : theme.colors.textSecondary};
-  border: 1px solid ${({ $active = true, theme }) => 
-    $active ? "transparent" : theme.colors.border};
+  border: none;
+  box-shadow: ${({ $active = true, theme }) => 
+    $active ? "none" : `inset 0 0 0 1px ${theme.colors.border}`};
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -47,16 +49,14 @@ const StyledButton = styled(motion.button)`
       $active ? theme.gradients.primaryHover : theme.colors.surface};
     color: ${({ $active = true, theme }) =>
       $active ? "white" : theme.colors.primary};
-    border-color: ${({ $active = true, theme }) => 
-      $active ? "transparent" : theme.colors.primary};
+    box-shadow: ${({ $active = true, theme }) => 
+      $active ? "none" : `inset 0 0 0 1px ${theme.colors.primary}`};
     transform: translateY(-4px);
   }
 
-
-
-  @media (max-width: 768px) {
-    padding: ${({ $size }) => ($size === "large" ? "0.8rem 1.6rem" : "0.65rem 1.3rem")};
-    font-size: ${({ $size }) => ($size === "large" ? "1rem" : "0.875rem")};
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ $size, theme }) => ($size === "large" ? `calc(${theme.spacing.sm} + 1px) calc(${theme.spacing.lg} + 1px)` : `calc(${theme.spacing.sm} + 1px) calc(${theme.spacing.md} + 1px)`)};
+    font-size: ${({ $size, theme }) => ($size === "large" ? theme.typography.fontSizes.base : theme.typography.fontSizes.sm)};
   }
   
   &:active {
@@ -70,6 +70,8 @@ const StyledButton = styled(motion.button)`
   }
 `;
 
+// Primary Button component integrating Framer Motion capabilities.
+// Wraps the StyledButton and passes through children and interaction props.
 const Button = ({ children, ...props }) => {
   return (
     <StyledButton {...props}>

@@ -1,5 +1,13 @@
 import React from 'react';
 
+/**
+ * Reusable SVG icon wrapper for rendering brand icons.
+ * 
+ * @param {Object} icon - The icon object containing viewBox, title, and path/innerHtml.
+ * @param {string} size - CSS size for width and height (default: "1em").
+ * @param {string} color - CSS fill color (default: "currentColor").
+ * @param {string} className - Optional CSS class names.
+ */
 const BrandIcon = ({ icon, size = "1em", color = "currentColor", className = "" }) => {
   if (!icon) return null;
   return (

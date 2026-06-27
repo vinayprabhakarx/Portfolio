@@ -12,6 +12,15 @@ const Canvas = styled.canvas`
   height: 100%;
 `;
 
+/**
+ * Renders an animated, interactive canvas background with floating/blinking stars.
+ * The animation only runs when dark mode is active to preserve performance in light mode.
+ *
+ * @param {number} starCount - Number of stars to render.
+ * @param {number} minSize - Minimum radius of a star.
+ * @param {number} maxSize - Maximum radius of a star.
+ * @param {number} blinkSpeed - Base speed for star opacity oscillation.
+ */
 const AnimatedBackground = ({
   starCount = 100,
   minSize = 0.5,
@@ -23,7 +32,7 @@ const AnimatedBackground = ({
   const starsRef = useRef([]);
   const { isDarkMode } = useTheme();
 
-  // Memoize star creation function
+  // Generates star properties uniformly distributed across the given dimensions
   const createStars = useCallback(
     (width, height) =>
       Array.from({ length: starCount }, () => ({
@@ -36,20 +45,20 @@ const AnimatedBackground = ({
     [starCount, minSize, maxSize, blinkSpeed]
   );
 
-  // Memoize initial stars for the first render
+  // Initialize default stars immediately on the first render to prevent layout flash
   const initialStars = useMemo(() => {
     if (typeof window === "undefined") return [];
     return createStars(window.innerWidth, window.innerHeight);
   }, [createStars]);
 
-  // Initialize starsRef only once
+  // Persist the initial stars into the mutable ref across re-renders
   useEffect(() => {
     if (starsRef.current.length === 0 && initialStars.length > 0) {
       starsRef.current = initialStars;
     }
   }, [initialStars]);
 
-  // Memoize resize handler
+  // Adjust canvas dimensions and scale contexts according to the device pixel ratio
   const handleResize = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -69,7 +78,7 @@ const AnimatedBackground = ({
     starsRef.current = createStars(width, height);
   }, [createStars]);
 
-  // Memoize animation function
+  // Main animation loop that updates star opacity (alpha) and renders them
   const animate = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;

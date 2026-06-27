@@ -2,6 +2,8 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion } from 'framer-motion';
 import animationFile from '../assets/developer.lottie';
 
+// Renders a looping, animated developer illustration (Lottie) with a fade-in reveal.
+// Used prominently in the Hero section.
 const DeveloperSkills = () => {
   return (
     <motion.div
@@ -20,6 +22,9 @@ const DeveloperSkills = () => {
         src={animationFile}
         loop
         autoplay
+        renderConfig={{
+          autoResize: true,
+        }}
       />
     </motion.div>
   );

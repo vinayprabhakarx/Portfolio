@@ -4,7 +4,7 @@ import { CONFIG } from "../config/contactConfig";
 
 // Validation utilities
 const validateEmail = (email) => {
-  // Use a permissive regex to ensure valid emails
+// Use a permissive regex to ensure valid emails
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
@@ -47,8 +47,8 @@ const validateForm = (formData) => {
 const validateField = (name, value) => {
   const trimmedValue = value?.trim() || "";
   
-  // If empty, no validation error for individual field constraints
-  // (Required check is handled separately in form submission)
+// If empty, no validation error for individual field constraints
+// (Required check is handled separately in form submission)
   if (!trimmedValue) return null;
 
   switch (name) {
@@ -94,28 +94,28 @@ const httpClient = {
 
       clearTimeout(timeoutId);
 
-      // Handle successful response
+// Handle successful response
       if (response.ok) {
         const contentType = response.headers.get("content-type");
         if (contentType?.includes("application/json")) {
           return await response.json();
         } else {
-          // If not JSON, return empty object
+// If not JSON, return empty object
           return {};
         }
       }
 
-      // Handle error response
+// Handle error response
       let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
 
       try {
         const errorData = await response.json();
         errorMessage = errorData.message || errorMessage;
       } catch {
-        // If response is not JSON, use status text
+// If response is not JSON, use status text
       }
 
-      // Handle specific HTTP errors
+// Handle specific HTTP errors
       switch (response.status) {
         case 400:
           throw new Error("Bad request. Please check your form data.");
@@ -145,19 +145,19 @@ const httpClient = {
     } catch (error) {
       clearTimeout(timeoutId);
 
-      // Handle specific errors
+// Handle specific errors
       if (error.name === "AbortError") {
         throw new Error("Request timed out. Please try again.");
       }
 
-      // Handle fetch errors
+// Handle fetch errors
       if (error instanceof TypeError && error.message.includes("fetch")) {
         throw new Error(
           "Network error. Please check your connection and try again."
         );
       }
 
-      // Handle CORS errors
+// Handle CORS errors
       if (
         error.message.includes("CORS") ||
         error.message.includes("Access-Control-Allow-Origin")
@@ -167,14 +167,14 @@ const httpClient = {
         );
       }
 
-      // Handle other errors
+// Handle other errors
       if (error.message.includes("Failed to fetch")) {
         throw new Error(
           "Network error. Please check your connection and try again."
         );
       }
 
-      // Re-throw the original error if none of the above conditions match
+// Re-throw the original error if none of the above conditions match
       throw error;
     }
   },
@@ -188,12 +188,12 @@ const httpClient = {
       } catch (error) {
         lastError = error;
 
-        // Don't retry on validation errors (4xx)
+// Don't retry on validation errors (4xx)
         if (error.message.includes("400") || error.message.includes("429")) {
           throw error;
         }
 
-        // Don't retry on CORS errors
+// Don't retry on CORS errors
         if (
           error.message.includes("CORS") ||
           error.message.includes("Access-Control-Allow-Origin")
@@ -203,12 +203,12 @@ const httpClient = {
           );
         }
 
-        // If this was the last attempt, throw the error
+// If this was the last attempt, throw the error
         if (attempt > maxRetries) {
           break;
         }
 
-        // Wait before retrying (exponential backoff)
+// Wait before retrying (exponential backoff)
         const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
         await new Promise((resolve) => setTimeout(resolve, delay));
       }
@@ -219,7 +219,7 @@ const httpClient = {
 };
 
 export const useContactForm = () => {
-  // Form state
+// Form state
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
@@ -227,7 +227,7 @@ export const useContactForm = () => {
     message: "",
   });
 
-  // Status state
+// Status state
   const [status, setStatus] = useState({
     submitting: false,
     submitted: false,
@@ -235,13 +235,13 @@ export const useContactForm = () => {
     message: "",
   });
 
-  // Validation errors
+// Validation errors
   const [validationErrors, setValidationErrors] = useState({});
 
-  // Refs
+// Refs
   const timeoutRef = useRef(null);
 
-  // Cleanup previous timeout
+// Cleanup previous timeout
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
@@ -250,7 +250,7 @@ export const useContactForm = () => {
     };
   }, []);
 
-  // Form field configuration
+// Form field configuration
   const formFields = [
     {
       name: "userName",
@@ -275,14 +275,14 @@ export const useContactForm = () => {
     },
   ];
 
-  // Handle input changes with validation
+// Handle input changes with validation
   const handleChange = useCallback(
     (e) => {
       const { name, value } = e.target;
 
       setFormData((prev) => ({ ...prev, [name]: value }));
 
-      // Clear validation error when user starts typing
+// Clear validation error when user starts typing
       if (validationErrors[name]) {
         setValidationErrors((prev) => {
           const newErrors = { ...prev };
@@ -294,7 +294,7 @@ export const useContactForm = () => {
     [validationErrors]
   );
 
-  // Handle input blur (validate field if not empty)
+// Handle input blur (validate field if not empty)
   const handleBlur = useCallback((e) => {
     const { name, value } = e.target;
     const error = validateField(name, value);
@@ -310,7 +310,7 @@ export const useContactForm = () => {
     });
   }, []);
 
-  // Reset form
+// Reset form
   const resetForm = useCallback(() => {
     setFormData({
       userName: "",
@@ -321,12 +321,12 @@ export const useContactForm = () => {
     setValidationErrors({});
   }, []);
 
-  // Update status with auto-dismiss
+// Update status with auto-dismiss
   const updateStatus = useCallback(
     (updates) => {
       setStatus((prev) => ({ ...prev, ...updates }));
 
-      // If there's any message (success or error), set timeout to dismiss
+// If there's any message (success or error), set timeout to dismiss
       if (updates.message) {
         if (timeoutRef.current) {
           clearTimeout(timeoutRef.current);
@@ -345,19 +345,19 @@ export const useContactForm = () => {
     []
   );
 
-  // Handle form submission
+// Handle form submission
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
 
-      // Clear previous messages
+// Clear previous messages
       updateStatus({
         submitted: false,
         error: null,
         message: "",
       });
 
-      // Validate form
+// Validate form
       const errors = validateForm(formData);
       if (Object.keys(errors).length > 0) {
         setValidationErrors(errors);
@@ -368,7 +368,7 @@ export const useContactForm = () => {
         return;
       }
 
-      // Check API URL
+// Check API URL
       if (!CONFIG.API_URL) {
         updateStatus({
           error: true,
@@ -391,7 +391,7 @@ export const useContactForm = () => {
         });
 
 
-        // Show success toast
+// Show success toast
         toast.success(
           response.message ||
             "Message sent successfully! I'll get back to you soon.",
@@ -413,14 +413,14 @@ export const useContactForm = () => {
             "Message sent successfully! I'll get back to you soon.",
         });
 
-        // Reset form after successful submission
+// Reset form after successful submission
         setTimeout(resetForm, 2000);
       } catch (error) {
 
         const errorMessage =
           error.message || "Failed to send message. Please try again later.";
 
-        // Show error toast
+// Show error toast
         toast.error(errorMessage, {
           position: "top-right",
           autoClose: 5000,

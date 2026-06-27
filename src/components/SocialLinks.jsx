@@ -23,6 +23,8 @@ const SocialIcon = styled.a`
   }
 `;
 
+// Renders a row of interactive social media icon links.
+// Each link opens in a new tab with proper security attributes.
 const SocialLinks = () => {
   const socialLinks = [
     { href: "https://www.linkedin.com/in/VinayPrabhakarX/", icon: iconMap.FaLinkedin },
@@ -33,11 +35,12 @@ const SocialLinks = () => {
 
   return (
     <SocialLinksContainer aria-label="Social media links">
-      {socialLinks.map(({ href, icon: IconComponent }, index) => {
+      {socialLinks.map((link, index) => {
+        const IconComponent = link.icon;
         return (
           <SocialIcon
             key={index}
-            href={href}
+            href={link.href}
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -7,14 +7,16 @@ import Footer from "./components/Footer.jsx";
 import Loading from "./components/Loading.jsx";
 import { useRoutePrefetch } from "./utils/routePrefetcher";
 
-// Styled wrapper for entire app layout
+// Outer wrapper for the entire application layout.
+// Enforces a minimum viewport height and flex-column structure for routing content.
 const AppWrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 `;
 
-// Styled main content wrapper
+// Main content area wrapper.
+// Accounts for fixed navigational elements (Navbar/Footer) via padding.
 const MainContent = styled.main`
   padding-top: 70px;
   padding-bottom: 60px; /* Space for Fixed Footer */
@@ -24,6 +26,9 @@ const MainContent = styled.main`
   flex-direction: column;
 `;
 
+// AppLayout component serves as the root layout wrapper for all routes.
+// It handles global UI elements (Navbar, Footer), scroll restoration,
+// dynamic SEO titles, and intrinsic root font-size scaling.
 const AppLayout = () => {
   const location = useLocation();
   useRoutePrefetch();
@@ -31,7 +36,7 @@ const AppLayout = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
-    // Set dynamic route-based document titles for SEO/UX
+    // Dynamically update document title based on the current route for SEO and UX
     const titleMap = {
       "/": "Vinay Prabhakar | Full-Stack Developer",
       "/about": "About | Vinay Prabhakar",
@@ -41,6 +46,22 @@ const AppLayout = () => {
     };
     document.title = titleMap[location.pathname] || "Vinay Prabhakar";
   }, [location.pathname]);
+
+  // Enforce root font-size scaling dynamically via JavaScript.
+  // This bypasses known DevTools viewport width (vw) emulation bugs 
+  // and guarantees reliable scaling across 4K displays.
+  useEffect(() => {
+    const handleResize = () => {
+      // 120 base rems maps to a standard 1920px desktop width (1920 / 16).
+      // Constrained between 16px and 48px to prevent severe over/under scaling.
+      const scaledFontSize = Math.max(16, Math.min(48, window.innerWidth / 120));
+      document.documentElement.style.fontSize = `${scaledFontSize}px`;
+    };
+
+    handleResize(); // Initial call
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <Suspense fallback={<Loading />}>

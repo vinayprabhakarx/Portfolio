@@ -23,6 +23,9 @@ import {
   FormTextarea,
 } from "../styles/ContactStyles";
 
+// Contact page component.
+// Provides a form for visitors to send messages and displays social links.
+// Incorporates form validation, error handling, and toast notifications.
 const Contact = () => {
   const theme = useTheme();
   const {
@@ -54,7 +57,7 @@ const Contact = () => {
       </Header>
 
       <ContentWrapper>
-        {/* Animate InfoCard like in Code 1 */}
+        {/* Left column: Contact information and social links */}
         <InfoCard
           as={motion.div}
           initial={{ y: 30 }}
@@ -74,7 +77,7 @@ const Contact = () => {
           <GradientBackground />
         </InfoCard>
 
-        {/* Animate FormSection like in Code 1 */}
+        {/* Right column: Interactive contact form */}
         <FormSection
           as={motion.div}
           initial={{ y: 30 }}
@@ -118,8 +121,8 @@ const Contact = () => {
                       id={`${name}-error`}
                       style={{
                         color: theme.colors.error,
-                        fontSize: "0.875rem",
-                        marginTop: "0.25rem",
+                        fontSize: theme.typography.fontSizes.sm,
+                        marginTop: theme.spacing.xs,
                       }}
                     >
                       {validationErrors[name]}
@@ -157,8 +160,8 @@ const Contact = () => {
                   id="message-error"
                   style={{
                     color: theme.colors.error,
-                    fontSize: "0.875rem",
-                    marginTop: "0.25rem",
+                    fontSize: theme.typography.fontSizes.sm,
+                    marginTop: theme.spacing.xs,
                   }}
                 >
                   {validationErrors.message}
@@ -166,9 +169,9 @@ const Contact = () => {
               )}
               <div
                 style={{
-                  fontSize: "0.75rem",
+                  fontSize: theme.typography.fontSizes.xs,
                   color: theme.colors.textSecondary,
-                  marginTop: "0.25rem",
+                  marginTop: theme.spacing.xs,
                 }}
               >
                 {formData.message.length}/2000 characters
@@ -188,7 +191,7 @@ const Contact = () => {
                 "Sending..."
               ) : (
                 <>
-                  Send Message <FaPaperPlane style={{ marginLeft: "8px" }} />
+                  Send Message <FaPaperPlane style={{ marginLeft: theme.spacing.sm }} />
                 </>
               )}
             </Button>

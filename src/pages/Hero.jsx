@@ -45,6 +45,9 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
 };
 
+// The Hero landing page component.
+// Serves as the first visual impression, featuring an animated typewriter effect,
+// call-to-action buttons, and a lazy-loaded Lottie animation.
 const Hero = () => {
   const [showAnimation, setShowAnimation] = useState(false);
 
@@ -122,14 +125,15 @@ const Hero = () => {
 
       <motion.div variants={itemVariants}>
         <SocialRow>
-          {socialLinks.map(({ href, icon: IconComponent, label }) => {
+          {socialLinks.map((link) => {
+            const IconComponent = link.icon;
             return (
               <SocialIconLink
-                key={href}
-                href={href}
+                key={link.href}
+                href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={label}
+                aria-label={link.label}
                 as={motion.a}
                 whileHover={{ y: -4, scale: 1.15 }}
                 whileTap={{ scale: 0.92 }}

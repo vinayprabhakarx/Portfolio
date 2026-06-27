@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-// TimelineComponent displays a vertical timeline of events.
+/**
+ * Renders a vertical timeline layout (used for Experience/Education).
+ * Maps through an array of items and orchestrates staggered entrance animations.
+ * 
+ * @param {Array} items - Array of timeline objects containing title, duration, and extra content.
+ */
 const TimelineComponent = ({ items }) => (
   <Timeline>
     {items.map((item, index) => (
@@ -21,34 +26,32 @@ const TimelineComponent = ({ items }) => (
   </Timeline>
 );
 
-// Timeline wrapper with vertical line
+// The outer container for the timeline.
+// Uses a pseudo-element (`::before`) to draw the continuous vertical tracking line.
 const Timeline = styled.div`
   position: relative;
   width: 100%;
-  max-width: 1000px;
+  max-width: 62.5rem;
   margin: 0 auto;
 
   &::before {
     content: "";
     position: absolute;
-    left: 0;
+    left: 1rem;
     top: 0;
     height: 100%;
-    width: 2px;
+    width: 0.125rem;
     background: ${({ theme }) => theme.colors.border};
     opacity: 0.5;
-
-    @media (max-width: 768px) {
-      left: 15px;
-    }
   }
 `;
 
-// Styled individual timeline entry with animation
+// Individual animated entry on the timeline.
+// Uses pseudo-elements to draw the connecting node (circle) and horizontal connector line.
 const TimelineItem = styled(motion.article)`
   position: relative;
-  margin-left: 40px;
-  padding: ${({ theme }) => theme.spacing.xl};
+  margin-left: 3.5rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
   background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 20px;
@@ -58,45 +61,31 @@ const TimelineItem = styled(motion.article)`
   will-change: transform;
   isolation: isolate;
 
-  @media (max-width: 768px) {
-    margin-left: 45px;
-    padding: ${({ theme }) => theme.spacing.lg};
-  }
-
   &::before {
     content: "";
     position: absolute;
-    left: -46px;
-    top: calc(50% - 7px);
-    width: 14px;
-    height: 14px;
+    left: -2.9375rem; /* Exactly aligns center of dot with vertical line at -2.4375rem */
+    top: calc(50% - 0.5rem);
+    width: 1rem;
+    height: 1rem;
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.surface};
-    border: 3px solid ${({ theme }) => theme.colors.primary};
+    border: 0.1875rem solid ${({ theme }) => theme.colors.primary};
     transition: all 0.3s ease;
     z-index: 1;
-
-    @media (max-width: 768px) {
-      left: -37px;
-    }
   }
 
   &::after {
     content: "";
     position: absolute;
-    left: -32px;
+    left: -2.4375rem;
     top: 50%;
-    width: 32px;
-    height: 2px;
+    width: 2.4375rem;
+    height: 0.125rem;
     background: ${({ theme }) => theme.colors.border};
     opacity: 0.5;
     transform: translateY(-50%);
     z-index: 0;
-
-    @media (max-width: 768px) {
-      left: -24px;
-      width: 24px;
-    }
   }
 
   &:hover {
@@ -116,19 +105,13 @@ const TimelineItem = styled(motion.article)`
   }
 `;
 
-// Header for each timeline item
 const TimelineHeader = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing.lg};
+  gap: clamp(0.5rem, 2vw, 1.5rem);
   margin-bottom: ${({ theme }) => theme.spacing.md};
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: ${({ theme }) => theme.spacing.xs};
-  }
 
   h3 {
     color: ${({ theme }) => theme.colors.text};
@@ -136,16 +119,11 @@ const TimelineHeader = styled.div`
     font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
     margin: 0;
     line-height: ${({ theme }) => theme.lineHeights.tight};
-    flex: 1;
+    flex: 1 1 15rem;
     min-width: 0;
-
-    @media (max-width: 768px) {
-      font-size: ${({ theme }) => theme.typography.fontSizes.xl};
-    }
   }
 `;
 
-// Duration styling
 const Duration = styled.span`
   color: ${({ theme }) => theme.colors.textSecondary};
   font-style: italic;
@@ -153,10 +131,6 @@ const Duration = styled.span`
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   flex-shrink: 0;
   white-space: nowrap;
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  }
 `;
 
 export default TimelineComponent;

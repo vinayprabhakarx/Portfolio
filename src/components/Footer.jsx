@@ -1,16 +1,16 @@
 import { memo, useMemo } from "react";
 import styled from "styled-components";
 
-// Container for the entire footer section.
+// Container boundary for the global Footer.
 const FooterContainer = styled.footer`
   width: 100%;
-  padding: 0.5rem;
+  padding: ${({ theme }) => theme.spacing.sm};
   background: ${({ theme }) => theme.colors.background};
   border-top: 1px solid ${({ theme }) => theme.colors.border};
   text-align: center;
 `;
 
-// Styling for copyright text.
+// Typography styling for the copyright and attribution string.
 const CopyrightText = styled.p`
   color: ${({ theme }) => theme.colors.textSecondary};
   margin: 0;
@@ -20,7 +20,8 @@ const CopyrightText = styled.p`
   }
 `;
 
-// Footer component, memoized to prevent unnecessary re-renders.
+// Global site footer presenting copyright information.
+// Memoized to prevent redundant renders during route navigation.
 const Footer = memo(() => {
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
