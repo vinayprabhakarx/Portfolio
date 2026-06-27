@@ -33,6 +33,14 @@ const ResumeWrapper = styled.div`
   justify-content: center;
   width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
+  
+  /* Hide scrollbar visually but allow scrolling if needed */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
   
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
