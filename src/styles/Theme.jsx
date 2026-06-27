@@ -15,13 +15,11 @@ const baseShadows = {
   large: "0 10px 20px #00000040",
   scrolled: "0 2px 10px #00000020",
   scrolledDark: "0 2px 10px rgba(0, 0, 0, 0.7)",
-  primaryGlow: "0 0 12px rgba(231, 76, 60, 0.45)",
   errorGlow: "0 10px 20px rgba(220, 53, 69, 0.4)",
 };
 
 const darkShadows = {
   ...baseShadows,
-  primaryGlow: "0 0 16px rgba(255, 107, 107, 0.6)",
   errorGlow: "0 10px 20px rgba(239, 68, 68, 0.5)",
 };
 

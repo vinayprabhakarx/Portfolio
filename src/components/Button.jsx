@@ -12,6 +12,7 @@ export const TabContainer = styled.div`
 
 // Styled button component for tabs
 const StyledButton = styled(motion.button)`
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -22,22 +23,47 @@ const StyledButton = styled(motion.button)`
   font-weight: 600;
   border-radius: ${({ $size }) => ($size === "large" ? "24px" : "22px")};
   background: ${({ $active = true, theme }) =>
-    $active ? theme.gradients.primary : "transparent"};
+    $active ? theme.gradients.primary : theme.colors.surface};
   color: ${({ $active = true, theme }) =>
-    $active ? "white" : theme.colors.primary};
-  border: 2px solid ${({ theme }) => theme.colors.primary};
+    $active ? "white" : theme.colors.textSecondary};
+  border: 1px solid ${({ $active = true, theme }) => 
+    $active ? "transparent" : theme.colors.border};
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   user-select: none;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+
+  /* Subtle glass effect for inactive buttons */
+  ${({ $active }) => !$active && `
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  `}
 
   &:hover {
     background: ${({ $active = true, theme }) =>
-    $active ? theme.gradients.primaryHover : theme.gradients.primary};
-    color: white;
-    border-color: ${({ theme }) => theme.colors.primary};
+      $active ? theme.gradients.primaryHover : theme.colors.surface};
+    color: ${({ $active = true, theme }) =>
+      $active ? "white" : theme.colors.primary};
+    border-color: ${({ $active = true, theme }) => 
+      $active ? "transparent" : theme.colors.primary};
+    transform: translateY(-2px);
+  }
+
+  /* Micro-animation overlay for active state */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+    opacity: ${({ $active = true }) => ($active ? 1 : 0)};
+    transition: opacity 0.3s ease;
+    pointer-events: none;
   }
 
   @media (max-width: 768px) {
