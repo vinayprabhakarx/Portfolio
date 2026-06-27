@@ -86,7 +86,6 @@ export const SkillTag = styled.span`
   cursor: default;
 
   &:hover {
-    transform: translateY(-2px);
     border-color: ${({ theme }) => theme.colors.primary}80;
     box-shadow: 0 4px 12px ${({ theme }) => theme.colors.primary}22;
   }

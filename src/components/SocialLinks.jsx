@@ -20,7 +20,6 @@ const SocialIcon = styled.a`
 
   &:hover {
     color: ${({ theme }) => theme.colors.secondary};
-    transform: translateY(-3px);
   }
 `;
 

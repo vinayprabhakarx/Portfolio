@@ -6,98 +6,129 @@ import { motion } from "framer-motion";
 
 const CardContainer = styled(motion.article)`
   background: ${({ theme }) => theme.colors.surface};
-  padding: ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing.lg};
   border-radius: 20px;
   border: 1px solid ${({ theme }) => theme.colors.border};
-  box-shadow: 0 4px 15px ${({ theme }) => theme.shadows.small};
+  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   position: relative;
   z-index: 1;
-  transition: ${({ theme }) => theme.transitions.default};
-  max-width: 90%; /* Restrict card width */
-  margin: 0 auto; /* Center card in grid cell */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   height: 100%;
+  flex: 1;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+    box-shadow: ${({ theme }) => theme.shadows.medium};
     border-color: ${({ theme }) => theme.colors.primary}80;
-
-    &::before {
-      opacity: 1;
-    }
   }
 `;
 
-const CardImage = styled.img.attrs({ loading: "lazy", decoding: "async" })`
-  width: 100%; /* Revert to full width */
-  margin-bottom: ${({ theme }) => theme.spacing.xl};
+const ImageWrapper = styled.div`
+  width: 100%;
   aspect-ratio: 2 / 1;
-  object-fit: cover; /* Zoom to fill */
-  object-position: top; /* Show top of website/code */
   border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
   background: ${({ theme }) => theme.colors.background};
+  position: relative;
 `;
 
+const StyledCardImage = styled.img.attrs({ loading: "lazy", decoding: "async" })`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+`;
+
+const CardImage = memo(({ src, alt, ...props }) => (
+  <ImageWrapper>
+    <StyledCardImage src={src} alt={alt} {...props} />
+  </ImageWrapper>
+));
+
 const CardImagePlaceholder = styled.div`
-  width: 100%; /* Revert to full width */
+  width: 100%;
   aspect-ratio: 2 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  margin-bottom: ${({ theme }) => theme.spacing.xl}; /* Matched margin */
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
   color: ${({ theme }) => theme.colors.primary};
-  font-size: 2.5rem;
-  background: ${({ theme }) => theme.colors.background}; /* Added placeholder bg */
+  font-size: 3rem;
+  background: ${({ theme }) => theme.colors.background};
+  transition: color 0.4s ease-in-out;
+
+  ${CardContainer}:hover & {
+    color: ${({ theme }) => theme.colors.secondary};
+  }
 `;
+
+const CardImagePlaceholderWrapper = memo(({ children, ...props }) => (
+  <ImageWrapper>
+    <CardImagePlaceholder {...props}>
+      {children}
+    </CardImagePlaceholder>
+  </ImageWrapper>
+));
 
 const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: ${({ theme }) => theme.spacing.xl};
+  grid-template-columns: repeat(auto-fit, minmax(340px, 450px));
+  justify-content: center;
+  max-width: calc(450px * 3 + 2 * ${({ theme }) => theme.spacing.lg});
+  margin: 0 auto;
+  gap: ${({ theme }) => theme.spacing.lg};
   margin-top: ${({ theme }) => theme.spacing.xl};
-
-  @media (min-width: 1400px) {
-    gap: ${({ theme }) => theme.spacing["2xl"]};
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: ${({ theme }) => theme.spacing.lg};
+    gap: ${({ theme }) => theme.spacing.md};
   }
 `;
 
 const CardTitle = styled.h3`
   color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.typography.fontSizes["3xl"]};
+  font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
   font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  margin-bottom: ${({ theme }) => theme.spacing.xs};
   line-height: ${({ theme }) => theme.lineHeights.tight};
-  text-align: center; /* Center Title */
+  text-align: center;
+  transition: color 0.4s ease-in-out;
+
+  ${CardContainer}:hover & {
+    color: ${({ theme }) => theme.colors.primary};
+  }
 
   @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
+    font-size: ${({ theme }) => theme.typography.fontSizes.xl};
   }
 `;
 
 const CardDescription = styled.p`
-  color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
-  margin: ${({ theme }) => theme.spacing.sm} 0;
+  margin: ${({ theme }) => theme.spacing.xs} 0;
   line-height: ${({ theme }) => theme.lineHeights.relaxed};
-  text-align: center; /* Center Content */
+  text-align: center;
 
   @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+    font-size: ${({ theme }) => theme.typography.fontSizes.base};
   }
 `;
 
 const HighlightsList = styled.div`
-  margin: ${({ theme }) => theme.spacing.sm} 0;
+  margin: ${({ theme }) => theme.spacing.xs} 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -108,50 +139,63 @@ const HighlightsList = styled.div`
 const HighlightItem = styled.div`
   color: ${({ theme }) => theme.colors.textSecondary};
   font-style: italic;
-  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+  font-size: ${({ theme }) => theme.typography.fontSizes.base};
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   display: flex;
   align-items: flex-start;
-  gap: ${({ theme }) => theme.spacing.sm};
-  margin: ${({ theme }) => theme.spacing.sm} 0;
+  gap: ${({ theme }) => theme.spacing.xs};
+  margin: 0 0 ${({ theme }) => theme.spacing.xs} 0;
   line-height: ${({ theme }) => theme.lineHeights.relaxed};
 
   @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.base};
+    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   }
 `;
 
 const TagContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Center Tags */
+  justify-content: center;
   gap: ${({ theme }) => theme.spacing.sm};
-  margin-top: ${({ theme }) => theme.spacing.sm};
+  margin-top: auto; /* Push tags to bottom if flex column */
+  padding-top: ${({ theme }) => theme.spacing.sm};
 `;
 
 const Tag = styled.span`
   background: ${({ theme }) =>
     theme.isDark
-      ? "rgba(255, 107, 107, 0.12)"
-      : "linear-gradient(120deg, rgba(231, 76, 60, 0.08), rgba(243, 156, 18, 0.08))"};
+      ? "rgba(255, 255, 255, 0.03)"
+      : "rgba(0, 0, 0, 0.03)"};
   border: 1px solid ${({ theme }) =>
     theme.isDark
-      ? "rgba(255, 107, 107, 0.25)"
-      : "rgba(231, 76, 60, 0.15)"};
-  color: ${({ theme }) => theme.colors.primary};
-  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
-  border-radius: 25px; /* Match SkillTag */
-  font-size: ${({ theme }) => theme.typography.fontSizes.base};
+      ? "rgba(255, 255, 255, 0.1)"
+      : "rgba(0, 0, 0, 0.1)"};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.md};
+  border-radius: 20px;
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  transition: ${({ theme }) => theme.transitions.default};
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: ${({ theme }) =>
+      theme.isDark
+        ? "rgba(255, 107, 107, 0.12)"
+        : "linear-gradient(120deg, rgba(231, 76, 60, 0.08), rgba(243, 156, 18, 0.08))"};
+    border-color: ${({ theme }) =>
+      theme.isDark
+        ? "rgba(255, 107, 107, 0.25)"
+        : "rgba(231, 76, 60, 0.15)"};
+    color: ${({ theme }) => theme.colors.primary};
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
 
   @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-    padding: ${({ theme }) => theme.spacing.xs}
-      ${({ theme }) => theme.spacing.md};
+    font-size: 0.75rem;
+    padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
   }
 `;
 
@@ -210,10 +254,10 @@ Card.WorkPeriod.displayName = "Card.WorkPeriod";
 Card.GradientBackground = memo(GradientBackground);
 Card.GradientBackground.displayName = "Card.GradientBackground";
 
-Card.Image = memo(CardImage);
+Card.Image = CardImage;
 Card.Image.displayName = "Card.Image";
 
-Card.ImagePlaceholder = memo(CardImagePlaceholder);
+Card.ImagePlaceholder = CardImagePlaceholderWrapper;
 Card.ImagePlaceholder.displayName = "Card.ImagePlaceholder";
 
 export default Card;

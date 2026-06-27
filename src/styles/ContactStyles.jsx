@@ -39,8 +39,7 @@ export const InfoCard = styled.aside`
   transition: ${({ theme }) => theme.transitions.default};
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+    box-shadow: ${({ theme }) => theme.shadows.medium};
   }
 `;
 
@@ -89,7 +88,7 @@ export const FormSection = styled.section`
   transition: ${({ theme }) => theme.transitions.default};
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+    box-shadow: ${({ theme }) => theme.shadows.medium};
   }
 `;
 

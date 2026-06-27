@@ -84,7 +84,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .Toastify__toast--success {
-    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+    box-shadow: ${({ theme }) => theme.shadows.medium};
   }
 
   .Toastify__toast--error {

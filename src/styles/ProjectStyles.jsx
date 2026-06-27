@@ -12,13 +12,13 @@ export const CategoryContainer = styled.div`
 // Grid layout for displaying project cards.
 export const ProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: ${({ theme }) => theme.spacing["2xl"]};
   margin-top: ${({ theme }) => theme.spacing["2xl"]};
   grid-auto-rows: 1fr;
 
   @media (min-width: 1400px) {
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: ${({ theme }) => theme.spacing["3xl"]};
   }
 
@@ -28,12 +28,13 @@ export const ProjectsGrid = styled.div`
   }
 `;
 
-// Wrapper for individual project card with consistent height
 export const ProjectCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 100%;
+  width: 100%;
+  flex: 1;
 `;
 
 // Container for project links (e.g., GitHub, live demo).
@@ -57,7 +58,6 @@ export const ProjectLink = styled.a`
 
   &:hover {
     color: ${({ theme }) => theme.colors.secondary};
-    transform: translateY(-2px);
   }
 `;
 
@@ -102,7 +102,6 @@ export const ProjectCard = styled.div`
   transition: ${({ theme }) => theme.transitions.smooth};
 
   &:hover {
-    transform: translateY(-4px);
     box-shadow: ${({ theme }) => theme.shadows.large};
     border-color: ${({ theme }) => theme.colors.primary};
   }

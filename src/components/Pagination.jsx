@@ -249,11 +249,10 @@ const ArrowButton = styled.button`
 
   &:hover:not(:disabled) {
     color: ${({ theme }) => theme.colors.secondary};
-    transform: translateY(-2px);
   }
 
   &:active:not(:disabled) {
-    transform: translateY(0);
+    opacity: 0.8;
   }
 
   &:focus-visible {

@@ -96,8 +96,7 @@ const TimelineItem = styled(motion.article)`
   }
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: ${({ theme }) => theme.shadows.primaryGlow};
+    box-shadow: ${({ theme }) => theme.shadows.medium};
 
     &::before {
       transform: scale(1.3);
