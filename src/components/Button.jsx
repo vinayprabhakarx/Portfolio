@@ -49,28 +49,20 @@ const StyledButton = styled(motion.button)`
       $active ? "white" : theme.colors.primary};
     border-color: ${({ $active = true, theme }) => 
       $active ? "transparent" : theme.colors.primary};
-    transform: translateY(-2px);
+    transform: translateY(-4px);
   }
 
-  /* Micro-animation overlay for active state */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
-    opacity: ${({ $active = true }) => ($active ? 1 : 0)};
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
+
 
   @media (max-width: 768px) {
     padding: ${({ $size }) => ($size === "large" ? "0.8rem 1.6rem" : "0.65rem 1.3rem")};
     font-size: ${({ $size }) => ($size === "large" ? "1rem" : "0.875rem")};
   }
   
+  &:active {
+    transform: translateY(-1px);
+  }
+
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
@@ -80,11 +72,7 @@ const StyledButton = styled(motion.button)`
 
 const Button = ({ children, ...props }) => {
   return (
-    <StyledButton
-      whileHover={{ scale: 1.05, y: -2 }}
-      whileTap={{ scale: 0.95 }}
-      {...props}
-    >
+    <StyledButton {...props}>
       {children}
     </StyledButton>
   );

@@ -1,4 +1,4 @@
-import { memo, forwardRef } from "react";
+import { memo, forwardRef, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
@@ -13,7 +13,7 @@ const CardContainer = styled(motion.article)`
   overflow: hidden;
   position: relative;
   z-index: 1;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s ease;
   width: 100%;
   max-width: 450px;
   margin: 0 auto;
@@ -28,7 +28,8 @@ const CardContainer = styled(motion.article)`
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadows.medium};
-    border-color: ${({ theme }) => theme.colors.primary}80;
+    transform: translateY(-4px) !important;
+    border-color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -47,13 +48,24 @@ const StyledCardImage = styled.img.attrs({ loading: "lazy", decoding: "async" })
   height: 100%;
   object-fit: cover;
   object-position: top;
+  opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
+  transition: opacity 0.4s ease;
 `;
 
-const CardImage = memo(({ src, alt, ...props }) => (
-  <ImageWrapper>
-    <StyledCardImage src={src} alt={alt} {...props} />
-  </ImageWrapper>
-));
+const CardImage = memo(({ src, alt, ...props }) => {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <ImageWrapper>
+      <StyledCardImage
+        src={src}
+        alt={alt}
+        $loaded={loaded}
+        onLoad={() => setLoaded(true)}
+        {...props}
+      />
+    </ImageWrapper>
+  );
+});
 
 const CardImagePlaceholder = styled.div`
   width: 100%;
@@ -83,12 +95,15 @@ const CardImagePlaceholderWrapper = memo(({ children, ...props }) => (
 
 const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 450px));
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  max-width: calc(450px * 3 + 2 * ${({ theme }) => theme.spacing.lg});
   margin: 0 auto;
   gap: ${({ theme }) => theme.spacing.lg};
   margin-top: ${({ theme }) => theme.spacing.xl};
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;

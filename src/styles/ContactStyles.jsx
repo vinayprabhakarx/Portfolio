@@ -36,10 +36,12 @@ export const InfoCard = styled.aside`
   overflow: hidden;
   z-index: 1;
   border: 1px solid ${({ theme }) => theme.colors.border};
-  transition: ${({ theme }) => theme.transitions.default};
+  transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadows.medium};
+    box-shadow: ${({ theme }) => theme.shadows.medium} !important;
+    transform: translateY(-4px) !important;
+    border-color: ${({ theme }) => theme.colors.primary} !important;
   }
 `;
 
@@ -85,10 +87,12 @@ export const FormSection = styled.section`
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.colors.border};
-  transition: ${({ theme }) => theme.transitions.default};
+  transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: ${({ theme }) => theme.shadows.medium};
+    box-shadow: ${({ theme }) => theme.shadows.medium} !important;
+    transform: translateY(-4px) !important;
+    border-color: ${({ theme }) => theme.colors.primary} !important;
   }
 `;
 
@@ -140,8 +144,7 @@ export const FormInput = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${({ theme }) => theme.colors.secondary};
-    box-shadow: ${({ theme }) => theme.shadows.light};
+    border-color: ${({ theme }) => theme.colors.primary};
     background: ${({ theme }) => theme.colors.inputBackground};
   }
 
@@ -187,8 +190,7 @@ export const FormTextarea = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: ${({ theme }) => theme.colors.secondary};
-    box-shadow: ${({ theme }) => theme.shadows.light};
+    border-color: ${({ theme }) => theme.colors.primary};
     background: ${({ theme }) => theme.colors.inputBackground};
   }
 `;

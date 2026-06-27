@@ -7,7 +7,6 @@ const createIcon = (iconObj) => (props) => React.createElement(BrandIcon, { icon
 
 import LinkedinIcon from '../assets/linkedin.svg?react';
 import AwsIcon from '../assets/aws.svg?react';
-import VscodeIcon from '../assets/vscode.svg?react';
 import KaggleIcon from '../assets/kaggle.svg?react';
 
 export const iconMap = {
@@ -20,10 +19,11 @@ export const iconMap = {
   FaNodeJs: createIcon(si.siNodedotjs),
   FaGitAlt: createIcon(si.siGit),
   FaGithub: createIcon(si.siGithub),
-  FaLinkedin: (props) => React.createElement(LinkedinIcon, { width: props.size, height: props.size, fill: props.color || "currentColor", ...props }),
-  FaKaggle: (props) => React.createElement(KaggleIcon, { width: props.size, height: props.size, fill: props.color || "currentColor", ...props }),
+  FaLinkedin: (props) => React.createElement(LinkedinIcon, { width: props.size || 24, height: props.size || 24, fill: props.color || "currentColor", ...props }),
+  FaKaggle: (props) => React.createElement(KaggleIcon, { width: props.size || 24, height: props.size || 24, fill: props.color || "currentColor", ...props }),
   FaXTwitter: createIcon(si.siX),
-  FaAws: (props) => React.createElement(AwsIcon, { width: props.size, height: props.size, fill: props.color || "currentColor", ...props }),
+  FaAws: (props) => React.createElement(AwsIcon, { width: props.size || 24, height: props.size || 24, fill: props.color || "currentColor", ...props }),
+  VscVscode: (props) => React.createElement(VscodeIcon, { width: props.size || 24, height: props.size || 24, fill: props.color || "currentColor", ...props }),
   FaDocker: createIcon(si.siDocker),
   FaDatabase: Database,
   FaLinux: createIcon(si.siLinux),
@@ -48,7 +48,8 @@ export const iconMap = {
   SiJsonwebtokens: createIcon(si.siJsonwebtokens),
   SiNextdotjs: createIcon(si.siNextdotjs),
   SiMdx: createIcon(si.siMdx),
-  VscVscode: (props) => React.createElement(VscodeIcon, { width: props.size, height: props.size, fill: props.color || "currentColor", ...props }),
+  SiSpringboot: createIcon(si.siSpringboot),
+  VscVscode: Code,
 };
 
 

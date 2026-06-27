@@ -1,27 +1,26 @@
 {
-  "experience": [
-    {
-      "title": "Open for Opportunities",
-      "company": "",
-      "period": "Present",
-      "description": "Looking for opportunities to apply my knowledge in Web Development."
-    }
-  ],
+  "experience": [],
+  "_experienceGuide": {
+    "title": "Job Title",
+    "institution": "Company Name",
+    "period": "Jan 2025 – Present",
+    "description": "Your role description"
+  },
   "education": [
     {
-      "degree": "Bachelor of Computer Applications (BCA)",
+      "title": "Bachelor of Computer Applications",
       "institution": "Indian Institute of Business Management, Patna",
       "period": "2022 – 2025",
       "description": "Affiliated with Aryabhatta Knowledge University, Patna"
     },
     {
-      "degree": "Intermediate of Science",
+      "title": "Intermediate of Science",
       "institution": "S.K. College, Lohanda, Jamui",
       "period": "2018 – 2020",
       "description": "Affiliated with Bihar School Examination Board"
     },
     {
-      "degree": "Matriculation",
+      "title": "Matriculation",
       "institution": "Janta High School, Satyana, Jamui",
       "period": "2017 - 2018",
       "description": "Affiliated with Bihar School Examination Board"
@@ -40,40 +39,6 @@
       {
         "name": "JavaScript",
         "icon": "FaJsSquare"
-      }
-    ],
-    "Machine Learning": [
-      {
-        "name": "NumPy",
-        "icon": "SiNumpy"
-      },
-      {
-        "name": "Pandas",
-        "icon": "SiPandas"
-      },
-      {
-        "name": "Scikit-learn",
-        "icon": "SiScikitlearn"
-      },
-      {
-        "name": "Matplotlib",
-        "icon": "FaDatabase"
-      },
-      {
-        "name": "TensorFlow",
-        "icon": "SiTensorflow"
-      },
-      {
-        "name": "Streamlit",
-        "icon": "SiStreamlit"
-      },
-      {
-        "name": "Keras",
-        "icon": "SiKeras"
-      },
-      {
-        "name": "Deep Learning",
-        "icon": "FaBrain"
       }
     ],
     "Web Development": [
@@ -112,6 +77,44 @@
       {
         "name": "JWT",
         "icon": "SiJsonwebtokens"
+      },
+      {
+        "name": "Spring Boot",
+        "icon": "SiSpringboot"
+      }
+    ],
+    "Machine Learning": [
+      {
+        "name": "NumPy",
+        "icon": "SiNumpy"
+      },
+      {
+        "name": "Pandas",
+        "icon": "SiPandas"
+      },
+      {
+        "name": "Scikit-learn",
+        "icon": "SiScikitlearn"
+      },
+      {
+        "name": "Matplotlib",
+        "icon": "FaDatabase"
+      },
+      {
+        "name": "TensorFlow",
+        "icon": "SiTensorflow"
+      },
+      {
+        "name": "Streamlit",
+        "icon": "SiStreamlit"
+      },
+      {
+        "name": "Keras",
+        "icon": "SiKeras"
+      },
+      {
+        "name": "Deep Learning",
+        "icon": "FaBrain"
       }
     ],
     "Databases": [
@@ -158,10 +161,6 @@
       {
         "name": "GitHub",
         "icon": "FaGithub"
-      },
-      {
-        "name": "VS Code",
-        "icon": "VscVscode"
       },
       {
         "name": "Postman",

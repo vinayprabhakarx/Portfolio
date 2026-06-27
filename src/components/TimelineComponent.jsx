@@ -34,7 +34,8 @@ const Timeline = styled.div`
     top: 0;
     height: 100%;
     width: 2px;
-    background: ${({ theme }) => theme.gradients.primary};
+    background: ${({ theme }) => theme.colors.border};
+    opacity: 0.5;
 
     @media (max-width: 768px) {
       left: 15px;
@@ -45,61 +46,71 @@ const Timeline = styled.div`
 // Styled individual timeline entry with animation
 const TimelineItem = styled(motion.article)`
   position: relative;
-  margin-left: 30px;
-  padding: ${({ theme }) => theme.spacing.lg};
+  margin-left: 40px;
+  padding: ${({ theme }) => theme.spacing.xl};
   background: ${({ theme }) => theme.colors.surface};
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 20px;
   margin-bottom: ${({ theme }) => theme.spacing.xl};
-
   box-shadow: ${({ theme }) => theme.shadows.light};
-  transition: ${({ theme }) => theme.transitions.default};
+  transition: all 0.3s ease;
   will-change: transform;
   isolation: isolate;
 
   @media (max-width: 768px) {
     margin-left: 45px;
-    backdrop-filter: none;
+    padding: ${({ theme }) => theme.spacing.lg};
   }
 
   &::before {
     content: "";
     position: absolute;
-    left: -36px;
-    top: calc(50% - 6px);
-    width: 12px;
-    height: 12px;
+    left: -46px;
+    top: calc(50% - 7px);
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    background: ${({ theme }) => theme.gradients.primary};
-    box-shadow: ${({ theme }) => theme.gradients.primary};
+    background: ${({ theme }) => theme.colors.surface};
+    border: 3px solid ${({ theme }) => theme.colors.primary};
     transition: all 0.3s ease;
+    z-index: 1;
 
     @media (max-width: 768px) {
-      left: -36px;
+      left: -37px;
     }
   }
 
   &::after {
     content: "";
     position: absolute;
-    left: -24px;
+    left: -32px;
     top: 50%;
-    width: 24px;
+    width: 32px;
     height: 2px;
-    background: ${({ theme }) => theme.gradients.primary};
+    background: ${({ theme }) => theme.colors.border};
+    opacity: 0.5;
     transform: translateY(-50%);
     z-index: 0;
 
     @media (max-width: 768px) {
       left: -24px;
+      width: 24px;
     }
   }
 
   &:hover {
     box-shadow: ${({ theme }) => theme.shadows.medium};
+    transform: translateY(-4px) !important;
+    border-color: ${({ theme }) => theme.colors.primary};
 
     &::before {
-      transform: scale(1.3);
+      background: ${({ theme }) => theme.colors.primary};
+      box-shadow: 0 0 15px ${({ theme }) => theme.colors.primary}80;
+    }
+    
+    &::after {
+      background: ${({ theme }) => theme.colors.primary};
+      opacity: 0.8;
     }
   }
 `;

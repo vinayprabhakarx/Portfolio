@@ -9,11 +9,16 @@ import Button from "../components/Button";
 import GradientTitle from "../components/GradientTitle";
 import Profile from "../components/Profile";
 import TimelineComponent from "../components/TimelineComponent";
-import aboutData from "../data/aboutData.json";
+import aboutData from "../data/about.json";
 import { iconMap } from "../utils/iconMap";
 import { useTheme } from "styled-components";
 
 const { experience, education, skills, bioText } = aboutData;
+
+// Dynamically build tabs based on what data exists
+const hasExperience = experience && experience.length > 0;
+const hasEducation = education && education.length > 0;
+const hasSkills = skills && Object.keys(skills).length > 0;
 import {
   ProfileSection,
   BioSection,
@@ -24,13 +29,16 @@ import {
   CourseItem,
   SkillsContainer,
   SkillCategoryTitle,
+  SkillCategoryCard,
   SkillTag,
   SkillTags,
 } from "../styles/AboutStyles";
 
 const About = () => {
   const theme = useTheme();
-  const [activeTab, setActiveTab] = useState("experience");
+  const [activeTab, setActiveTab] = useState(
+    hasExperience ? "experience" : hasEducation ? "education" : hasSkills ? "skills" : ""
+  );
   const tabContentRef = useRef(null);
 
   // Handle tab click with scroll
@@ -47,15 +55,16 @@ const About = () => {
     }, 100);
   };
 
-  const tabs = [
-    { id: "experience", icon: FaBriefcase, label: "Experience" },
-    { id: "education", icon: FaGraduationCap, label: "Education" },
-    { id: "skills", icon: FaCode, label: "Skills" },
+  const allTabs = [
+    ...(hasExperience ? [{ id: "experience", icon: FaBriefcase, label: "Experience" }] : []),
+    ...(hasEducation  ? [{ id: "education",  icon: FaGraduationCap, label: "Education" }] : []),
+    ...(hasSkills     ? [{ id: "skills",     icon: FaCode, label: "Skills" }] : []),
   ];
+  const tabs = allTabs;
 
   const renderTimelineItems = (items, type) =>
     items.map((item) => ({
-      title: type === "education" ? item.degree : item.title,
+      title: item.title,
       duration: item.period,
       extra: (
         <>
@@ -90,35 +99,22 @@ const About = () => {
         );
       case "skills":
         return (
-          <SkillsContainer
-            style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
-          >
+          <SkillsContainer>
             {Object.entries(skills).map(([category, skillList]) => (
-              <section key={category}>
+              <SkillCategoryCard key={category}>
                 <SkillCategoryTitle>{category}</SkillCategoryTitle>
                 <SkillTags>
                   {skillList.map((skill, index) => {
-                    const Icon = iconMap[skill.icon];
+                    const IconComponent = iconMap[skill.icon];
                     return (
-                      <SkillTag
-                        key={index}
-                        as={motion.div}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3, delay: index * 0.05 }}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "0.5rem",
-                        }}
-                      >
-                        {Icon && <Icon size={20} />}
+                      <SkillTag key={`${category}-${index}`}>
+                        {IconComponent && <IconComponent />}
                         {skill.name}
                       </SkillTag>
                     );
                   })}
                 </SkillTags>
-              </section>
+              </SkillCategoryCard>
             ))}
           </SkillsContainer>
         );

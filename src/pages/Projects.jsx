@@ -11,11 +11,14 @@ import {
   ProjectLink,
   ProjectCardWrapper,
 } from "../styles/ProjectStyles";
-import aboutData from "../data/aboutData.json";
+import aboutData from "../data/about.json";
 import { iconMap } from "../utils/iconMap";
 import projectsList from "../data/projects.json";
 
-const categories = ["all", "web", "machine-learning"];
+// Derive categories dynamically from actual projects
+const projectCategories = [...new Set(projectsList.map((p) => p.category).filter(Boolean))];
+// Only show "all" button if there are multiple categories
+const categories = projectCategories.length > 1 ? ["all", ...projectCategories] : projectCategories;
 
 const ProjectCard = memo(({ project, index }) => {
   // Create a flattened map of skill name -> icon
@@ -135,7 +138,7 @@ CategoryTab.displayName = "CategoryTab";
 
 // Main Projects Component
 const Projects = memo(() => {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState(categories[0] ?? "all");
   const [currentPage, setCurrentPage] = useState(1);
   const [currentProjects, setCurrentProjects] = useState([]);
   const projectsGridRef = useRef(null);

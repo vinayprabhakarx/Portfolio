@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Profile = ({ src, alt = "Profile Image" }) => (
   <ProfileSection>
     <PhotoContainer>
-      <ProfileImage src={src} alt={alt} width="280" height="280" />
+      <ProfileImage src={src} alt={alt} width="250" height="250" />
     </PhotoContainer>
   </ProfileSection>
 );
@@ -26,29 +26,12 @@ const ProfileSection = styled.div`
 // Container for the profile photo, with a decorative border/background.
 const PhotoContainer = styled.figure`
   flex-shrink: 0;
-  width: 280px;
-  height: 280px;
+  width: 250px;
+  height: 250px;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
   box-shadow: ${({ theme }) => theme.shadows.large};
-  background: ${({ theme }) => theme.gradients.primary};
-  padding: 4px;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    padding: 4px;
-    background: ${({ theme }) => theme.gradients.primary};
-    mask: linear-gradient(${({ theme }) => theme.colors.white} 0 0) content-box, linear-gradient(${({ theme }) => theme.colors.white} 0 0);
-    mask-composite: exclude;
-    -webkit-mask: linear-gradient(${({ theme }) => theme.colors.white} 0 0) content-box,
-      linear-gradient(${({ theme }) => theme.colors.white} 0 0);
-    -webkit-mask-composite: xor;
-    will-change: transform;
-  }
 
   @media (max-width: 768px) {
     width: 200px;

@@ -34,6 +34,8 @@ const ResumeWrapper = styled.div`
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+  opacity: ${({ $loaded }) => ($loaded ? 1 : 0)};
+  transition: opacity 0.5s ease;
   
   /* Hide scrollbar visually but allow scrolling if needed */
   &::-webkit-scrollbar {
@@ -66,36 +68,12 @@ const ResumeWrapper = styled.div`
   }
 `;
 
-const LoadingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: ${({ theme }) => theme.colors.surface};
-  border-radius: 8px;
-  box-shadow: ${({ theme }) => theme.shadows.large};
-  
-  /* Responsive sizing - use 90% of viewport width up to max */
-  width: 90vw;
-  max-width: 893px;
-  aspect-ratio: 1 / 1.414; /* A4 aspect ratio */
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-  }
-`;
 
-const LoadingText = styled.p`
-  color: ${({ theme }) => theme.colors.primary};
-  font-size: 1.2rem;
-  font-weight: 500;
-  animation: pulse 1.5s ease-in-out infinite;
-`;
 
 // --- Component ---
 const Resume = () => {
   const [width, setWidth] = useState(1200);
+  const [pageLoaded, setPageLoaded] = useState(false);
 
   useEffect(() => {
     const updateWidth = () => setWidth(window.innerWidth);
@@ -150,16 +128,17 @@ const Resume = () => {
         </ButtonGroup>
 
         {/* PDF Viewer */}
-        <ResumeWrapper>
+        <ResumeWrapper $loaded={pageLoaded}>
           <Document
             file={resumePdf}
-            loading={<LoadingContainer><LoadingText>Loading Resume...</LoadingText></LoadingContainer>}
+            loading={null}
           >
             <Page
               pageNumber={1}
               scale={getScale()}
               renderTextLayer={false}
               renderAnnotationLayer={false}
+              onRenderSuccess={() => setPageLoaded(true)}
             />
           </Document>
         </ResumeWrapper>

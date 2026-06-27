@@ -6,19 +6,25 @@ export const ProfileSection = styled.section`
   align-items: center;
   justify-content: center;
   gap: ${({ theme }) => theme.spacing["3xl"]};
-  margin-bottom: ${({ theme }) => theme.spacing["3xl"]};
+  max-width: 1100px;
+  margin: 0 auto ${({ theme }) => theme.spacing["3xl"]};
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     flex-direction: column;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.xl};
+    text-align: center;
   }
 `;
 
 // Container for biographical text
 export const BioSection = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing["4xl"]};
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.lg};
+  transform: translateY(-1.5rem);
+
+  @media (max-width: 1024px) {
+    transform: none;
+  }
 `;
 
 // Styling for biographical text paragraph
@@ -28,9 +34,12 @@ export const BioText = styled.p`
   line-height: ${({ theme }) => theme.lineHeights.relaxed};
   color: ${({ theme }) => theme.colors.text};
   max-width: 800px;
-  text-align: left;
-  user-select: none;
+  text-align: center;
 
+  @media (max-width: 1024px) {
+    text-align: center;
+  }
+  
   @media (max-width: 768px) {
     font-size: ${({ theme }) => theme.typography.fontSizes.xl};
   }
@@ -39,22 +48,51 @@ export const BioText = styled.p`
 // Container for tab-specific content
 export const TabContent = styled.section`
   margin-top: ${({ theme }) => theme.spacing["3xl"]};
-
-  @media (max-width: 768px) {
-    padding-left: 0;
-  }
 `;
 
 // Styling for company name in experience
 export const Company = styled.div`
-  color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.typography.fontSizes["xl"]};
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+`;
+
+// Skills Section (Bento Grid)
+export const SkillsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${({ theme }) => theme.spacing.xl};
+  margin-top: ${({ theme }) => theme.spacing["2xl"]};
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+    grid-template-columns: 1fr;
   }
+`;
+
+export const SkillCategoryCard = styled.div`
+  background: ${({ theme }) => theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 20px;
+  padding: ${({ theme }) => theme.spacing.xl};
+  box-shadow: ${({ theme }) => theme.shadows.light};
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: ${({ theme }) => theme.shadows.medium};
+    transform: translateY(-4px);
+    border-color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+export const SkillCategoryTitle = styled.h3`
+  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
+  color: ${({ theme }) => theme.colors.text};
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
 // Container for skill tags
@@ -62,32 +100,33 @@ export const SkillTags = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.sm};
-  margin-top: ${({ theme }) => theme.spacing.md};
 `;
 
 // Styling for an individual skill tag
-export const SkillTag = styled.span`
-  background: ${({ theme }) =>
-    theme.isDark
-      ? "rgba(255, 107, 107, 0.12)"
-      : "linear-gradient(120deg, rgba(231, 76, 60, 0.08), rgba(243, 156, 18, 0.08))"};
-  border: 1px solid ${({ theme }) =>
-    theme.isDark
-      ? "rgba(255, 107, 107, 0.2) "
-      : "rgba(231, 76, 60, 0.15)"};
-  color: ${({ theme }) => theme.colors.primary};
-  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
-  border-radius: 25px;
+export const SkillTag = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: ${({ theme }) => theme.colors.background};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  padding: 8px 16px;
+  border-radius: 12px;
   font-size: ${({ theme }) => theme.typography.fontSizes.base};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   white-space: nowrap;
-  flex-shrink: 0;
   transition: all 0.2s ease;
-  cursor: default;
+
+  svg {
+    font-size: 1.2rem;
+    color: ${({ theme }) => theme.colors.primary};
+  }
 
   &:hover {
-    border-color: ${({ theme }) => theme.colors.primary}80;
-    box-shadow: 0 4px 12px ${({ theme }) => theme.colors.primary}22;
+    background: ${({ theme }) => theme.colors.surface};
+    border-color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.text};
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   }
 `;
 
@@ -111,46 +150,4 @@ export const CourseItem = styled.li`
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
 `;
 
-// Main container for skills sections
-export const SkillsContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.sm};
-  max-width: 100%;
-  margin: 0 auto;
-`;
 
-// Styling for skill details (e.g., frameworks)
-export const SkillDetails = styled.span`
-  color: ${({ theme }) => theme.colors.textSecondary};
-  font-size: ${({ theme }) => theme.typography.fontSizes["xl"]};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
-  font-style: italic;
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-  }
-`;
-
-// Styling for skill name
-export const SkillName = styled.span`
-  color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-  }
-`;
-
-// Styling for skill category title (e.g., "Programming Languages")
-export const SkillCategoryTitle = styled.h3`
-  color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.typography.fontSizes["2xl"]};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-  line-height: ${({ theme }) => theme.lineHeights.tight};
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSizes.xl};
-  }
-`;

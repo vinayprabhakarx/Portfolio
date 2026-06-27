@@ -3,13 +3,7 @@
     "title": "Docs App",
     "image": "https://bit.ly/professional-portfolio-docs",
     "description": "A personal repository for technical notes, project documentation, and ongoing learning. Built to track my progress and explore new things.",
-    "tags": [
-      "Next.js",
-      "React.js",
-      "Fumadocs",
-      "Tailwind CSS",
-      "MDX"
-    ],
+    "tags": ["Next.js", "React.js", "Fumadocs", "Tailwind CSS", "MDX"],
     "github": "https://github.com/vinayprabhakarx/docs-app",
     "demo": "https://docs.vinayprabhakar.dev",
     "category": "web",
@@ -36,22 +30,15 @@
     "category": "web",
     "highlights": [
       "JWT-based authentication with email verification and password reset",
-      "Blog CRUD with admin-defined categories",
-      "Comments with nested replies, likes, and real-time notifications",
-      "Profile management with social links and image uploads via Cloudinary",
-      "Markdown editor with LaTeX support and responsive UI with light/dark mode"
+      "Blog CRUD with admin-defined categories, nested comment replies, likes, and real-time notifications",
+      "Profile management with Cloudinary image uploads, markdown editor with LaTeX support, and light/dark mode UI"
     ]
   },
   {
     "title": "Portfolio Website",
     "image": "https://bit.ly/my-portfolio-assets",
     "description": "Modern portfolio website built with React and styled-components featuring interactive animations.",
-    "tags": [
-      "React.js",
-      "Express.js",
-      "Node.js",
-      "Cloudflare"
-    ],
+    "tags": ["React.js", "Express.js", "Node.js", "Cloudflare"],
     "github": "https://github.com/VinayPrabhakarX/Portfolio",
     "demo": "https://vinayprabhakar.dev",
     "category": "web",
@@ -65,12 +52,7 @@
     "title": "Plant Disease Recognition System",
     "image": "https://bit.ly/plant-portfolio-asset",
     "description": "Agricultural system that identifies potential plant diseases based on uploaded images using deep learning algorithms.",
-    "tags": [
-      "Python",
-      "Deep Learning",
-      "TensorFlow",
-      "Keras"
-    ],
+    "tags": ["Python", "Deep Learning", "TensorFlow", "Keras"],
     "github": "https://github.com/vinayprabhakar-in/plant_disease_model",
     "demo": "https://vinayprabhakar-plant.streamlit.app/",
     "category": "machine-learning",
@@ -84,12 +66,7 @@
     "title": "Course Selling App",
     "image": "",
     "description": "Scalable Node.js backend with MongoDB for an online course platform featuring JWT authentication, course management and secure payment tracking.",
-    "tags": [
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "JWT"
-    ],
+    "tags": ["Node.js", "Express.js", "MongoDB", "JWT"],
     "github": "https://github.com/VinayPrabhakarX/course-selling-app",
     "demo": "https://github.com/VinayPrabhakarX/course-selling-app?tab=readme-ov-file#-installation",
     "category": "web",
@@ -99,16 +76,11 @@
       "Secure course purchase system"
     ]
   },
-    {
+  {
     "title": "Online Examination System",
     "image": "",
     "description": "Web-based platform for managing and conducting online exams with role-based access and secure exam flow.",
-    "tags": [
-      "React.js",
-      "Node.js",
-      "MongoDB",
-      "Tailwind CSS"
-    ],
+    "tags": ["React.js", "Node.js", "MongoDB", "Tailwind CSS"],
     "github": "https://github.com/VinayPrabhakarX/online-examination-system",
     "demo": "https://vinayprabhakar.tech/oes",
     "category": "web",
@@ -118,5 +90,4 @@
       "Still under development \u2014 more features coming soon"
     ]
   }
-  
 ]
