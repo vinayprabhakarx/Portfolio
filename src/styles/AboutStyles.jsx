@@ -44,7 +44,7 @@ export const Company = styled.div`
 
 export const SkillsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(22rem, 28vw, 28rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(20rem, 28vw, 25rem)), 1fr));
   gap: ${({ theme }) => theme.spacing.xl};
   margin-top: ${({ theme }) => theme.spacing["2xl"]};
 `;
