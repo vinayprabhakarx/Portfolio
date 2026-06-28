@@ -1,5 +1,19 @@
 [
   {
+    "title": "/learn.ref",
+    "image": "https://bit.ly/4fbRLN9",
+    "description": "A lightning-fast, zero-dependency learning reference platform capable of dynamically rendering technical study materials.",
+    "tags": ["HTML", "CSS", "Vanilla JS", "JSON"],
+    "github": "https://github.com/VinayPrabhakarX/learn-app",
+    "demo": "learn.vinayprabhakar.dev",
+    "category": "web",
+    "highlights": [
+      "Modular routing engine that dynamically builds Grid or List layouts from JSON files",
+      "Completely decoupled architecture for easily adding new subjects like Kubernetes or System Design",
+      "Highly optimized, zero-dependency vanilla web stack for maximum performance"
+    ]
+  },
+  {
     "title": "Docs App",
     "image": "https://bit.ly/professional-portfolio-docs",
     "description": "A personal repository for technical notes, project documentation, and ongoing learning. Built to track my progress and explore new things.",
@@ -86,8 +100,7 @@
     "category": "web",
     "highlights": [
       "Role-based login for admin, teacher, and student",
-      "Secure exam setup and automated evaluation",
-      "Still under development \u2014 more features coming soon"
+      "Secure exam setup and automated evaluation"
     ]
   }
 ]
